@@ -1,0 +1,105 @@
+id: content.campaign
+title: Campaña
+frames_route: R6
+status: active
+wave: 3
+intent:
+  examples:
+    - quiero una campana de cuatro semanas para lanzar este servicio
+    - planea una campana con parrilla de contenidos y canales
+    - arma el cronograma de publicaciones del lanzamiento
+    - necesito un plan de campana con hitos y medicion
+  negatives:
+    - escribe un solo post
+slots:
+  - id: audience
+    question: ¿A quién le habla la campaña y qué debe hacer después?
+    required: true
+  - id: channels
+    question: ¿En qué canales y con qué frecuencia?
+    required: false
+  - id: window
+    question: ¿Cuál es la ventana de la campaña (inicio, fin, hitos)?
+    required: false
+improvements:
+  - id: fields-filled
+    claim: Cada entregable de campaña conserva los campos de su plantilla de Frames y no pasa si alguno queda sin llenar; Frames escribía «Pendiente de producción gobernada» y lo daba por hecho.
+    check: verify/tests/campaign.test.ts#a campaign deliverable with an unfilled Frames field fails
+  - id: landing
+    claim: La campaña trae su landing animada (playbook del mismo deck-v1), verificada en un navegador real.
+    check: verify/tests/campaign.test.ts#renders the campaign landing as a verified scroll page
+  - id: publish-hard-stop
+    claim: Publicar es un hard stop que el motor nunca aprueba; el registro de publicación y el aprendizaje se hacen en un run aparte, después de que la persona publica.
+    check: verify/tests/campaign.test.ts#the run stops at publish and never reaches a publication step
+steps:
+  - id: K01
+    title: Crea el brief de la campaña
+    handler: content.brief
+    agent: RT-04
+    when: { not: { fact: phase, eq: learn } }
+    template: domains/content/templates
+    outputs:
+      - { id: brief, schema: frames-brief-v1 }
+      - { id: brief-html, schema: html }
+    gate: direction
+  - id: K02
+    title: Mapea la campaña y su charter
+    handler: authored
+    agent: RT-04
+    when: { not: { fact: phase, eq: learn } }
+    inputs: [brief]
+    template: domains/content/templates
+    outputs:
+      - { id: brief-campaign-map-v1, schema: deliverable-v1 }
+      - { id: campaign-charter-v1, schema: deliverable-v1, when: { fact: charter, eq: true } }
+  - id: P04
+    title: Construye un calendario editorial realista
+    handler: authored
+    agent: RT-08
+    when: { not: { fact: phase, eq: learn } }
+    inputs: [brief-campaign-map-v1]
+    template: domains/content/templates
+    outputs:
+      - { id: editorial-calendar-v1, schema: deliverable-v1 }
+      - { id: content-grid-v1, schema: deliverable-v1, when: { fact: grid, eq: true } }
+      - { id: board-v1, schema: deliverable-v1 }
+      - { id: batch-plan-v1, schema: deliverable-v1 }
+    gate: sources-and-spec
+  - id: K04
+    title: Escribe la landing de la campaña
+    handler: authored
+    agent: RT-05
+    when: { not: { fact: phase, eq: learn } }
+    inputs: [brief-campaign-map-v1]
+    outputs:
+      - { id: landing, schema: deck-v1 }
+  - id: K05
+    title: Renderiza la landing y la verifica en pantalla
+    handler: campaign.landing
+    agent: RT-07
+    when: { not: { fact: phase, eq: learn } }
+    inputs: [landing]
+    outputs:
+      - { id: landing-html, schema: html }
+      - { id: landing-visual-report, schema: markdown }
+    gate: acceptance
+  - id: P09
+    title: Empaqueta por plataforma
+    handler: authored
+    agent: RT-10
+    when: { not: { fact: phase, eq: learn } }
+    inputs: [landing-html, editorial-calendar-v1]
+    template: domains/content/templates
+    outputs:
+      - { id: platform-package-v1, schema: deliverable-v1 }
+    gate: publish
+  - id: K07
+    title: Registra lo publicado y aprende
+    handler: authored
+    agent: RT-10
+    when: { fact: phase, eq: learn }
+    template: domains/content/templates
+    outputs:
+      - { id: publication-record-v1, schema: deliverable-v1 }
+      - { id: results-dashboard-v1, schema: deliverable-v1, when: { fact: results, eq: true } }
+      - { id: learning-report-v1, schema: deliverable-v1 }

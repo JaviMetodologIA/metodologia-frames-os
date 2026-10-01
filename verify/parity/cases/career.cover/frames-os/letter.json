@@ -1,0 +1,80 @@
+{
+  "schema_version": "career-letter-v1",
+  "document_id": "LETTER-SYNTHETIC-001",
+  "candidate_id": "CAND-SYNTHETIC-001",
+  "application_id": "APP-SYNTHETIC-001",
+  "job_id": "JOB-SYNTHETIC-001",
+  "language": "es",
+  "channel": "letter",
+  "design_profile": "candidate-neutral-ats",
+  "authorized_brand": null,
+  "generated_by": "MetodologIA",
+  "addressee": "Equipo de selección",
+  "subject": "Product Operations Lead",
+  "paragraphs": [
+    "Les escribo para postular al rol de Product Operations Lead porque el trabajo que describen coincide con lo que he hecho en los últimos dos años: ordenar la operación de producto para que cada decisión tenga un dato detrás. En mi rol actual construí un sistema de indicadores compartido entre producto, operaciones y soporte, acordé con cada equipo qué se mide y cuándo se revisa, y convertí esas revisiones en decisiones con dueño y fecha. El resultado verificable fue que redujimos el ciclo operativo 30% durante un trimestre medido, sin agregar personas al equipo.",
+    "Me interesa su equipo porque buscan a alguien que convierta pedidos sueltos en un flujo que se pueda auditar, y esa es la parte del trabajo que mejor hago. Puedo empezar por un inventario de lo que hoy se pide y lo que de verdad se entrega, proponer un tablero con pocas métricas y acordar con ustedes cómo se toma cada decisión. Quedo atenta a una conversación para contarles con detalle cómo trabajé ese trimestre, qué aprendí de lo que no funcionó y qué haría distinto en su contexto, con los datos a la vista."
+  ],
+  "claims": [
+    {
+      "claim_id": "CLM-SYNTHETIC-001",
+      "text": "Redujo el ciclo operativo 30% durante un trimestre medido.",
+      "evidence_ids": [
+        "EVD-SYNTHETIC-001"
+      ],
+      "evidence_hashes": [
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      ]
+    }
+  ],
+  "source_refs": [
+    "work/private/evidence/profile.yml"
+  ],
+  "surface_bindings": [
+    {
+      "path": "/addressee",
+      "classification": "evidence",
+      "evidence_ids": [
+        "EVD-SYNTHETIC-001"
+      ],
+      "evidence_hashes": [
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      ],
+      "rationale": null
+    },
+    {
+      "path": "/subject",
+      "classification": "evidence",
+      "evidence_ids": [
+        "EVD-SYNTHETIC-001"
+      ],
+      "evidence_hashes": [
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      ],
+      "rationale": null
+    },
+    {
+      "path": "/paragraphs/0",
+      "classification": "evidence",
+      "evidence_ids": [
+        "EVD-SYNTHETIC-001"
+      ],
+      "evidence_hashes": [
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      ],
+      "rationale": null
+    },
+    {
+      "path": "/paragraphs/1",
+      "classification": "evidence",
+      "evidence_ids": [
+        "EVD-SYNTHETIC-001"
+      ],
+      "evidence_hashes": [
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      ],
+      "rationale": null
+    }
+  ],
+  "content_sha256": "b4561bb8e1f1d887dde0004651eb488eef05cc866332d505f6bb40452fb0c83f"
+}

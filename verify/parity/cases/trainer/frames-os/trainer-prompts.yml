@@ -1,0 +1,319 @@
+schema: prompts-v1
+meta:
+  title: Biblioteca de prompts del curso
+  subtitle: Un prompt por paso del playbook, en cuatro niveles.
+  lang: es
+prompts:
+  - id: idea-eje-1
+    step: 'idea-eje#1'
+    family: text
+    title: Idea eje en una frase
+    objective: Resumir el propósito de la pieza en una sola frase clara.
+    prompt: Resume en una sola frase la idea que debe sostener una presentación sobre {tema} para {audiencia}.
+    expected: Una frase de menos de veinte palabras con sujeto, verbo y beneficio.
+    acceptance: La frase se entiende sin contexto y no usa jerga sin explicar.
+    levels:
+      - 'Básico: escribe una frase que diga de qué trata la pieza.'
+      - 'Intermedio: agrega a quién va dirigida y qué gana esa persona.'
+      - 'Avanzado: escribe tres versiones y elige la que se entiende más rápido.'
+      - 'Experto: prueba la frase con alguien del público y ajústala con su respuesta.'
+  - id: idea-eje-2
+    step: 'idea-eje#2'
+    family: text
+    title: Revisión de láminas contra la idea eje
+    objective: Detectar láminas que no sostienen la idea eje.
+    prompt: Revisa esta lista de títulos de lámina {encabezados} y marca cuáles no sostienen la idea eje {idea_eje}.
+    expected: La lista de títulos con una marca y una razón breve en los que no sostienen la idea.
+    acceptance: Cada marca tiene una razón concreta y ninguna lámina queda sin revisar.
+    levels:
+      - 'Básico: marca las láminas que hablan de otro tema.'
+      - 'Intermedio: explica en una línea por qué cada lámina marcada no suma.'
+      - 'Avanzado: propone un título nuevo para cada lámina marcada.'
+      - 'Experto: reordena el relato para que la idea eje crezca de lámina en lámina.'
+  - id: actos-1
+    step: 'actos#1'
+    family: text
+    title: Nombres de actos
+    objective: Proponer entre tres y cinco actos que ordenen el relato.
+    prompt: Propón entre tres y cinco actos para una presentación sobre {tema} con la idea eje {idea_eje}.
+    expected: Una lista de actos con un nombre corto y el propósito de cada uno.
+    acceptance: Los actos siguen un orden lógico y ninguno repite el propósito de otro.
+    levels:
+      - 'Básico: nombra un inicio, un desarrollo y un cierre.'
+      - 'Intermedio: dale a cada acto un nombre que anticipe su contenido.'
+      - 'Avanzado: agrega un acto de prueba con evidencia antes del cierre.'
+      - 'Experto: ajusta los actos al tiempo disponible y al nivel del público.'
+  - id: actos-2
+    step: 'actos#2'
+    family: text
+    title: Asignación de láminas a actos
+    objective: Ubicar cada lámina en el acto que le corresponde.
+    prompt: Asigna cada lámina de {diapositivas} a uno de estos actos {actos} y señala los actos que quedan vacíos.
+    expected: Una tabla con cada lámina y su acto, más la lista de actos vacíos.
+    acceptance: Ninguna lámina queda sin acto y ningún acto queda vacío al final.
+    levels:
+      - 'Básico: ubica cada lámina en el acto que mejor le queda.'
+      - 'Intermedio: mueve láminas para equilibrar el peso de cada acto.'
+      - 'Avanzado: detecta láminas duplicadas entre actos y fusiónalas.'
+      - 'Experto: calcula el tiempo por acto y recorta lo que no cabe.'
+  - id: tipos-lamina-1
+    step: 'tipos-lamina#1'
+    family: text
+    title: Tipo de lámina por pregunta
+    objective: Elegir el tipo de lámina según la pregunta que responde.
+    prompt: Para cada lámina de {diapositivas} indica qué pregunta responde y qué tipo de lámina de Frames OS le sirve mejor.
+    expected: Una lista con lámina, pregunta que responde y tipo sugerido.
+    acceptance: Cada tipo sugerido existe en el esquema y coincide con la pregunta.
+    levels:
+      - 'Básico: elige entre lista, afirmación y cierre.'
+      - 'Intermedio: suma flujo, tarjetas y métricas cuando corresponda.'
+      - 'Avanzado: justifica cada elección con la pregunta que responde.'
+      - 'Experto: combina tipos para que el ritmo del relato no se repita.'
+  - id: tipos-lamina-2
+    step: 'tipos-lamina#2'
+    family: text
+    title: Cadena para tipos que la piden
+    objective: Escribir la cadena de nodos de un eje, flujo o tubería.
+    prompt: Escribe la cadena de nodos para una lámina de tipo {tipo} sobre {tema}, con un máximo de ocho nodos cortos.
+    expected: Entre tres y ocho nodos de pocas palabras en orden lógico.
+    acceptance: Cada nodo tiene menos de cuarenta caracteres y el orden se entiende sin explicación.
+    levels:
+      - 'Básico: escribe tres nodos en orden.'
+      - 'Intermedio: usa verbos al inicio de cada nodo.'
+      - 'Avanzado: marca el nodo que requiere una aprobación humana.'
+      - 'Experto: ajusta la cadena para que coincida con el proceso real del equipo.'
+  - id: escenas-1
+    step: 'escenas#1'
+    family: miniclip
+    title: Nombre de la escena
+    objective: Describir en pocas palabras la animación de una lámina.
+    prompt: Describe en una frase corta la animación de una lámina de tipo {tipo} cuyo título es {encabezado}.
+    expected: Una frase que dice qué se mueve y cómo termina la escena.
+    acceptance: La frase sirve como nombre accesible y no describe efectos que no existen.
+    levels:
+      - 'Básico: di qué elemento aparece en la escena.'
+      - 'Intermedio: agrega cómo se mueve y dónde se detiene.'
+      - 'Avanzado: relaciona el movimiento con la idea de la lámina.'
+      - 'Experto: escribe el nombre pensando en quien usa un lector de pantalla.'
+  - id: escenas-2
+    step: 'escenas#2'
+    family: miniclip
+    title: Movimiento que no distrae
+    objective: Simplificar una animación que compite con la idea.
+    prompt: Esta escena {escena} distrae de la idea {idea}. Propón una versión más simple que termine quieta.
+    expected: Una descripción de la escena simplificada con su punto final quieto.
+    acceptance: La nueva escena tiene menos movimiento y respeta el movimiento reducido.
+    levels:
+      - 'Básico: quita un elemento que se mueve sin razón.'
+      - 'Intermedio: haz que la escena termine quieta.'
+      - 'Avanzado: alinea el ritmo de la escena con la narración.'
+      - 'Experto: diseña una alternativa estática para movimiento reducido.'
+  - id: cifras-fuente-1
+    step: 'cifras-fuente#1'
+    family: graphic
+    title: Cifra con su fuente
+    objective: Mostrar una cifra con su fuente visible y legible.
+    prompt: 'Gráfica de una sola cifra: {cifra}. Etiqueta: {etiqueta}. Fuente visible debajo: {fuente}.'
+    negative: números animados, fuentes inventadas, decimales sin respaldo
+    expected: Una gráfica con la cifra, su etiqueta y su fuente legibles en móvil.
+    acceptance: La cifra coincide con la fuente citada y la fuente se lee sin ampliar.
+    levels:
+      - 'Básico: muestra la cifra con su etiqueta.'
+      - 'Intermedio: agrega la fuente en un tamaño legible.'
+      - 'Avanzado: revisa que la fuente sea verificable por el público.'
+      - 'Experto: elimina toda cifra que no tenga una fuente comprobable.'
+  - id: cifras-fuente-2
+    step: 'cifras-fuente#2'
+    family: graphic
+    title: Cifra quieta en pantalla
+    objective: Reemplazar un contador animado por una cifra estática.
+    prompt: Esta lámina anima la cifra {cifra} con un contador. Propón una escena donde la cifra quede quieta y solo se mueva un apoyo visual.
+    expected: Una escena donde la cifra aparece completa y el movimiento está en otro elemento.
+    acceptance: La cifra nunca muestra valores intermedios durante la animación.
+    levels:
+      - 'Básico: quita el contador y deja la cifra fija.'
+      - 'Intermedio: mueve una barra o un trazo en lugar del número.'
+      - 'Avanzado: revisa todas las láminas en busca de cifras animadas.'
+      - 'Experto: documenta la regla para todo el equipo que produce piezas.'
+  - id: presentacion-1
+    step: 'presentacion#1'
+    family: text
+    title: Transiciones entre actos
+    objective: Elegir transiciones coherentes para cada cambio de acto.
+    prompt: Propón una transición para cada cambio de acto en {actos}, eligiendo entre fade, push, zoom, morph o none.
+    expected: Una lista de cambios de acto con la transición elegida y su razón.
+    acceptance: Las transiciones son coherentes entre sí y ninguna marea al público.
+    levels:
+      - 'Básico: usa la misma transición en toda la pieza.'
+      - 'Intermedio: cambia la transición solo al pasar de acto.'
+      - 'Avanzado: relaciona cada transición con el cambio de tono del relato.'
+      - 'Experto: prueba las transiciones con movimiento reducido activado.'
+  - id: presentacion-2
+    step: 'presentacion#2'
+    family: text
+    title: Notas para quien presenta
+    objective: Escribir notas breves que ayuden a presentar cada lámina.
+    prompt: Escribe una nota de dos líneas para presentar la lámina {encabezado} ante {audiencia}.
+    expected: Una nota con qué decir y qué pregunta hacer al público.
+    acceptance: La nota se lee en voz alta en menos de veinte segundos.
+    levels:
+      - 'Básico: escribe qué decir en la lámina.'
+      - 'Intermedio: agrega una pregunta para el público.'
+      - 'Avanzado: anticipa una objeción y cómo responderla.'
+      - 'Experto: conecta la nota con la lámina siguiente para mantener el hilo.'
+  - id: carrusel-1
+    step: 'carrusel#1'
+    family: carousel
+    title: Tarjeta de conclusión
+    objective: Abrir el carrusel con la conclusión en una frase.
+    prompt: Escribe la primera tarjeta de un carrusel sobre {tema} para {audiencia}, con la conclusión en una frase de máximo noventa caracteres.
+    expected: Un título de tarjeta con la conclusión y una línea de apoyo.
+    acceptance: La conclusión se entiende aunque la persona no deslice el carrusel.
+    levels:
+      - 'Básico: escribe la conclusión en una frase.'
+      - 'Intermedio: agrega una línea que invite a seguir leyendo.'
+      - 'Avanzado: ajusta la frase al tono de la audiencia.'
+      - 'Experto: prueba dos versiones y elige la que se entiende más rápido.'
+  - id: carrusel-2
+    step: 'carrusel#2'
+    family: carousel
+    title: Tarjeta de llamada a la acción
+    objective: Cerrar el carrusel con una acción concreta.
+    prompt: Escribe la última tarjeta de un carrusel sobre {tema} con la llamada a la acción {cta}.
+    expected: Una tarjeta con una acción concreta y un solo verbo principal.
+    acceptance: La acción se puede hacer hoy y no promete resultados sin prueba.
+    levels:
+      - 'Básico: escribe una acción con un verbo.'
+      - 'Intermedio: di dónde o cómo hacer la acción.'
+      - 'Avanzado: conecta la acción con la conclusión de la primera tarjeta.'
+      - 'Experto: elimina toda urgencia falsa del cierre.'
+  - id: video-1
+    step: 'video#1'
+    family: story
+    title: Narración por beat
+    objective: Escribir la narración breve de cada beat del video.
+    prompt: Escribe la narración de cada beat de este guion {guion}, con una idea por beat y frases cortas.
+    expected: Un texto por beat que se puede leer en voz alta sin tropiezos.
+    acceptance: Cada beat tiene una sola idea y la narración cabe en su duración.
+    levels:
+      - 'Básico: escribe una frase por beat.'
+      - 'Intermedio: ajusta cada frase a la duración del beat.'
+      - 'Avanzado: cuida que la narración diga lo mismo que la pantalla.'
+      - 'Experto: lee la narración en voz alta y recorta lo que sobra.'
+  - id: video-2
+    step: 'video#2'
+    family: story
+    title: Revisión de subtítulos
+    objective: Comprobar que los subtítulos coinciden con la narración.
+    prompt: Compara estos subtítulos {texto_en_pantalla} con la narración {texto_narrado} y lista cada diferencia.
+    expected: Una lista de diferencias con el beat donde aparece cada una.
+    acceptance: Al corregir la lista, subtítulos y narración dicen exactamente lo mismo.
+    levels:
+      - 'Básico: marca las palabras que no coinciden.'
+      - 'Intermedio: indica en qué beat está cada diferencia.'
+      - 'Avanzado: revisa también tildes y signos de puntuación.'
+      - 'Experto: mira el video sin audio y confirma que se entiende solo con subtítulos.'
+  - id: gates-fuente-1
+    step: 'gates-fuente#1'
+    family: text
+    title: Lectura de líneas en rojo
+    objective: Entender qué pide corregir cada línea en rojo de un gate.
+    prompt: Explica en lenguaje simple qué pide corregir cada una de estas líneas del gate {errores_en_rojo}.
+    expected: Una explicación breve por línea con el cambio que hay que hacer en la fuente.
+    acceptance: Cada explicación señala el campo de la fuente que hay que cambiar.
+    levels:
+      - 'Básico: explica qué dice cada línea.'
+      - 'Intermedio: señala en qué archivo está el problema.'
+      - 'Avanzado: agrupa las líneas que comparten la misma causa.'
+      - 'Experto: propone una regla para que el error no se repita.'
+  - id: gates-fuente-2
+    step: 'gates-fuente#2'
+    family: text
+    title: Corrección en la fuente
+    objective: Corregir la fuente en lugar del HTML generado.
+    prompt: 'Este error del gate {error} aparece en el HTML generado. Indica qué cambio hacer en la fuente {archivo} para resolverlo.'
+    expected: El cambio exacto en la fuente y la razón por la que resuelve el error.
+    acceptance: La corrección se hace en la fuente y el gate pasa al volver a correrlo.
+    levels:
+      - 'Básico: ubica el campo de la fuente que genera el error.'
+      - 'Intermedio: escribe el cambio que lo corrige.'
+      - 'Avanzado: vuelve a correr el gate y confirma que pasa.'
+      - 'Experto: revisa si otras fuentes tienen el mismo error.'
+  - id: navegador-1
+    step: 'navegador#1'
+    family: text
+    title: Prueba de teclado, toque y movimiento
+    objective: Preparar una lista de pruebas para abrir la pieza en el navegador.
+    prompt: Escribe una lista de pruebas para revisar la pieza {pieza} con teclado, toque y movimiento reducido.
+    expected: Una lista de pruebas con el resultado esperado de cada una.
+    acceptance: Cada prueba se puede hacer en pocos minutos y tiene un resultado claro.
+    levels:
+      - 'Básico: prueba las flechas del teclado.'
+      - 'Intermedio: suma el toque en una pantalla táctil.'
+      - 'Avanzado: activa el movimiento reducido y revisa cada escena.'
+      - 'Experto: repite las pruebas en dos navegadores distintos.'
+  - id: navegador-2
+    step: 'navegador#2'
+    family: text
+    title: Revisión de impresión
+    objective: Detectar cortes y pérdidas al imprimir la pieza.
+    prompt: Revisa la vista de impresión de {pieza} y lista las láminas con cortes, textos perdidos o fondos que no se ven.
+    expected: Una lista de láminas con el problema de impresión de cada una.
+    acceptance: Tras corregir la lista, la pieza se imprime completa y legible.
+    levels:
+      - 'Básico: abre la vista de impresión y mira cada página.'
+      - 'Intermedio: anota las láminas con texto cortado.'
+      - 'Avanzado: revisa el contraste de la versión impresa.'
+      - 'Experto: genera el PDF y compáralo con la versión en pantalla.'
+  - id: aceptacion-1
+    step: 'aceptacion#1'
+    family: text
+    title: Mensaje para pedir la aceptación
+    objective: Pedir la revisión de la pieza a quien decide.
+    prompt: Escribe un mensaje breve para pedir a {persona} que revise y acepte la pieza {pieza} antes de {fecha}.
+    expected: Un mensaje corto con qué revisar, cómo abrir la pieza y cuándo responder.
+    acceptance: El mensaje se entiende sin reunión y pide una decisión clara.
+    levels:
+      - 'Básico: pide que revise la pieza.'
+      - 'Intermedio: di qué aspectos revisar primero.'
+      - 'Avanzado: adjunta el reporte del navegador sin líneas en rojo.'
+      - 'Experto: ofrece dos opciones de respuesta para acelerar la decisión.'
+  - id: aceptacion-2
+    step: 'aceptacion#2'
+    family: text
+    title: Registro de la decisión
+    objective: Dejar por escrito la decisión y los comentarios de quien acepta.
+    prompt: Resume la decisión de {persona} sobre la pieza {pieza} y sus comentarios {comentarios} en un registro breve.
+    expected: Un registro con la decisión, los comentarios y los cambios pendientes.
+    acceptance: El registro permite saber qué versión se aceptó y qué falta hacer.
+    levels:
+      - 'Básico: anota si la pieza se aceptó o no.'
+      - 'Intermedio: agrega los comentarios tal como llegaron.'
+      - 'Avanzado: convierte cada comentario en un cambio concreto.'
+      - 'Experto: vincula el registro con la versión exacta del paquete.'
+  - id: entrega-1
+    step: 'entrega#1'
+    family: text
+    title: Paquete con huellas
+    objective: Generar el paquete de entrega con la huella de cada archivo.
+    prompt: Lista los archivos de la entrega de {pieza} y explica para qué sirve la huella de cada uno en el paquete.
+    expected: Una lista de archivos con una línea que explica su huella.
+    acceptance: Cada archivo entregado aparece en la lista y tiene su huella.
+    levels:
+      - 'Básico: lista los archivos de la entrega.'
+      - 'Intermedio: explica qué es una huella de archivo.'
+      - 'Avanzado: comprueba que las huellas coinciden con los archivos.'
+      - 'Experto: automatiza la comprobación en cada entrega.'
+  - id: entrega-2
+    step: 'entrega#2'
+    family: text
+    title: Compartir la versión aceptada
+    objective: Compartir solo la versión que la persona aceptó.
+    prompt: Escribe un mensaje de entrega de {pieza} para {audiencia} que indique qué versión se aceptó y dónde encontrarla.
+    expected: Un mensaje breve con la versión aceptada y cómo abrirla.
+    acceptance: El mensaje no menciona versiones previas ni borradores sin aceptar.
+    levels:
+      - 'Básico: di qué versión se entrega.'
+      - 'Intermedio: explica cómo abrir la pieza.'
+      - 'Avanzado: incluye la fecha de aceptación.'
+      - 'Experto: retira las versiones anteriores de los canales compartidos.'

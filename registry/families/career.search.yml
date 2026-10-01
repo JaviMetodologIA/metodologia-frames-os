@@ -1,0 +1,70 @@
+id: career.search
+title: Búsqueda laboral
+frames_route: R7
+status: active
+wave: 6
+intent:
+  examples:
+    - ayudame a encontrar oportunidades compatibles con mi perfil
+    - buscar vacantes de arquitecto de datos en colombia
+    - compara estas vacantes y priorizalas por ajuste
+    - arma una shortlist de empleos donde postular
+  negatives:
+    - publica mi perfil en linkedin
+improvements:
+  - id: scored
+    claim: Las oportunidades se ordenan con la rúbrica de Frames (evidencia 30, requisitos 20, restricciones 15, transferibilidad 10, calidad 10, sector 5, fricción 5, contacto 5) y un bloqueo obligatorio bloquea.
+    check: verify/tests/career.test.ts#ranks opportunities with Frames scoring rubric and blocks on a mandatory blocker
+steps:
+  - id: C00
+    title: Entiende a la persona y su objetivo
+    handler: authored
+    agent: RT-04
+    template: domains/career/frames/c00-intake/templates
+    outputs:
+      - { id: candidate-foundation-brief-v1, schema: markdown }
+    gate: direction
+  - id: C01
+    title: Reúne y verifica la evidencia
+    handler: authored
+    agent: RT-03
+    inputs: [candidate-foundation-brief-v1]
+    template: domains/career/frames/c01-evidence/templates
+    outputs:
+      - { id: evidence-bank, schema: evidence-bank-v1 }
+      - { id: gap-report, schema: markdown }
+    gate: sources-and-spec
+  - id: C02
+    title: Define el posicionamiento
+    handler: authored
+    agent: RT-04
+    inputs: [evidence-bank]
+    template: domains/career/frames/c02-positioning/templates
+    outputs:
+      - { id: positioning-charter-v1, schema: markdown }
+  - id: C03
+    title: Busca oportunidades
+    handler: authored
+    agent: RT-03
+    inputs: [positioning-charter-v1]
+    template: domains/career/frames/c03-discovery/templates
+    outputs:
+      - { id: job-search-brief-v1, schema: markdown }
+      - { id: opportunity-inventory, schema: json }
+  - id: C04
+    title: Puntúa y ordena las oportunidades
+    handler: career.score
+    agent: RT-09
+    inputs: [opportunity-inventory]
+    outputs:
+      - { id: fit-scorecard, schema: json }
+      - { id: ranked-shortlist, schema: markdown }
+    gate: acceptance
+  - id: C05
+    title: Diseña la postulación elegida
+    handler: authored
+    agent: RT-04
+    inputs: [ranked-shortlist]
+    template: domains/career/frames/c05-application-design/templates
+    outputs:
+      - { id: application-brief-v1, schema: markdown }

@@ -1,0 +1,11 @@
+{
+  "source": "Pedidos que deben caer en R0 (preguntar) en vez de adivinar una familia.",
+  "cases": [
+    { "text": "hola" },
+    { "text": "ayuda" },
+    { "text": "que puedes hacer" },
+    { "text": "gracias" },
+    { "text": "cuanto es dos mas dos" },
+    { "text": "haz deploy a produccion" }
+  ]
+}

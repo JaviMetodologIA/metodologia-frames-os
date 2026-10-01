@@ -1,0 +1,11 @@
+agents:
+  - id: RT-01
+    title: Orquestacion
+    purpose: Coordinar.
+    tools_allow: [leer]
+    tools_deny: [publicar]
+    stop_rules:
+      - id: stop
+        condition: siempre
+        result: BLOCK
+    done: [hecho]

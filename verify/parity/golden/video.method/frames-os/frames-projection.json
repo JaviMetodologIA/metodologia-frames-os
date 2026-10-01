@@ -1,0 +1,18 @@
+{
+  "source": "Frames 02_proceso/workflows/video-os/_schema + 01_intencion/video-os/ARCHITECTURE.md",
+  "size": [
+    1080,
+    1920
+  ],
+  "fps": 30,
+  "seconds": [
+    15,
+    180
+  ],
+  "beats_max": 30,
+  "voiceover_max": 1000,
+  "words_per_second_max": 3.2,
+  "screen_items_max": 8,
+  "screen_text_max": 160,
+  "renders": false
+}

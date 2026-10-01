@@ -1,0 +1,34 @@
+{
+  "source": "Escritos a mano el 2026-09-24 antes de medir. NUNCA se editan para pasar: el guard niega escribir aqui.",
+  "cases": [
+    {
+      "text": "tengo una clase el jueves y quiero slides animadas que se vean espectaculares",
+      "expect": "deck.immersive"
+    },
+    {
+      "text": "armame el deck de la reunion de directorio con este excel de resultados",
+      "expect": "deck.immersive"
+    },
+    {
+      "text": "haz una presentacion interactiva en html para el kickoff del proyecto",
+      "expect": "deck.immersive"
+    },
+    { "text": "escribe un post para linkedin contando el caso de exito", "expect": "content.piece" },
+    { "text": "necesito un texto de blog sobre inteligencia artificial en salud", "expect": "content.piece" },
+    {
+      "text": "disena laminas para un carrusel sobre los cinco errores de datos",
+      "expect": "content.carousel"
+    },
+    { "text": "plan de contenidos de un mes con canales y metricas", "expect": "content.campaign" },
+    { "text": "genera prompts para imagenes del lanzamiento", "expect": "content.prompts" },
+    { "text": "un video corto que explique nuestro metodo con diagramas", "expect": "video.method" },
+    { "text": "actualiza mi curriculum para aplicar a data engineer", "expect": "career.cv" },
+    { "text": "carta para postularme a la vacante de arquitecto", "expect": "career.cover" },
+    { "text": "encuentra vacantes remotas que encajen con mi experiencia", "expect": "career.search" },
+    { "text": "revisa este documento y mejoralo sin perder lo bueno", "expect": "improve" },
+    { "text": "sube estas fuentes a notebooklm y arma un audio", "expect": "nlm" },
+    { "text": "quiero una skill nueva para auditar contratos", "expect": "skills.build" },
+    { "text": "diseña un programa de capacitacion de tres modulos", "expect": "trainer" },
+    { "text": "el arnes de frames tiene un check roto, corrigelo", "expect": "meta.maintain" }
+  ]
+}

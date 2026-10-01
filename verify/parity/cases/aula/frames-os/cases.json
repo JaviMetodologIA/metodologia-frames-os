@@ -1,0 +1,114 @@
+{
+  "schema": "aula-succession-case-v1",
+  "origin": "Frames original Aula engine, authored independently; restricted Amaris code excluded",
+  "capabilities": [
+    {
+      "id": "edu-immersive-class",
+      "kind": "immersive-class",
+      "edition": "white-label",
+      "inputSha256": "fb47776e2622ecfcf312e302d72f93a2ea3aa4d440a72c3e869726f4156d6a42"
+    },
+    {
+      "id": "edu-index",
+      "kind": "index",
+      "edition": "white-label",
+      "inputSha256": "da893dcb1ee25b0e217c2d02f5e4d6f463bd22374819cd48989649761dca9294"
+    },
+    {
+      "id": "edu-lean-coffee",
+      "kind": "lean-coffee",
+      "edition": "white-label",
+      "inputSha256": "5697af7fc57861b701ce4c0342e0a4c9ce47baf10cc0969fc14182955170433d"
+    },
+    {
+      "id": "edu-masterclass",
+      "kind": "masterclass",
+      "edition": "white-label",
+      "inputSha256": "6b0d5d74f073986436c57bbaec86bd8dbe812b44827c972c818d7b9a64d7fe20"
+    },
+    {
+      "id": "edu-module",
+      "kind": "module",
+      "edition": "white-label",
+      "inputSha256": "8db1cdc574b527a4f1b57715b5a50e933d5adea18293a51de623b6238f170cd1"
+    },
+    {
+      "id": "edu-playbook",
+      "kind": "playbook",
+      "edition": "white-label",
+      "inputSha256": "45b9030a1ab06a3532d010b7e1c9c5758c17ecd9c0ffb97449bd116b972d896d"
+    },
+    {
+      "id": "edu-playbook-immersive",
+      "kind": "playbook-immersive",
+      "edition": "white-label",
+      "inputSha256": "061b5965782f7475a253e5359f8c969fbc63a0e8760e05fd5d2e4907291c1548"
+    },
+    {
+      "id": "edu-workbook",
+      "kind": "workbook",
+      "edition": "white-label",
+      "inputSha256": "86a181a55b417ca26bb9a92fdcd641f5a888dd1e5b6c1269a848eaf0ad4e4051"
+    },
+    {
+      "id": "metodologia-dynamic-commercial-decks",
+      "kind": "dynamic-commercial-decks",
+      "edition": "metodologia",
+      "inputSha256": "f0b366d726fba58b4ad508dc506387ba66e2702b2b5cd414b2d5b174e2745b5a"
+    },
+    {
+      "id": "metodologia-edu-immersive-class",
+      "kind": "immersive-class",
+      "edition": "metodologia",
+      "inputSha256": "fb47776e2622ecfcf312e302d72f93a2ea3aa4d440a72c3e869726f4156d6a42"
+    },
+    {
+      "id": "metodologia-edu-index",
+      "kind": "index",
+      "edition": "metodologia",
+      "inputSha256": "da893dcb1ee25b0e217c2d02f5e4d6f463bd22374819cd48989649761dca9294"
+    },
+    {
+      "id": "metodologia-edu-lean-coffee",
+      "kind": "lean-coffee",
+      "edition": "metodologia",
+      "inputSha256": "5697af7fc57861b701ce4c0342e0a4c9ce47baf10cc0969fc14182955170433d"
+    },
+    {
+      "id": "metodologia-edu-masterclass",
+      "kind": "masterclass",
+      "edition": "metodologia",
+      "inputSha256": "6b0d5d74f073986436c57bbaec86bd8dbe812b44827c972c818d7b9a64d7fe20"
+    },
+    {
+      "id": "metodologia-edu-module",
+      "kind": "module",
+      "edition": "metodologia",
+      "inputSha256": "8db1cdc574b527a4f1b57715b5a50e933d5adea18293a51de623b6238f170cd1"
+    },
+    {
+      "id": "metodologia-edu-playbook",
+      "kind": "playbook",
+      "edition": "metodologia",
+      "inputSha256": "45b9030a1ab06a3532d010b7e1c9c5758c17ecd9c0ffb97449bd116b972d896d"
+    },
+    {
+      "id": "metodologia-edu-playbook-immersive",
+      "kind": "playbook-immersive",
+      "edition": "metodologia",
+      "inputSha256": "061b5965782f7475a253e5359f8c969fbc63a0e8760e05fd5d2e4907291c1548"
+    },
+    {
+      "id": "metodologia-edu-workbook",
+      "kind": "workbook",
+      "edition": "metodologia",
+      "inputSha256": "86a181a55b417ca26bb9a92fdcd641f5a888dd1e5b6c1269a848eaf0ad4e4051"
+    },
+    {
+      "id": "white-label-dynamic-commercial-decks",
+      "kind": "dynamic-commercial-decks",
+      "edition": "white-label",
+      "inputSha256": "f0b366d726fba58b4ad508dc506387ba66e2702b2b5cd414b2d5b174e2745b5a"
+    }
+  ]
+}

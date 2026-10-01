@@ -1,0 +1,285 @@
+id: deck.immersive
+title: Presentación HTML inmersiva
+frames_route: R6
+status: active
+wave: 2
+intent:
+  examples:
+    - convierte este informe en una presentacion ejecutiva
+    - crea una presentacion html animada e inmersiva
+    - necesito un deck para la clase de manana con slides animadas
+    - arma las diapositivas de la masterclass con notas del presentador
+    - quiero un playbook interactivo con scroll a partir de esta clase
+    - propuesta comercial en formato presentacion
+  negatives:
+    - crea un carrusel para instagram
+    - escribe un post corto
+slots:
+  - id: audience
+    question: ¿Para quién es la presentación y qué decisión o acción debe salir de ella?
+    required: true
+  - id: brand
+    question: ¿Con qué marca? MetodologIA por defecto; otra marca necesita su archivo de tokens.
+    required: false
+  - id: sources
+    question: ¿Qué fuentes autorizadas sostienen las cifras?
+    required: false
+improvements:
+  - id: deck-materialized
+    claim:
+      Frames no tenía renderer de decks (deck.materialized false, tope RENDERED_DRAFT); aquí el deck HTML inmersivo
+      se genera, se verifica y se acepta.
+    check: verify/tests/deck.test.ts#renders every kind from one typed source and passes both gate sets
+  - id: link-integrity
+    claim:
+      Un enlace roto hace fallar el gate; las referencias publicaron una masterclass que apuntaba a 02_Workshop.html
+      inexistente.
+    check: verify/tests/deck.test.ts#a broken link fails the gate
+  - id: contrast-by-tokens
+    claim:
+      El texto sobre cada relleno elige tinta o blanco por contraste WCAG contra los tokens reales (mínimo 4,5);
+      nunca blanco sobre dorado.
+    check: verify/tests/deck.test.ts#text on every token fill clears 4.5 to 1
+  - id: print-and-notes
+    claim:
+      Modo impresión/PDF y notas del presentador en todos los layouts (la referencia A no tenía ninguno de los
+      dos).
+    check: verify/tests/deck.test.ts#ships print mode and presenter notes
+  - id: spanish-accents
+    claim: Un deck en español con tildes faltantes no pasa el gate de fuente.
+    check: verify/tests/deck.test.ts#a spanish deck with missing accents fails
+  - id: visual-gate
+    claim:
+      Cada escena se mueve, se queda quieta con movimiento reducido y no desborda a 1920, 1366 y 390, en un navegador
+      real.
+    check: verify/tests/deck.test.ts#the visual gate catches a scene that does not move
+  - id: scenes-as-data
+    claim:
+      Una escena se escribe como datos motion-v1 (formas, iconos, personas y pistas) con colores solo de tokens;
+      el host nunca escribe SVG crudo.
+    check: verify/tests/motion.test.ts#renders a data scene with token colours only, and it passes its gate
+  - id: bespoke-illustrations
+    claim:
+      Las 6 ilustraciones a medida de la referencia A quedan portadas como datos, más 8 figuras nuevas; A pasa
+      de 19/25 a 25/25 escenas exactas.
+    check:
+      verify/tests/motion.test.ts#every data illustration, the six from reference A included, passes the motion
+      gate
+  - id: svg-allowlist
+    claim:
+      Una ilustración externa entra solo si pasa una lista blanca (sin script, eventos, enlaces, estilos ni contenido
+      ajeno); si no, se rechaza entera.
+    check:
+      verify/tests/motion.test.ts#the sanitizer rejects script, event handlers, links, styles, foreign content
+      and a missing viewBox
+  - id: slide-transitions
+    claim:
+      Cada lámina declara cómo entra (fade, push, zoom, morph o none) con View Transitions nativas; con movimiento
+      reducido no hay transición.
+    check: verify/tests/deck.test.ts#declares a transition per slide and the runtime skips it under reduced motion
+  - id: deterministic-capture
+    claim:
+      El mismo HTML animado da los mismos PNG, cuadros y MP4 byte a byte; el tiempo se fija, nunca se lee del
+      reloj.
+    check: verify/tests/capture.test.ts#the same HTML gives the same stills, twice
+  - id: scroll-layouts
+    claim:
+      El mismo deck-v1 sale también como playbook con scroll y como workbook con ejercicios; el texto de cada
+      lámina es idéntico en los tres layouts.
+    check: verify/tests/deck.test.ts#deck, playbook and workbook say the same thing on every slide
+  - id: workbook-state
+    claim:
+      El workbook guarda las respuestas en el navegador del lector, las recupera al recargar y sigue funcionando
+      con el almacenamiento bloqueado.
+    check: verify/tests/deck.test.ts#the workbook keeps its answers, and a workbook that forgets them fails
+  - id: languages
+    claim:
+      Un mismo HTML lleva ES, EN, PT y FR con un selector; falta una traducción o cambia una cifra al traducir
+      y el gate falla.
+    check: verify/tests/deck.test.ts#one page carries every language; a missing or altered translation fails
+  - id: commercial-aula-variant
+    claim:
+      Los decks comerciales ejecutan las dos skills de marca sobre frames-aula-v1 y requieren intake y especificación
+      aprobados, preservando deck-v1 y sus escenas.
+    check: verify/tests/aula.test.ts#executes all eighteen edition and format combinations through native human gates
+steps:
+  - id: D01
+    title: Crea el brief de la presentación
+    handler: content.brief
+    agent: RT-04
+    template: domains/content/templates
+    outputs:
+      - id: brief
+        schema: frames-brief-v1
+      - id: brief-html
+        schema: html
+      - id: ab-concepts-v1
+        schema: markdown
+      - id: definition-of-ready-v1
+        schema: markdown
+    gate: direction
+  - id: DC01
+    title: 'Intake comercial: audiencia, problema y decisión'
+    handler: authored
+    agent: RT-04
+    when:
+      fact: renderer
+      eq: frames-aula
+    inputs:
+      - brief
+    outputs:
+      - id: commercial-intake
+        schema: commercial-intake-v1
+    gate: outcome
+  - id: DC02
+    title: Especificación comercial y evidencia
+    handler: aula.source
+    agent: RT-05
+    when:
+      fact: renderer
+      eq: frames-aula
+    inputs:
+      - brief
+      - commercial-intake
+    outputs:
+      - id: aula-source
+        schema: frames-aula-v1
+    gate: sources-and-spec
+  - id: DC03
+    title: Renderizar el deck comercial
+    handler: aula.render
+    agent: RT-07
+    when:
+      fact: renderer
+      eq: frames-aula
+    inputs:
+      - aula-source
+      - commercial-intake
+    outputs:
+      - id: aula-html
+        schema: html
+      - id: aula-receipt
+        schema: aula-receipt-v1
+  - id: DC04
+    title: Revisión de evidencia, derechos y narrativa comercial
+    handler: content.review
+    agent: RT-09
+    when:
+      fact: renderer
+      eq: frames-aula
+    inputs:
+      - aula-html
+      - aula-receipt
+    template: domains/content/templates
+    outputs:
+      - id: review-report-v1
+        schema: markdown
+      - id: verdict-v1
+        schema: markdown
+      - id: top5-changes-v1
+        schema: markdown
+  - id: DC05
+    title: Aceptación humana del deck comercial
+    handler: aula.final
+    agent: RT-11
+    when:
+      fact: renderer
+      eq: frames-aula
+    inputs:
+      - aula-receipt
+      - review-report-v1
+      - verdict-v1
+    outputs:
+      - id: aula-final-receipt
+        schema: aula-receipt-v1
+    gate: acceptance
+  - id: D02
+    title: Escribe el guion y la fuente del deck
+    handler: authored
+    agent: RT-05
+    inputs:
+      - brief
+    template: domains/content/templates
+    outputs:
+      - id: executive-presentation-v1
+        schema: markdown
+      - id: deck
+        schema: deck-v1
+    when:
+      not:
+        fact: renderer
+        eq: frames-aula
+  - id: D03
+    title: Renderiza el deck y lo verifica en pantalla
+    handler: deck.render
+    agent: RT-07
+    inputs:
+      - deck
+    outputs:
+      - id: deck-html
+        schema: html
+      - id: playbook-html
+        schema: html
+      - id: workbook-html
+        schema: html
+      - id: visual-report
+        schema: markdown
+    when:
+      not:
+        fact: renderer
+        eq: frames-aula
+  - id: D04
+    title: Revisa derechos, accesibilidad y narrativa
+    handler: content.review
+    agent: RT-09
+    inputs:
+      - deck-html
+    template: domains/content/templates
+    outputs:
+      - id: review-report-v1
+        schema: markdown
+      - id: verdict-v1
+        schema: markdown
+      - id: top5-changes-v1
+        schema: markdown
+    when:
+      not:
+        fact: renderer
+        eq: frames-aula
+  - id: D05
+    title: Aplica los cambios de la revisión
+    handler: authored
+    agent: RT-05
+    when:
+      all:
+        - fact: revise
+          eq: true
+        - not:
+            fact: renderer
+            eq: frames-aula
+    inputs:
+      - deck
+      - top5-changes-v1
+    outputs:
+      - id: deck-v2
+        schema: deck-v1
+  - id: D06
+    title: Versión final para aceptación
+    handler: deck.final
+    agent: RT-11
+    inputs:
+      - deck
+    outputs:
+      - id: final-html
+        schema: html
+      - id: final-playbook-html
+        schema: html
+      - id: final-workbook-html
+        schema: html
+      - id: final-visual-report
+        schema: markdown
+    gate: acceptance
+    when:
+      not:
+        fact: renderer
+        eq: frames-aula

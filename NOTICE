@@ -1,0 +1,11 @@
+Frames OS · por MetodologIA
+Autoría de Frames: Franklin Ospina y Javier Montaño.
+Código propio distribuido bajo MIT. Los avisos y licencias de dependencias,
+fuentes y componentes externos se conservan; MIT no concede derechos de marca.
+
+Frames Aula: implementación original de MetodologIA, MIT.
+Bancos opcionales: metodologia-aula-assets y white-label-aula-assets, v1.0.0.
+Las referencias Amaris se estudiaron sin redistribuir sus internals restringidos.
+La procedencia del sucesor se documenta en docs/adr/0001-sucesor.md.
+La procedencia y atribución se conservan. El historial local previo no se
+distribuye: el repositorio público comienza con un snapshot sanitizado.

@@ -1,0 +1,6 @@
+{
+  "source": "Frames 02_proceso/workflows/multimedia/_runner/commercial-proposal-projections-v1.ts",
+  "deck_materialized": false,
+  "maximum_state": "RENDERED_DRAFT",
+  "next_step": "G14 · revisión humana; sin publicación ni deck."
+}

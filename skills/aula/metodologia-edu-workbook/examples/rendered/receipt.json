@@ -1,0 +1,15 @@
+{
+  "state": "RENDERED_DRAFT",
+  "kind": "workbook",
+  "edition": "metodologia",
+  "inputSha256": "86a181a55b417ca26bb9a92fdcd641f5a888dd1e5b6c1269a848eaf0ad4e4051",
+  "engineSha256": "46c8e4c9cf63105704debf33d7f57a2cb569fbcb1daaec00eee123847676b3d3",
+  "outputs": {
+    "artifact.html": "09a88dbd98bc0179c3458d408a2e16536ddd2f00695784f191a083c1df7d1a86",
+    "artifact-mobile.html": "b30fde638271fc9c03d60938497c02f7bb8a38903dd1412f6d490552b91ae213",
+    "artifact-audience.html": "988ad72b9c4572e59211f0a7682aece662f5d6144dd841c1d6f1a63811704e72",
+    "artifact-mobile-audience.html": "d974dc3f3a06a471237169f01e580dc94402944171c369da1a077914b858e1e9",
+    "artifact.md": "23dcba58384678fe9d1d72ca345ef5661d19cd84e92effedae57ace48c062525"
+  },
+  "advisories": []
+}

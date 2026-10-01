@@ -1,0 +1,20 @@
+{
+  "opportunities": [
+    {
+      "id": "OPP-SYNTH-001",
+      "title": "Product Operations Lead · Empresa Sintética A",
+      "inputs": { "evidence": 0.9, "hard_requirements": 0.8, "constraints": 1, "transferability": 0.7, "publication_quality": 0.8, "sector": 0.6, "application_friction": 0.9, "legitimate_contact": 0.5 }
+    },
+    {
+      "id": "OPP-SYNTH-002",
+      "title": "Operations Manager · Empresa Sintética B",
+      "inputs": { "evidence": 0.6, "hard_requirements": 0.5, "constraints": 0.8, "transferability": 0.6, "publication_quality": 0.7, "sector": 0.4, "application_friction": 0.6, "legitimate_contact": 0.2 }
+    },
+    {
+      "id": "OPP-SYNTH-003",
+      "title": "Program Lead · Empresa Sintética C",
+      "inputs": { "evidence": 0.95, "hard_requirements": 0.9, "constraints": 0.9, "transferability": 0.8, "publication_quality": 0.9, "sector": 0.8, "application_friction": 0.8, "legitimate_contact": 0.6 },
+      "mandatory_blockers": ["requiere reubicación que la persona descartó"]
+    }
+  ]
+}

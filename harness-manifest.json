@@ -1,0 +1,10 @@
+{
+  "convention": "external",
+  "gate_command": "pnpm verify",
+  "map": {
+    "goal-contract.md": "docs/scope.md",
+    "harness.sh": "engine/cli.ts",
+    ".harness/validate_loop_bound.py": "engine/guard/hook.ts",
+    ".harness/session.json": "work/session.json"
+  }
+}

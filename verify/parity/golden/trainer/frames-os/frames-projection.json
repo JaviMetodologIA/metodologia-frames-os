@@ -1,0 +1,26 @@
+{
+  "source": "Frames 02_proceso/workflows/trainer-os",
+  "landing_sections": 8,
+  "cta_words": 3,
+  "cta_chars": 40,
+  "preparation": [
+    1,
+    8
+  ],
+  "routes": 3,
+  "route_steps_max": 12,
+  "essential_chapters": 12,
+  "optional_chapters_max": 7,
+  "chapter_steps": [
+    1,
+    8
+  ],
+  "prompts_max": 152,
+  "prompt_levels": 4,
+  "masterclass_moments": 18,
+  "masterclass_minutes": [
+    90,
+    30
+  ],
+  "benchmark_executed": false
+}

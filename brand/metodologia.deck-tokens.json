@@ -1,0 +1,17 @@
+{
+  "name": "MetodologIA",
+  "source": "Frames c6d0ba61 03_artefactos/brand/tokens/brand-tokens.yml (colors + career.navy); ningun hex inventado",
+  "palette": {
+    "brand": "#093d78",
+    "accent": "#e0b400",
+    "ink": "#0a122a",
+    "surface": "#ffffff"
+  },
+  "accents": ["#0d4788", "#b9c9dc", "#52749b", "#f0c820", "#e2e8f0"],
+  "ok": "#f0c541",
+  "fonts": {
+    "heading": "\"Poppins\", system-ui, sans-serif",
+    "body": "\"Montserrat\", system-ui, sans-serif"
+  },
+  "wordmark": "MetodologIA"
+}

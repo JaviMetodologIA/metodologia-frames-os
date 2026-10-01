@@ -1,0 +1,5 @@
+# GENERADO por `pnpm gen` (engine/gen.ts). No editar a mano: edita la fuente.
+description = "Frames OS: enruta un pedido de contenido"
+prompt = """
+Corre `pnpm frames route "{{args}}"` y sigue el flujo de AGENTS.md: haz la pregunta R0 si aparece; si no, confirma la familia y usa `pnpm frames start`.
+"""

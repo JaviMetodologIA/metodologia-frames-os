@@ -1,0 +1,80 @@
+schema: deck-v1
+meta:
+  title: Presentaciones que se verifican
+  subtitle: Un curso de MetodologIA para crear presentaciones, carruseles y videos con Frames OS.
+  lang: es
+  axis: Una pieza está lista cuando pasó por un navegador real y una persona la aceptó.
+  cta: Empieza el curso
+acts:
+  - { id: promesa, title: La promesa }
+  - { id: contenido, title: El contenido }
+  - { id: cierre, title: El cierre }
+slides:
+  - id: portada
+    act: promesa
+    kind: cover
+    eyebrow: Curso de MetodologIA
+    title: Presentaciones que se verifican
+    sub: De una fuente tipada a una pieza revisada en un navegador real y aceptada por una persona.
+    chain: [Fuente, Gates, Navegador, Aceptación]
+    scene_label: Anillo de cuatro etapas con un punto que las recorre
+  - id: problema
+    act: promesa
+    kind: question
+    eyebrow: La pregunta
+    title: ¿Cuántas veces publicaste una lámina que nadie revisó en pantalla?
+    sub: Un error de tildes, una cifra sin fuente o una animación que marea llegan al público sin aviso.
+    scene_label: Tarjetas que se apilan frente a una lupa
+  - id: metodo
+    act: contenido
+    kind: flow
+    eyebrow: El método
+    title: Cuatro pasos, siempre en el mismo orden
+    chain: [Escribir la fuente, Pasar los gates, Revisar en navegador, Aceptar con una persona]
+    scene_label: Flujo de cuatro cajas con un punto que avanza
+  - id: formatos
+    act: contenido
+    kind: cards
+    eyebrow: Tres formatos
+    title: Una fuente, tres piezas
+    cards:
+      - { title: Presentación, fix: Láminas inmersivas con teclado y táctil. }
+      - { title: Carrusel, fix: Tarjetas que abren con la conclusión. }
+      - { title: Video, fix: Beats con narración y subtítulos. }
+    scene_label: Tres tarjetas que entran una tras otra
+  - id: modulos
+    act: contenido
+    kind: list
+    eyebrow: Lo que vas a practicar
+    title: Cinco módulos cortos y prácticos
+    items:
+      - La fuente tipada
+      - Escenas y ritmo
+      - Carrusel y video desde la misma fuente
+      - Verificar en un navegador real
+      - Aceptar y entregar
+    scene_label: Cinco hitos que se marcan en orden
+  - id: para-quien
+    act: contenido
+    kind: statement
+    eyebrow: Para quién
+    title: Para quien enseña o vende con piezas visuales y no quiere sorpresas al publicar.
+    scene_label: Una frase que aparece sobre un brillo suave
+  - id: entregables
+    act: cierre
+    kind: list
+    eyebrow: Qué te llevas
+    title: Materiales para seguir practicando
+    items:
+      - Una masterclass de noventa minutos
+      - Un workbook con ejercicios
+      - Un playbook de doce capítulos
+      - Una biblioteca de prompts por nivel
+    scene_label: Cuatro piezas que se ordenan en una pila
+  - id: cierre
+    act: cierre
+    kind: close
+    eyebrow: Tu siguiente paso
+    title: Empieza hoy con tu primera fuente
+    sub: Trae una presentación que ya tengas y conviértela en una pieza que se verifica.
+    scene_label: Un punto de llegada que se ilumina al final del recorrido

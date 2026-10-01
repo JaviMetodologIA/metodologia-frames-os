@@ -1,0 +1,15 @@
+{
+  "state": "RENDERED_DRAFT",
+  "kind": "dynamic-commercial-decks",
+  "edition": "white-label",
+  "inputSha256": "f0b366d726fba58b4ad508dc506387ba66e2702b2b5cd414b2d5b174e2745b5a",
+  "engineSha256": "46c8e4c9cf63105704debf33d7f57a2cb569fbcb1daaec00eee123847676b3d3",
+  "outputs": {
+    "artifact.html": "621a523e76251833978dd657f1e34900e47c021def111b5850614a069b33a130",
+    "artifact-mobile.html": "bda6dddae3c8aea4046174084e8a5463c168af49c32cc822ad89032ed67d2e6c",
+    "artifact-audience.html": "3700b6056339084140c70030fdc03f5207d2cdc6910e19f504c838e1f478a296",
+    "artifact-mobile-audience.html": "b1a3990aa3950f73668814968d7de8ae31cae8af862bda028b306b7438cfe0ca",
+    "artifact.md": "4243f309e9fd512b9b0e014cea1d59e7f8846d750f5f7377e6c1c7421cdc5758"
+  },
+  "advisories": []
+}

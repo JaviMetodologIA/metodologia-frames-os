@@ -1,0 +1,4 @@
+# GENERADO por `pnpm gen` (engine/gen.ts). No editar a mano: edita la fuente.
+# Codex no documenta hooks pre-tool: el guard no corre por llamada. Límite registrado en docs/adr/0004.
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"

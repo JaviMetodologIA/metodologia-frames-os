@@ -1,0 +1,37 @@
+# Familia de prueba: solo existe en tests, nunca en registry/.
+id: echo
+title: Eco de prueba
+frames_route: R6
+status: active
+wave: 0
+intent:
+  examples:
+    - eco de prueba uno
+    - eco de prueba dos
+    - eco de prueba tres
+steps:
+  - id: E01
+    title: Nota inicial
+    handler: authored
+    agent: RT-01
+    outputs:
+      - id: note
+        schema: markdown
+    gate: direction
+  - id: E02
+    title: Solo si hay extra
+    handler: authored
+    agent: RT-01
+    when: { fact: extra, eq: true }
+    outputs:
+      - id: extra
+        schema: markdown
+  - id: E03
+    title: Final
+    handler: authored
+    agent: RT-01
+    inputs: [note]
+    outputs:
+      - id: final
+        schema: markdown
+    gate: publish

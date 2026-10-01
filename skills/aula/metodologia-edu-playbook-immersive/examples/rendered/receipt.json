@@ -1,0 +1,15 @@
+{
+  "state": "RENDERED_DRAFT",
+  "kind": "playbook-immersive",
+  "edition": "metodologia",
+  "inputSha256": "061b5965782f7475a253e5359f8c969fbc63a0e8760e05fd5d2e4907291c1548",
+  "engineSha256": "46c8e4c9cf63105704debf33d7f57a2cb569fbcb1daaec00eee123847676b3d3",
+  "outputs": {
+    "artifact.html": "79c19a83506623514a2e9b899f9260389de737a6d7082b9c81e8137c6ba37fd9",
+    "artifact-mobile.html": "2b1825db0bfd9b0bf3084031b42df2f53e7f8c1676952f6c23111b0d2bf3278f",
+    "artifact-audience.html": "ac5c6226984c451176b7cc2ebdb2725cbb9470a62c78b5d81ade8766137f199d",
+    "artifact-mobile-audience.html": "52bf1259537c72b2180921b359616700cd9cb67fe5c6e60f0207718f5c11f367",
+    "artifact.md": "e634f44faf33e2d484c7f026fd543384726847f2ad43a67973840485f81e13ea"
+  },
+  "advisories": []
+}

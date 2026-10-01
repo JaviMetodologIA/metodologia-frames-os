@@ -1,0 +1,15 @@
+{
+  "state": "RENDERED_DRAFT",
+  "kind": "playbook",
+  "edition": "metodologia",
+  "inputSha256": "45b9030a1ab06a3532d010b7e1c9c5758c17ecd9c0ffb97449bd116b972d896d",
+  "engineSha256": "46c8e4c9cf63105704debf33d7f57a2cb569fbcb1daaec00eee123847676b3d3",
+  "outputs": {
+    "artifact.html": "8aa2415651e865e0baddcd93bcc7234ecfedd873c180940895cab0e8689a097f",
+    "artifact-mobile.html": "2c5afd359f814b3ee6b584fa836faef9640c55d31c56b60465454dfbf1583ed9",
+    "artifact-audience.html": "f954ac76a491a8f64a3e019d4597ba653e9433ae4190821206da5a4e89be104b",
+    "artifact-mobile-audience.html": "b71eaaf25f6348af7a9c112c69216d6789c3446f3f569d51383264aa4075c175",
+    "artifact.md": "1272eb913e803a9a32003aeeb04d18285aa9c2e84c611dabb85af05fcfc39770"
+  },
+  "advisories": []
+}

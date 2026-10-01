@@ -1,0 +1,35 @@
+{
+  "source": "Frames 02_proceso/workflows/content/types/carousel/schema.ts + 03_artefactos/renderers/static-social/src/carousel-html.ts",
+  "cards": [
+    3,
+    10
+  ],
+  "eyebrow_max": 64,
+  "title_max": 96,
+  "bullets": [
+    3,
+    120
+  ],
+  "sources_per_card": [
+    1,
+    8
+  ],
+  "alt": [
+    20,
+    700
+  ],
+  "caption": [
+    40,
+    2200
+  ],
+  "cta": [
+    8,
+    180
+  ],
+  "opens_with": "conclusion",
+  "closes_with": "cta",
+  "support_needs_pillar": true,
+  "cta_min_position": 3,
+  "count_hard_coded": true,
+  "safe_zone_read": false
+}

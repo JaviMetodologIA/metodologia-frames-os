@@ -1,0 +1,25 @@
+# capability-map-v1
+
+Escribe un JSON con esta forma; el motor lo valida contra su schema al correr `next`.
+Ejemplo válido (caso `verify/parity/cases/skills.build/frames-os/capability-map-v1.json`):
+
+```json
+{
+  "schema_version": "capability-map-v1",
+  "map_id": "MAP-PROPUESTAS",
+  "case_id": "CASE-PROPUESTAS",
+  "existing_capabilities": ["improve"],
+  "components": [
+    {
+      "component_id": "SKILL-REVISOR",
+      "kind": "SKILL",
+      "responsibility": "Revisar una propuesta y listar hallazgos con su arreglo",
+      "owner": "consultor",
+      "effect_class": "E1"
+    }
+  ],
+  "demotion_results": ["una instrucción no basta: la revisión exige criterio"],
+  "split_reasons": [],
+  "content_sha256": "d67aaa9297faef88fcbf31539e598b83ddf432742bee7a9bbfe609aefd1ef382"
+}
+```

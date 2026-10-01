@@ -1,0 +1,39 @@
+# macOS / editor
+.DS_Store
+*.swp
+*~
+
+# Worktrees + sesión volátil
+.claude/worktrees/
+SESSION-*.md
+session-state.json
+calibration-digest.md
+ghost-menu.md
+.mirror/
+
+# Secrets / local
+.env
+.env.*
+*.pem
+*.key
+*.p12
+
+# Runtime / deps
+node_modules/
+**/node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.cache/
+.tmp/
+tmp/
+.validation/
+.playwright-mcp/
+
+# Frames OS: estado de ejecucion local (runs, privados, packs vendor instalados)
+work/*
+!work/.gitkeep
+
+# Extensiones locales privadas (skills.build L02-L04): nunca se versionan
+local/

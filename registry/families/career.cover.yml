@@ -1,0 +1,75 @@
+id: career.cover
+title: Cover letter
+frames_route: R7
+status: active
+wave: 6
+intent:
+  examples:
+    - escribe una cover letter que complemente mi cv
+    - redacta una carta de presentacion para esta vacante
+    - necesito un mensaje breve para el reclutador
+    - responde este formulario de postulacion sin inventar logros
+  negatives:
+    - mejora mi cv
+improvements:
+  - id: letter-bound
+    claim: La carta respeta los rangos de Frames (carta 180 a 280 palabras, formulario 80 a 140, mensaje 40 a 70) y cada párrafo pasa el gate de evidencia; sale en HTML y PDF.
+    check: verify/tests/career.test.ts#writes a cover letter only within Frames word ranges and bound to evidence
+  - id: submission-hard-stop
+    claim: Postular es un hard stop que el motor nunca aprueba; la persona postula fuera.
+    check: verify/tests/career.test.ts#every career family stops at submission and never submits
+steps:
+  - id: C00
+    title: Entiende a la persona y su objetivo
+    handler: authored
+    agent: RT-04
+    template: domains/career/frames/c00-intake/templates
+    outputs:
+      - { id: candidate-foundation-brief-v1, schema: markdown }
+    gate: direction
+  - id: C01
+    title: Reúne y verifica la evidencia
+    handler: authored
+    agent: RT-03
+    inputs: [candidate-foundation-brief-v1]
+    template: domains/career/frames/c01-evidence/templates
+    outputs:
+      - { id: evidence-bank, schema: evidence-bank-v1 }
+      - { id: gap-report, schema: markdown }
+    gate: sources-and-spec
+  - id: C05
+    title: Diseña la postulación
+    handler: authored
+    agent: RT-04
+    inputs: [evidence-bank]
+    template: domains/career/frames/c05-application-design/templates
+    outputs:
+      - { id: application-brief-v1, schema: markdown }
+  - id: C07
+    title: Escribe la carta
+    handler: career.letter
+    agent: RT-06
+    inputs: [evidence-bank, application-brief-v1]
+    template: domains/career/frames/c07-cover-letter/templates
+    outputs:
+      - { id: letter, schema: career-letter-v1 }
+      - { id: letter-html, schema: html }
+      - { id: letter-pdf, schema: pdf }
+  - id: C08
+    title: Revisa el paquete con otro actor
+    handler: content.review
+    agent: RT-09
+    inputs: [letter-html]
+    template: domains/content/templates
+    outputs:
+      - { id: review-report-v1, schema: markdown }
+      - { id: verdict-v1, schema: markdown }
+      - { id: top5-changes-v1, schema: markdown }
+  - id: C09
+    title: Prepara la postulación y se detiene
+    handler: authored
+    agent: RT-11
+    template: domains/career/frames/c09-submission/templates
+    outputs:
+      - { id: submission-preview-v1, schema: markdown }
+    gate: submission

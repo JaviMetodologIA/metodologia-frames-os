@@ -1,0 +1,99 @@
+{
+  "source": "Frames 02_proceso/workflows/multimedia/_assets/deliverable-definition-registry.yml",
+  "producing_code": false,
+  "fields": {
+    "brief-campaign-map-v1": [
+      "request",
+      "audience",
+      "objective",
+      "evidence",
+      "architecture",
+      "deliverables",
+      "acceptance"
+    ],
+    "campaign-charter-v1": [
+      "mission",
+      "scope",
+      "audience",
+      "outcomes",
+      "piece-system",
+      "governance",
+      "milestones",
+      "measurement",
+      "stop-rule"
+    ],
+    "editorial-calendar-v1": [
+      "milestone",
+      "deliverable",
+      "owner",
+      "dependency",
+      "target-date",
+      "gate",
+      "status"
+    ],
+    "content-grid-v1": [
+      "slot",
+      "audience",
+      "objective",
+      "channel",
+      "piece-family",
+      "hook",
+      "cta",
+      "source-ref",
+      "metric"
+    ],
+    "board-v1": [
+      "work-item",
+      "owner",
+      "state",
+      "capacity",
+      "blocker",
+      "next-gate"
+    ],
+    "batch-plan-v1": [
+      "batch",
+      "items",
+      "shared-inputs",
+      "capacity",
+      "sequence",
+      "quality-gate",
+      "learning"
+    ],
+    "platform-package-v1": [
+      "channel",
+      "files",
+      "copy",
+      "metadata",
+      "alt-text",
+      "authorization",
+      "checklist"
+    ],
+    "publication-record-v1": [
+      "authorization-ref",
+      "channel",
+      "candidate-hash",
+      "external-ref",
+      "published-at",
+      "actor",
+      "state"
+    ],
+    "results-dashboard-v1": [
+      "measurement-window",
+      "baseline",
+      "objective",
+      "metric",
+      "observed-value",
+      "source-ref",
+      "variance",
+      "limitation"
+    ],
+    "learning-report-v1": [
+      "observations",
+      "evidence",
+      "interpretation",
+      "limitations",
+      "decision",
+      "next-experiment"
+    ]
+  }
+}

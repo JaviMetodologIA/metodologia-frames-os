@@ -1,0 +1,10 @@
+{
+  "source": "Frames 02_proceso/workflows/career/_runner",
+  "evidence_confidence": [
+    "verified",
+    "user_confirmed"
+  ],
+  "rejects_unbound_text": true,
+  "submission_decision": "PREPARED_STOP",
+  "run_writes_only_brief": true
+}

@@ -1,0 +1,27 @@
+work/
+pnpm-lock.yaml
+verify/parity/frames-inventory.json
+# Generados por pnpm gen: su forma la fija engine/gen.ts
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+.github/copilot-instructions.md
+.claude/settings.json
+.claude/skills/
+.agents/
+.gemini/
+.github/hooks/
+.codex/
+# Portados tal cual desde Frames y goldens: sus bytes son la evidencia de paridad
+domains/content/brief/template.html
+domains/content/templates/
+verify/parity/golden/
+verify/parity/cases/
+domains/nlm/frames/
+verify/tests/nlm-frames/
+domains/career/frames/
+verify/tests/career-frames/
+# Frozen standalone Aula engine/packages: their exact bytes bind the runtime catalog.
+engine/aula/runtime/
+skills/aula/
+registry/aula-capabilities.json

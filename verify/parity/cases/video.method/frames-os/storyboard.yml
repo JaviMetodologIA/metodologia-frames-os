@@ -1,0 +1,71 @@
+schema: deck-v1
+meta:
+  title: Cómo Frames OS verifica una pieza
+  subtitle: Un video de método en seis beats
+  lang: es
+  hold: 6
+  transition: fade
+  axis: Una pieza no está lista hasta que un navegador real la vio y una persona la aceptó.
+  forbidden_terms: [Claude, Vercel]
+acts:
+  - { id: problema, title: El problema }
+  - { id: metodo, title: El método }
+slides:
+  - id: pregunta
+    act: problema
+    kind: question
+    eyebrow: La pregunta
+    title: ¿Cómo sabes que una presentación está lista?
+    scene_label: Signos de pregunta que aparecen alrededor de una tarjeta
+    voiceover: ¿Cómo sabes que una presentación está lista? Que se vea bien en tu pantalla no alcanza.
+  - id: fuente
+    act: metodo
+    kind: scene
+    eyebrow: Paso 1
+    title: Todo empieza en una fuente tipada
+    scene_label: Un documento que se convierte en una presentación mientras dos engranajes giran
+    voiceover: Todo empieza en un archivo con esquema. El motor lo lee y dibuja cada escena con la marca.
+    scene:
+      dur: 6
+      freeze: 0.9
+      elements:
+        - { type: icon, name: file-text, x: 540, y: 330, size: 220, stroke: c2, draw: [0.02, 0.3] }
+        - { type: path, d: 'M540 480 V600', stroke: accent, width: 6, draw: [0.3, 0.45], arrow: true }
+        - { type: icon, name: presentation, x: 540, y: 720, size: 240, stroke: accent, draw: [0.45, 0.75] }
+        - { type: icon, name: cog, x: 760, y: 420, size: 110, stroke: c4, origin: [760, 420], rotate: [[0, 0], [1, 360]] }
+  - id: gates
+    act: metodo
+    kind: pipeline
+    transition: push
+    eyebrow: Paso 2
+    title: Los gates revisan antes de mostrar
+    chain: [Fuente, Contenido, Pantalla, Persona]
+    gate: 3
+    scene_label: Tubería de cuatro etapas con un candado en la última
+    voiceover: Luego pasan los gates. Primero el contenido, después la pantalla, al final la persona.
+  - id: navegador
+    act: metodo
+    kind: zig
+    art: shield
+    side: left
+    eyebrow: Paso 3
+    title: Un navegador real la mira entera
+    scene_label: Un escudo que se dibuja con anillos que pulsan
+    voiceover: Un navegador real la abre en tres tamaños, prueba el teclado y confirma que cada escena se mueve.
+  - id: captura
+    act: metodo
+    kind: zig
+    art: rocket
+    side: right
+    transition: zoom
+    eyebrow: Paso 4
+    title: La misma pieza sale en video
+    scene_label: Un cohete que se dibuja y flota con su estela
+    voiceover: La misma fuente sale como video, cuadro a cuadro, y dos corridas dan los mismos bytes.
+  - id: cierre
+    act: metodo
+    kind: statement
+    eyebrow: En una frase
+    title: Lista es vista y aceptada
+    scene_label: Anillos que giran alrededor de la frase
+    voiceover: Lista quiere decir vista por un navegador y aceptada por una persona.

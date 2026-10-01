@@ -1,0 +1,59 @@
+schema: course-v1
+meta:
+  title: Presentaciones que se verifican
+  locale: es
+  audience: Personas que crean presentaciones, carruseles y videos para enseñar o vender, y quieren piezas que se revisan en un navegador real antes de publicarse.
+  privacy_reviewed: true
+intake:
+  outcomes:
+    - Escribir la fuente tipada de una presentación inmersiva en lugar de diseñar lámina por lámina.
+    - Convertir una misma fuente en presentación, carrusel y video sin duplicar el contenido.
+    - Revisar cada pieza con los gates de Frames OS y corregir la fuente, no la salida.
+    - Comprobar la pieza en un navegador real con teclado, táctil y movimiento reducido.
+    - Cerrar cada entrega con la aceptación explícita de una persona.
+  constraints:
+    - Las cifras se muestran con su fuente y nunca se animan.
+    - Las piezas funcionan sin conexión y sin recursos remotos.
+    - Ningún texto visible lleva etiquetas editoriales ni datos personales.
+  sources:
+    - Esquema deck-v1 de Frames OS
+    - Esquema prompts-v1 de Frames OS
+    - Gates de fuente y de HTML del dominio deck
+  prompt_rounds:
+    - { question: '¿Qué idea debe sostener toda la pieza en una sola frase?', blocking: true }
+    - { question: '¿Quién va a aceptar la pieza antes de publicarla?', blocking: true }
+    - { question: '¿En qué formatos se va a publicar: presentación, carrusel o video?', blocking: false }
+    - { question: '¿Qué cifras aparecen y de qué fuente sale cada una?', blocking: false }
+spec:
+  modules:
+    - id: fuente-tipada
+      title: La fuente tipada
+      outcome: La persona escribe un deck-v1 válido con actos, láminas y una idea eje.
+      evidence: El archivo pasa la validación del esquema sin errores.
+    - id: escenas-y-ritmo
+      title: Escenas y ritmo
+      outcome: Cada lámina tiene una escena con nombre accesible y una transición coherente.
+      evidence: El gate de HTML no reporta escenas sin nombre ni láminas sin loop.
+    - id: carrusel-y-video
+      title: Carrusel y video desde la misma fuente
+      outcome: La misma fuente produce un carrusel con roles y un video con narración.
+      evidence: El carrusel abre con la conclusión y el video tiene subtítulos por cada beat.
+    - id: verificar-en-navegador
+      title: Verificar en un navegador real
+      outcome: La pieza se revisa con teclado, táctil, impresión y movimiento reducido.
+      evidence: El reporte del navegador no tiene líneas en rojo.
+    - id: aceptar-y-entregar
+      title: Aceptar y entregar
+      outcome: Una persona acepta la pieza y el paquete queda sellado con sus huellas.
+      evidence: El paquete lista cada archivo con su sha256 y la aceptación queda registrada.
+  acceptance:
+    - Cada fuente pasa los gates de Frames OS sin líneas en rojo.
+    - La idea eje aparece en el primer tercio de la presentación.
+    - Ninguna cifra se anima y todas citan su fuente.
+    - El texto visible no tiene tildes faltantes ni etiquetas editoriales.
+    - Una persona acepta la pieza antes de publicarla.
+design:
+  directions:
+    - { id: noche-dorada, summary: 'Fondo azul noche, acentos dorados y escenas de trazo que se dibujan.' }
+    - { id: papel-claro, summary: 'Fondo claro tipo papel, tinta oscura y escenas de bloques geométricos.' }
+  chosen: noche-dorada

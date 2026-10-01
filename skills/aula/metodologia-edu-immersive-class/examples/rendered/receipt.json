@@ -1,0 +1,15 @@
+{
+  "state": "RENDERED_DRAFT",
+  "kind": "immersive-class",
+  "edition": "metodologia",
+  "inputSha256": "fb47776e2622ecfcf312e302d72f93a2ea3aa4d440a72c3e869726f4156d6a42",
+  "engineSha256": "46c8e4c9cf63105704debf33d7f57a2cb569fbcb1daaec00eee123847676b3d3",
+  "outputs": {
+    "artifact.html": "8c731e60164acad2b705fedfa9a67f5c20d5902e6fdf73a50fac6c53ff788dff",
+    "artifact-mobile.html": "068dec9966a727bb8ccb6b13050704884c8706995bbb96079e0265d1863fc7da",
+    "artifact-audience.html": "cb92db47cf98e4fe2c440be7510582545dd36e2782c333f6cc04d9fd8670793b",
+    "artifact-mobile-audience.html": "8efb6b49af82ff1ea92dd10471f953237ff2ea10dfe18aaa503abd3e8d1c73f5",
+    "artifact.md": "9c61a7bad26612db74e8d535ab4f15c04e6a564e021cbb5db6446789c62b46bb"
+  },
+  "advisories": []
+}

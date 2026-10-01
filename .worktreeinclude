@@ -1,0 +1,4 @@
+# Archivos gitignored pero necesarios en cada worktree nuevo (sintaxis .gitignore).
+.env
+.env.*
+.claude/settings.local.json

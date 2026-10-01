@@ -1,0 +1,79 @@
+id: aula
+title: Aula dinámica · formación y práctica
+frames_route: R6
+status: active
+wave: 2
+intent:
+  examples:
+    - crea un workbook dinámico con campos editables para practicar
+    - prepara una clase inmersiva para presentar en una sesión
+    - explica conceptos en una masterclass dinámica de Aula
+    - construye un módulo completo de Aula con recursos y ejercicios
+    - organiza un Lean Coffee con temporizador y revelado
+    - crea un playbook dinámico de procedimientos
+    - crea un playbook inmersivo para explorar procedimientos
+    - construye un índice dinámico de recursos de Aula
+  negatives:
+    - crea una presentación ejecutiva con diapositivas
+    - diseña un curso completo con Trainer OS
+    - quiero un post para redes sociales
+slots:
+  - id: audience
+    question: ¿Quién aprenderá y qué práctica demostrará el resultado?
+    required: true
+  - id: format
+    question: ¿Conceptos, práctica, sesión presentada o kit completo?
+    required: false
+  - id: brand
+    question: ¿MetodologIA o marca blanca?
+    required: false
+improvements:
+  - id: aula-material-execution
+    claim: Dieciséis capacidades educativas producen HTML offline y recibos ligados a archivos desde el catálogo de skills.
+    check: verify/tests/aula.test.ts#executes all eighteen edition and format combinations through native human gates
+steps:
+  - id: A01
+    title: Brief educativo y dirección
+    handler: content.brief
+    agent: RT-04
+    template: domains/content/templates
+    outputs:
+      - { id: brief, schema: frames-brief-v1 }
+      - { id: brief-html, schema: html }
+      - { id: ab-concepts-v1, schema: markdown }
+      - { id: definition-of-ready-v1, schema: markdown }
+    gate: direction
+  - id: A02
+    title: Fuente mantenible y especificación
+    handler: aula.source
+    agent: RT-05
+    inputs: [brief]
+    outputs:
+      - { id: aula-source, schema: frames-aula-v1 }
+    gate: sources-and-spec
+  - id: A03
+    title: Construir HTML y comprobar archivos
+    handler: aula.render
+    agent: RT-07
+    inputs: [aula-source]
+    outputs:
+      - { id: aula-html, schema: html }
+      - { id: aula-receipt, schema: aula-receipt-v1 }
+  - id: A04
+    title: Revisar objetivos, práctica, derechos y accesibilidad
+    handler: content.review
+    agent: RT-09
+    inputs: [aula-html, aula-receipt]
+    template: domains/content/templates
+    outputs:
+      - { id: review-report-v1, schema: markdown }
+      - { id: verdict-v1, schema: markdown }
+      - { id: top5-changes-v1, schema: markdown }
+  - id: A05
+    title: Aceptación humana del conjunto verificado
+    handler: aula.final
+    agent: RT-11
+    inputs: [aula-receipt, review-report-v1, verdict-v1]
+    outputs:
+      - { id: aula-final-receipt, schema: aula-receipt-v1 }
+    gate: acceptance

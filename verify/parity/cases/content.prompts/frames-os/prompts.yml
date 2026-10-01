@@ -1,0 +1,74 @@
+schema: prompts-v1
+meta:
+  title: Prompts para piezas de Frames OS
+  subtitle: Seis prompts reproducibles para imagen, miniclip, gráfica, carrusel, historia y texto.
+  lang: es
+prompts:
+  - id: portada-imagen
+    family: image
+    title: Imagen de portada con la idea central
+    objective: Obtener una imagen de portada que represente la idea central sin texto incrustado.
+    prompt: >-
+      Ilustración vectorial plana sobre fondo azul noche. Tema: {tema}. Un solo elemento
+      central que represente {idea_central}, con acentos dorados y mucho espacio negativo.
+      Composición 4:5, luz suave desde arriba a la izquierda.
+    negative: texto incrustado, logotipos, personas reconocibles, degradados neón
+    params: { formato: '1080x1350', estilo: vectorial plano }
+    inputs: [creative-spec-v1]
+    expected: Una imagen 1080×1350 sin texto, con un único foco visual.
+    acceptance: El foco se entiende en menos de dos segundos y no hay texto ni marcas de terceros.
+    tags: [portada, ilustración]
+  - id: miniclip-proceso
+    family: miniclip
+    title: Miniclip de un proceso en tres pasos
+    objective: Explicar un proceso corto con movimiento simple y ritmo constante.
+    prompt: >-
+      Animación de 8 segundos, estilo diagrama. Paso 1: {paso_uno}. Paso 2: {paso_dos}.
+      Paso 3: {paso_tres}. Cada paso aparece con un trazo que se dibuja y se queda quieto
+      el último segundo.
+    negative: cortes bruscos, música con letra, textos de más de seis palabras
+    params: { duración: 8 s, fps: '30' }
+    expected: Un clip de 8 s que muestra los tres pasos en orden.
+    acceptance: Cada paso es legible en pausa y el último cuadro resume el proceso.
+  - id: grafica-cifra
+    family: graphic
+    title: Gráfica con una sola cifra y su fuente
+    objective: Mostrar una cifra con su fuente visible, sin animar el número.
+    prompt: >-
+      Gráfica de una sola cifra: {cifra}. Etiqueta: {etiqueta}. Fuente en pequeño debajo:
+      {fuente}. Fondo azul noche, cifra en dorado, tipografía sans de peso alto.
+    negative: números animados, ejes inventados, decimales sin fuente
+    expected: Una gráfica con la cifra, su etiqueta y su fuente legibles.
+    acceptance: La cifra coincide con la fuente citada y la fuente se lee en móvil.
+  - id: carrusel-guion
+    family: carousel
+    title: Guion de un carrusel de ocho tarjetas
+    objective: Escribir un carrusel que abra con la conclusión y cierre con una acción.
+    prompt: >-
+      Escribe un carrusel de 8 tarjetas sobre {tema} para {audiencia}. Tarjeta 1: la
+      conclusión en una frase. Tarjetas 2 a 7: tensión, apoyo, evidencia con su fuente y
+      acción. Tarjeta 8: la llamada a la acción «{cta}». Máximo 96 caracteres por título.
+    expected: Ocho tarjetas con rol, título, texto breve y fuente por tarjeta.
+    acceptance: Cumple las reglas del carrusel (conclusión primero, cta al final, fuentes por tarjeta).
+  - id: historia-anuncio
+    family: story
+    title: Historia vertical que anuncia algo nuevo
+    objective: Anunciar un lanzamiento en tres cuadros verticales.
+    prompt: >-
+      Tres cuadros 9:16 que anuncian {lanzamiento}. Cuadro 1: la pregunta que resuelve.
+      Cuadro 2: qué cambia para {audiencia}. Cuadro 3: dónde empezar hoy.
+    negative: urgencia falsa, contadores regresivos, promesas sin prueba
+    expected: Tres cuadros verticales con un mensaje cada uno.
+    acceptance: Cada cuadro se entiende solo y el tercero tiene una acción concreta.
+  - id: texto-post
+    family: text
+    title: Post corto que anuncia lo construido
+    objective: Contar en pocas líneas qué se construyó y qué prueba lo respalda.
+    prompt: >-
+      Escribe un post de LinkedIn de 120 palabras como máximo que anuncia {que_construi}.
+      Empieza por el resultado, sigue con la prueba ({prueba}) y termina con una
+      pregunta abierta para {audiencia}.
+    negative: emojis, jerga sin explicar, afirmaciones sin prueba
+    params: { extensión: 120 palabras }
+    expected: Un post de 120 palabras o menos con resultado, prueba y pregunta.
+    acceptance: Cada afirmación tiene su prueba y no hay emojis.

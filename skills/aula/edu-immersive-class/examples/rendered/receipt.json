@@ -1,0 +1,15 @@
+{
+  "state": "RENDERED_DRAFT",
+  "kind": "immersive-class",
+  "edition": "white-label",
+  "inputSha256": "fb47776e2622ecfcf312e302d72f93a2ea3aa4d440a72c3e869726f4156d6a42",
+  "engineSha256": "46c8e4c9cf63105704debf33d7f57a2cb569fbcb1daaec00eee123847676b3d3",
+  "outputs": {
+    "artifact.html": "3a31766fd15b811ce247b0b7594f49d9a6fc08d5cf23bb897c27aa545eb029a1",
+    "artifact-mobile.html": "747067a90e918bc3126dada8b9a5ddd3619c9161f34b886273c04051cfecedac",
+    "artifact-audience.html": "9272f790eca2cfeea1531ca57f0c35fb7cc7be2fada676efbd277d138e7ff62e",
+    "artifact-mobile-audience.html": "11fd376bc3dbb97d183f40231b7ca483e3dfd9892524db36ebca12b7180fd899",
+    "artifact.md": "9c61a7bad26612db74e8d535ab4f15c04e6a564e021cbb5db6446789c62b46bb"
+  },
+  "advisories": []
+}

@@ -1,0 +1,53 @@
+id: improve
+title: Mejorar algo existente
+frames_route: R6
+status: active
+wave: 6
+intent:
+  examples:
+    - mejora este documento conservando lo que ya funciona
+    - revisa esta pieza y propone una version sucesora
+    - corrige los problemas de este texto sin reescribirlo todo
+    - edita este contenido existente y compara contra la version anterior
+  negatives:
+    - crea una pieza nueva desde cero
+improvements:
+  - id: reads-the-page
+    claim: La página existente se abre y se audita (red, CSP, idioma, h1, alt, nombres de SVG, movimiento reducido, etiquetas, rutas, tildes, desborde, errores de JS, contraste); Frames registraba la referencia como texto y no la leía.
+    check: verify/tests/improve.test.ts#finds the defects seeded in an existing page
+  - id: verified-improvement
+    claim: La versión mejorada se acepta solo si corrige hallazgos, no agrega ninguno y no deja altos pendientes.
+    check: verify/tests/improve.test.ts#accepts the improved page only when it fixes findings and adds none
+steps:
+  - id: I00
+    title: Trae la página a mejorar y el objetivo
+    handler: authored
+    agent: RT-04
+    outputs:
+      - { id: existing, schema: html }
+      - { id: improve-goal, schema: markdown }
+  - id: I01
+    title: Audita la página existente
+    handler: improve.audit
+    agent: RT-09
+    inputs: [existing]
+    outputs:
+      - { id: audit, schema: json }
+      - { id: audit-report, schema: markdown }
+    gate: correction
+  - id: I02
+    title: Escribe la versión mejorada
+    handler: authored
+    agent: RT-05
+    inputs: [audit-report]
+    outputs:
+      - { id: improved, schema: html }
+  - id: I03
+    title: Verifica la mejora
+    handler: improve.verify
+    agent: RT-09
+    inputs: [audit, improved]
+    outputs:
+      - { id: improve-verdict, schema: json }
+      - { id: verify-report, schema: markdown }
+    gate: acceptance

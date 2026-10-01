@@ -1,0 +1,134 @@
+id: content.piece
+title: Pieza de contenido
+frames_route: R6
+status: active
+wave: 1
+intent:
+  examples:
+    - ayudame a crear una pieza de contenido para redes
+    - quiero escribir un post que explique esta idea
+    - crear contenido sobre nuestro nuevo servicio
+    - necesito un articulo para linkedin sobre este tema
+    - redacta una pieza de blog con este informe como fuente
+  negatives:
+    - arma una presentacion ejecutiva
+    - mejora mi cv
+slots:
+  - id: audience
+    question: ¿Para quién es la pieza y qué debe hacer después de leerla?
+    required: true
+  - id: channel
+    question: ¿Dónde se va a publicar o usar (canal y formato)?
+    required: true
+  - id: sources
+    question: ¿Qué fuentes o materiales autorizados uso como evidencia?
+    required: false
+improvements:
+  - id: piece-written
+    claim: Entrega la pieza escrita (piece.md + piece.html), no solo su especificación como Frames P05.
+    check: verify/tests/content.test.ts#delivers the written piece and its offline HTML twin
+  - id: gate-enforced
+    claim: El brief y la aceptación pasan por gates humanos de un uso atados al sha del artefacto; en Frames eran un string.
+    check: verify/tests/content.test.ts#brief approval is invalidated when the brief changes
+  - id: brief-visual
+    claim: El HTML del brief pasa el gate visual (3 viewports, contraste 4,5:1, sin desborde a 390 px); la página de Frames tenía el índice a 4,0:1 y el hash del pie desbordaba.
+    check: verify/tests/content.test.ts#the brief page passes the visual audit that the Frames page failed
+  - id: render-in-flow
+    claim: El HTML del brief se genera y se verifica en paridad dentro del paso, sin el --apply manual de Frames.
+    check: verify/tests/content.test.ts#renders brief.html in parity inside P03
+  - id: placeholders-caught
+    claim: Un token de plantilla sin llenar ({{MAYÚSCULAS}}) hace fallar el artefacto.
+    check: verify/tests/content.test.ts#rejects a deliverable with an unfilled template token
+steps:
+  - id: P00
+    title: Define tu sistema creativo
+    handler: authored
+    agent: RT-04
+    when: { fact: brand_ready, eq: false }
+    template: domains/content/templates
+    outputs:
+      - { id: brand-charter-v1, schema: markdown }
+      - { id: brand-os-v1, schema: markdown }
+      - { id: calibration-sample-v1, schema: markdown }
+      - { id: pilot-plan-v1, schema: markdown }
+  - id: P01
+    title: Convierte tu día a día en oportunidades de contenido
+    handler: authored
+    agent: RT-02
+    when: { fact: materials, eq: true }
+    template: domains/content/templates
+    outputs:
+      - { id: capture-card-v1, schema: markdown }
+      - { id: triage-record-v1, schema: markdown }
+      - { id: digest-shortlist-v1, schema: markdown }
+  - id: P02
+    title: Investiga y fortalece una idea
+    handler: authored
+    agent: RT-03
+    when: { fact: research, eq: true }
+    template: domains/content/templates
+    outputs:
+      - { id: claim-register-v1, schema: markdown }
+      - { id: opportunity-map-v1, schema: markdown }
+      - { id: question-bank-v1, schema: markdown }
+    gate: sources-and-spec
+  - id: P03
+    title: Crea el brief
+    handler: content.brief
+    agent: RT-04
+    template: domains/content/templates
+    outputs:
+      - { id: brief, schema: frames-brief-v1 }
+      - { id: brief-html, schema: html }
+      - { id: ab-concepts-v1, schema: markdown }
+      - { id: definition-of-ready-v1, schema: markdown }
+    gate: direction
+  - id: P05
+    title: Diseña la pieza
+    handler: authored
+    agent: RT-06
+    inputs: [brief]
+    template: domains/content/templates
+    outputs:
+      - { id: creative-spec-v1, schema: markdown }
+      - { id: piece-family-spec-v1, schema: markdown, required: false }
+      - { id: continuity-bible-v1, schema: markdown, required: false }
+      - { id: asset-map-v1, schema: markdown, required: false }
+      - { id: derivatives-v1, schema: markdown, required: false }
+  - id: CP01
+    title: Escribe la pieza
+    handler: content.piece
+    agent: RT-06
+    inputs: [brief, creative-spec-v1]
+    outputs:
+      - { id: piece, schema: markdown }
+      - { id: piece-html, schema: html }
+  - id: P07
+    title: Revisa la pieza
+    handler: content.review
+    agent: RT-09
+    inputs: [piece]
+    template: domains/content/templates
+    outputs:
+      - { id: review-report-v1, schema: markdown }
+      - { id: verdict-v1, schema: markdown }
+      - { id: top5-changes-v1, schema: markdown }
+  - id: P08
+    title: Edita la pieza según la revisión
+    handler: authored
+    agent: RT-06
+    when: { fact: revise, eq: true }
+    inputs: [piece, top5-changes-v1]
+    template: domains/content/templates
+    outputs:
+      - { id: edit-candidate-v1, schema: markdown }
+      - { id: edl-v1, schema: markdown }
+      - { id: export-matrix-v1, schema: markdown, required: false }
+  - id: CP02
+    title: Versión final para aceptación
+    handler: content.final
+    agent: RT-11
+    inputs: [piece]
+    outputs:
+      - { id: final-html, schema: html }
+    gate: acceptance

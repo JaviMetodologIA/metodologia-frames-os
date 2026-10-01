@@ -1,0 +1,15 @@
+{
+  "state": "RENDERED_DRAFT",
+  "kind": "playbook",
+  "edition": "white-label",
+  "inputSha256": "45b9030a1ab06a3532d010b7e1c9c5758c17ecd9c0ffb97449bd116b972d896d",
+  "engineSha256": "46c8e4c9cf63105704debf33d7f57a2cb569fbcb1daaec00eee123847676b3d3",
+  "outputs": {
+    "artifact.html": "8f5b419a527ea44b1d9e5cda080cd6deb3bb201424e6560f2fa3976bde87c601",
+    "artifact-mobile.html": "5098550de6da1a3d0cc826cacbe94b488e7955de1f49455c524fe2f6df96f555",
+    "artifact-audience.html": "8cc7b5de074b8b56595265b7a95d71942056617058edfd349330421bad17f0c9",
+    "artifact-mobile-audience.html": "aab419c7e9e15e93524149cfc99e2ba48161aa6dc5ae43078a3abc87f639d763",
+    "artifact.md": "1272eb913e803a9a32003aeeb04d18285aa9c2e84c611dabb85af05fcfc39770"
+  },
+  "advisories": []
+}

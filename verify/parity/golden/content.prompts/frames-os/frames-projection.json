@@ -1,0 +1,50 @@
+{
+  "source": "Frames 02_proceso/workflows/multimedia/_assets/deliverable-definition-registry.yml",
+  "producing_code": false,
+  "fields": {
+    "universal-prompts-v1": [
+      "piece-family",
+      "objective",
+      "input-refs",
+      "prompt",
+      "negative-constraints",
+      "parameters",
+      "expected-output",
+      "acceptance"
+    ],
+    "asset-package-v1": [
+      "candidate-id",
+      "material-files",
+      "companion-files",
+      "hashes",
+      "state",
+      "limitations"
+    ],
+    "asset-manifest-v1": [
+      "asset-id",
+      "file-ref",
+      "hash",
+      "provenance",
+      "rights",
+      "tool-run",
+      "spec-ref"
+    ],
+    "capability-report-v1": [
+      "requested-capability",
+      "available-capability",
+      "result",
+      "gaps",
+      "fallback",
+      "decision"
+    ],
+    "tool-run-evidence-v1": [
+      "run-id",
+      "tool",
+      "version",
+      "input-hashes",
+      "parameters",
+      "output-hashes",
+      "errors"
+    ]
+  }
+}

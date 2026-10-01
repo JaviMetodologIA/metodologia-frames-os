@@ -1,0 +1,23 @@
+{
+  "schema_version": "evidence-bank-v1",
+  "candidate_id": "CAND-SYNTHETIC-001",
+  "evidence": [
+    {
+      "evidence_id": "EVD-SYNTHETIC-001",
+      "claim": "Redujo el ciclo operativo 30% durante un trimestre medido.",
+      "context": "Contexto sintético.",
+      "action_method": "Método sintético.",
+      "result": "Resultado sintético.",
+      "metric": "30% durante un trimestre",
+      "source_ref": "work/private/evidence/profile.yml",
+      "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "confidence": "verified",
+      "allowed_channels": [
+        "cv",
+        "letter"
+      ],
+      "constraints": []
+    }
+  ],
+  "bank_sha256": "42e31dc5cd906090bfbf97e8ab83bacee37da57c570d3edffd5cd1e17ac396e8"
+}

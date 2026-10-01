@@ -1,0 +1,19 @@
+{
+  "source": "Frames 02_proceso/workflows/skill-systems, 02_proceso/workflows/local-extensions, 05_verificacion/scripts",
+  "verdict_rule": true,
+  "minimum_eligible_floor": 2,
+  "demotion_kinds": [
+    "INSTRUCTION",
+    "REFERENCE",
+    "TOOL",
+    "INSTRUCTION",
+    "SKILL"
+  ],
+  "passes_declared": true,
+  "scaffold_applies": false,
+  "extend_requires_approval": true,
+  "loader_detects_hash": true,
+  "local_root": "04_estado/local/extensions",
+  "release_actor_separation": 4,
+  "release_host_unproven": true
+}

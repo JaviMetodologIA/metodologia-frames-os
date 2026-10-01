@@ -1,0 +1,21 @@
+{
+  "source": "Frames 02_proceso/workflows/maintenance y 05_verificacion/scripts/frames-maintain.ts",
+  "max_files": 12,
+  "hard_max_churn": 1200,
+  "write_equals_expected": true,
+  "changed_equals_write_set": true,
+  "tools": [
+    "apply-patch",
+    "git-read-only",
+    "pnpm"
+  ],
+  "reserved_names": true,
+  "questions": [
+    "¿Qué comportamiento quieres corregir o evolucionar?",
+    "¿Qué parte de Frames está afectada?",
+    "¿Qué resultado observable confirmará el cambio?"
+  ],
+  "churn_vs_order_target": false,
+  "runs_doctor": false,
+  "docs_against_diff": false
+}

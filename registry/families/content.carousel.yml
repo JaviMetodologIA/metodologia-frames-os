@@ -1,0 +1,90 @@
+id: content.carousel
+title: Carrusel o pieza gráfica
+frames_route: R6
+status: active
+wave: 3
+intent:
+  examples:
+    - ayudame a crear un carrusel para explicar esta idea
+    - disena un carrusel de instagram de diez laminas
+    - necesito una historia para instagram con esta noticia
+    - prepara una pieza grafica con copy y visual por pantalla
+  negatives:
+    - convierte esto en una presentacion ejecutiva
+slots:
+  - id: audience
+    question: ¿Para quién es el carrusel y qué acción debe provocar?
+    required: true
+  - id: format
+    question: ¿Carrusel 4:5, historia 9:16 o post cuadrado?
+    required: false
+  - id: sources
+    question: ¿Qué fuentes sostienen cada tarjeta?
+    required: false
+improvements:
+  - id: frames-from-deck
+    claim: El carrusel sale del mismo deck-v1 y del mismo núcleo de movimiento que el deck; cumple las 13 reglas del esquema de Frames (tarjetas, roles, límites, fuentes, alt, caption, CTA).
+    check: verify/tests/carousel.test.ts#renders social frames from deck-v1 and holds them to Frames carousel rules
+  - id: real-count
+    claim: Cada tarjeta se numera por el total real; Frames escribía «/ 8» fijo aunque su esquema aceptaba de 3 a 10.
+    check: verify/tests/carousel.test.ts#numbers each frame by the real count, never a fixed 8
+  - id: safe-zone
+    claim: El gate visual mide el margen de seguridad y que el texto quepa; Frames declaraba safeZonePx y nunca lo leía.
+    check: verify/tests/carousel.test.ts#the frames gate catches text that leaves the safe zone
+  - id: animated-frames
+    claim: Las tarjetas tienen escenas animadas y transiciones en el HTML, y se exportan a PNG deterministas con hoja de contacto y manifiesto con sus hashes.
+    check: verify/tests/carousel.test.ts#the run step writes one PNG per card, a contact sheet and a manifest with their hashes
+steps:
+  - id: C01
+    title: Crea el brief del carrusel
+    handler: content.brief
+    agent: RT-04
+    template: domains/content/templates
+    outputs:
+      - { id: brief, schema: frames-brief-v1 }
+      - { id: brief-html, schema: html }
+    gate: direction
+  - id: C02
+    title: Escribe las tarjetas
+    handler: authored
+    agent: RT-05
+    inputs: [brief]
+    outputs:
+      - { id: carousel, schema: carousel-v1 }
+  - id: C03
+    title: Renderiza, verifica en pantalla y exporta las tarjetas
+    handler: carousel.render
+    agent: RT-07
+    inputs: [carousel]
+    outputs:
+      - { id: carousel-html, schema: html }
+      - { id: carousel-manifest, schema: json }
+      - { id: carousel-visual-report, schema: markdown }
+  - id: C04
+    title: Revisa derechos, accesibilidad y narrativa
+    handler: content.review
+    agent: RT-09
+    inputs: [carousel-html]
+    template: domains/content/templates
+    outputs:
+      - { id: review-report-v1, schema: markdown }
+      - { id: verdict-v1, schema: markdown }
+      - { id: top5-changes-v1, schema: markdown }
+  - id: C05
+    title: Aplica los cambios de la revisión
+    handler: authored
+    agent: RT-05
+    when: { fact: revise, eq: true }
+    inputs: [carousel, top5-changes-v1]
+    outputs:
+      - { id: carousel-v2, schema: carousel-v1 }
+  - id: C06
+    title: Versión final para aceptación
+    handler: carousel.final
+    agent: RT-11
+    inputs: [carousel]
+    outputs:
+      - { id: final-html, schema: html }
+      - { id: final-manifest, schema: json }
+      - { id: final-visual-report, schema: markdown }
+    gate: acceptance

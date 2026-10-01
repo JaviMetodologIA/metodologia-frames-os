@@ -1,0 +1,101 @@
+# work-order
+
+Escribe un JSON con esta forma; el motor lo valida contra su schema al correr `next`.
+Ejemplo válido (caso `verify/parity/cases/meta.maintain/frames-os/work-order.json`):
+
+```json
+{
+  "schema_version": "work-order-v1",
+  "work_order_id": "gate-review-legal",
+  "change_class": "EXTEND",
+  "write_set": ["CHANGELOG.md", "docs/guia.md", "registry/gates.yml"],
+  "expected_outputs": ["CHANGELOG.md", "docs/guia.md", "registry/gates.yml"],
+  "tools": ["apply-patch", "pnpm"],
+  "budget": {
+    "target_files": 3,
+    "max_files": 3,
+    "max_churn": 40
+  },
+  "acceptance": ["frames doctor lista el gate review-legal", "la guía dice cuándo usarlo"],
+  "stop_rule": "si el cambio pide tocar otro archivo, se detiene y vuelve a M02",
+  "documentation_impact": {
+    "schemaVersion": "documentation-impact-plan-v1",
+    "planId": "gate-review-legal.docs",
+    "changeClass": "EXTEND",
+    "scope": "CANONICAL",
+    "affectedIds": ["review-legal"],
+    "surfaces": [
+      {
+        "surface": "QUICK_START",
+        "disposition": "NOT_APPLICABLE",
+        "reasonCode": "NO_USER_VISIBLE_CHANGE"
+      },
+      {
+        "surface": "FUNCTIONAL_GUIDE",
+        "disposition": "REQUIRED",
+        "sourceRefs": ["docs/guia.md"]
+      },
+      {
+        "surface": "TECHNICAL_REFERENCE",
+        "disposition": "NOT_APPLICABLE",
+        "reasonCode": "NO_USER_VISIBLE_CHANGE"
+      },
+      {
+        "surface": "ARCHITECTURE",
+        "disposition": "NOT_APPLICABLE",
+        "reasonCode": "NO_ARCHITECTURE_CHANGE"
+      },
+      {
+        "surface": "WORKFLOW_SEQUENCE",
+        "disposition": "NOT_APPLICABLE",
+        "reasonCode": "NO_WORKFLOW_CHANGE"
+      },
+      {
+        "surface": "SKILL_CONTEXT",
+        "disposition": "NOT_APPLICABLE",
+        "reasonCode": "NO_USER_VISIBLE_CHANGE"
+      },
+      {
+        "surface": "TEMPLATES_DELIVERABLES",
+        "disposition": "NOT_APPLICABLE",
+        "reasonCode": "NO_USER_VISIBLE_CHANGE"
+      },
+      {
+        "surface": "ROUTING_COMMANDS",
+        "disposition": "NOT_APPLICABLE",
+        "reasonCode": "NO_ROUTING_CHANGE"
+      },
+      {
+        "surface": "TROUBLESHOOTING",
+        "disposition": "NOT_APPLICABLE",
+        "reasonCode": "NO_USER_VISIBLE_CHANGE"
+      },
+      {
+        "surface": "ADR",
+        "disposition": "NOT_APPLICABLE",
+        "reasonCode": "NO_USER_VISIBLE_CHANGE"
+      },
+      {
+        "surface": "CHANGELOG_COMPATIBILITY",
+        "disposition": "REQUIRED",
+        "sourceRefs": ["CHANGELOG.md"]
+      },
+      {
+        "surface": "INDEXES_INVENTORIES",
+        "disposition": "REQUIRED",
+        "sourceRefs": ["registry/gates.yml"]
+      },
+      {
+        "surface": "PORTAL",
+        "disposition": "NOT_APPLICABLE",
+        "reasonCode": "NO_USER_VISIBLE_CHANGE"
+      },
+      {
+        "surface": "TESTS_EXAMPLES",
+        "disposition": "NOT_APPLICABLE",
+        "reasonCode": "NO_USER_VISIBLE_CHANGE"
+      }
+    ]
+  }
+}
+```

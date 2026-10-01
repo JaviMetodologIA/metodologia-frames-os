@@ -1,0 +1,136 @@
+schema: deck-v1
+meta:
+  title: Workbook del curso
+  subtitle: Presentaciones que se verifican
+  lang: es
+  axis: Una pieza está lista cuando pasó por un navegador real y una persona la aceptó.
+acts:
+  - { id: preparacion, title: Preparación }
+  - { id: ruta-presentacion, title: Ruta 1 · Presentación }
+  - { id: ruta-carrusel, title: Ruta 2 · Carrusel }
+  - { id: ruta-video, title: Ruta 3 · Video }
+slides:
+  - id: prep-entorno
+    act: preparacion
+    kind: list
+    eyebrow: Antes de empezar
+    title: Prepara tu entorno de trabajo
+    items:
+      - Node 22 y pnpm instalados
+      - El repositorio de Frames OS clonado
+      - Una presentación propia para practicar
+    interactive:
+      kind: checklist
+      title: Entorno listo
+      items:
+        - Node 22 responde en la terminal
+        - pnpm instala las dependencias sin errores
+        - Tengo una presentación propia a mano
+    scene_label: Tres casillas que se marcan en orden
+  - id: prep-eje
+    act: preparacion
+    kind: axis
+    eyebrow: Tu idea eje
+    title: Escribe en una frase la idea que sostiene tu pieza
+    chain: [Idea, Público, Acción]
+    interactive:
+      kind: notes
+      prompt: Escribe tu idea eje en una sola frase y a quién va dirigida.
+    scene_label: Cadena de tres pasos que se ilumina en orden
+  - id: pres-fuente
+    act: ruta-presentacion
+    kind: list
+    eyebrow: Paso 1
+    title: Escribe la fuente de tu presentación
+    items:
+      - Declara los actos antes que las láminas
+      - Pon la lámina eje en el primer tercio
+      - Dale a cada lámina una escena con nombre
+    interactive:
+      kind: quiz
+      question: ¿Dónde debe aparecer la lámina eje en una presentación?
+      options:
+        - En la última lámina
+        - En el primer tercio
+        - Donde quepa mejor
+      answer: 1
+      explain: El gate de fuente exige que la idea eje llegue en el primer tercio para que todo lo demás la sostenga.
+    scene_label: Tres bloques que se apilan de abajo hacia arriba
+  - id: pres-revision
+    act: ruta-presentacion
+    kind: list
+    eyebrow: Paso 2
+    title: Revisa la presentación en el navegador
+    items:
+      - Navega con las flechas del teclado
+      - Prueba el toque en una pantalla táctil
+      - Activa el movimiento reducido
+    interactive:
+      kind: rubric
+      title: Revisión en navegador
+      rows:
+        - Se navega con teclado
+        - Se navega con toque
+        - Respeta el movimiento reducido
+        - Se imprime sin cortes
+      scale: [No cumple, Parcial, Cumple]
+    scene_label: Una lupa que recorre cuatro láminas
+  - id: car-roles
+    act: ruta-carrusel
+    kind: flow
+    eyebrow: Paso 1
+    title: Asigna un rol a cada tarjeta
+    chain: [Conclusión, Tensión, Evidencia, Acción]
+    interactive:
+      kind: quiz
+      question: ¿Con qué tarjeta abre un carrusel?
+      options:
+        - Con la llamada a la acción
+        - Con la evidencia
+        - Con la conclusión
+      answer: 2
+      explain: El carrusel abre con la conclusión para que quien lo ve entienda la idea aunque no deslice.
+    scene_label: Flujo de cuatro tarjetas con un punto que avanza
+  - id: car-texto
+    act: ruta-carrusel
+    kind: list
+    eyebrow: Paso 2
+    title: Escribe el texto alternativo de cada tarjeta
+    items:
+      - Describe lo que se ve, no lo que se siente
+      - Incluye la cifra y su fuente si aparece
+    interactive:
+      kind: notes
+      prompt: Escribe el texto alternativo de tu primera tarjeta.
+    scene_label: Una tarjeta que se voltea y muestra su descripción
+  - id: vid-beats
+    act: ruta-video
+    kind: timeline
+    eyebrow: Paso 1
+    title: Divide tu guion en beats
+    chain: [Apertura, Desarrollo, Prueba, Cierre]
+    interactive:
+      kind: checklist
+      title: Beats listos
+      items:
+        - Cada beat tiene una sola idea
+        - Cada beat tiene su narración
+        - El último beat cierra con una acción
+    scene_label: Línea de tiempo con cuatro marcas que se encienden
+  - id: vid-captura
+    act: ruta-video
+    kind: list
+    eyebrow: Paso 2
+    title: Captura el video y revisa los subtítulos
+    items:
+      - Captura desde la misma fuente
+      - Lee los subtítulos con el audio apagado
+    interactive:
+      kind: rubric
+      title: Revisión del video
+      rows:
+        - Los subtítulos coinciden con la narración
+        - Las cifras no se animan
+        - El cierre deja una acción clara
+      scale: [No cumple, Parcial, Cumple]
+    scene_label: Un cuadro de video que avanza con subtítulos debajo

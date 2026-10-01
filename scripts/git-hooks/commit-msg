@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# commit-msg: cada commit declara su unidad de port para medir el ritmo real.
+set -euo pipefail
+cd "$(git rev-parse --show-toplevel)"
+node verify/checks/commit-msg.ts "$1"

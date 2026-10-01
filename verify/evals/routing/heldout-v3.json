@@ -1,0 +1,48 @@
+{
+  "source": "Escrito el 2026-09-24 antes de medir, sin mirar el scorer ni los fallos de v1 y v2; dos pedidos por familia activa, en el registro de habla de un usuario. Nunca se edita para pasar.",
+  "cases": [
+    {
+      "text": "escribe un artículo corto para el blog sobre por qué medimos lo que publicamos",
+      "expect": "content.piece"
+    },
+    { "text": "necesito un texto para linkedin que cuente el lanzamiento", "expect": "content.piece" },
+    { "text": "armame las slides para presentar el proyecto al comité el lunes", "expect": "deck.immersive" },
+    { "text": "quiero una presentación animada para la clase de mañana", "expect": "deck.immersive" },
+    {
+      "text": "haz un carrusel de seis tarjetas para instagram con estos datos",
+      "expect": "content.carousel"
+    },
+    { "text": "convierte este post en historias verticales para instagram", "expect": "content.carousel" },
+    {
+      "text": "planifica la campaña de lanzamiento con calendario y piezas por canal",
+      "expect": "content.campaign"
+    },
+    { "text": "necesito la parrilla de contenidos del próximo mes para redes", "expect": "content.campaign" },
+    { "text": "dame prompts para generar las imágenes de la campaña", "expect": "content.prompts" },
+    {
+      "text": "quiero una biblioteca de prompts para que el equipo produzca gráficas",
+      "expect": "content.prompts"
+    },
+    { "text": "haz un video corto que explique nuestro proceso en cuatro pasos", "expect": "video.method" },
+    { "text": "necesito un explainer animado del método con narración", "expect": "video.method" },
+    {
+      "text": "sube estas fuentes a un cuaderno de notebooklm y prepara una guía de estudio",
+      "expect": "nlm"
+    },
+    { "text": "crea un audio overview en notebooklm con estos documentos", "expect": "nlm" },
+    { "text": "diseña un curso de cuatro semanas para enseñar análisis de datos", "expect": "trainer" },
+    { "text": "arma una masterclass con workbook y playbook para el equipo comercial", "expect": "trainer" },
+    { "text": "actualiza mi cv para esta vacante de product manager", "expect": "career.cv" },
+    { "text": "hazme un curriculum que no invente nada de mi experiencia", "expect": "career.cv" },
+    { "text": "escríbeme la carta de presentación para esta postulación", "expect": "career.cover" },
+    { "text": "necesito un mensaje corto para el reclutador de esta empresa", "expect": "career.cover" },
+    { "text": "ayúdame a encontrar vacantes que encajen con mi perfil", "expect": "career.search" },
+    { "text": "compara estas ofertas de trabajo y dime cuál me conviene", "expect": "career.search" },
+    { "text": "revisa esta página html que hicimos y dime qué arreglar", "expect": "improve" },
+    { "text": "mejora esta presentación que ya existe sin empezar de cero", "expect": "improve" },
+    { "text": "quiero crear una skill para revisar contratos antes de firmarlos", "expect": "skills.build" },
+    { "text": "evalúa esta skill contra su versión anterior", "expect": "skills.build" },
+    { "text": "un check de frames falló, diagnostica y arréglalo", "expect": "meta.maintain" },
+    { "text": "migra este workflow viejo a la estructura nueva de frames", "expect": "meta.maintain" }
+  ]
+}

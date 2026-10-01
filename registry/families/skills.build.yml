@@ -1,0 +1,202 @@
+id: skills.build
+title: Crear o mejorar una skill
+frames_route: R8
+status: active
+wave: 7
+intent:
+  examples:
+    - necesito una skill para revisar propuestas antes de enviarlas
+    - crear una skill local para este flujo
+    - mejora esta skill y evalua contra el baseline
+    - crear un workflow privado que extienda frames localmente
+  negatives:
+    - usa la skill de cv
+slots:
+  - id: track
+    question: ¿Es una extensión privada para este proyecto (local) o una skill del sistema (system)?
+    required: false
+improvements:
+  - id: computed-eval
+    claim: El veredicto PASS/REVISE/UNKNOWN de Frames se aplica sobre casos puntuados por el clasificador del motor, candidato frente a base; en Frames los aciertos del eval eran un registro declarado.
+    check: verify/tests/skills.test.ts#scores each eval case with the engine classifier and applies the Frames verdict rule
+  - id: tamper-probe
+    claim: La extensión local se valida con el loader de Frames y además se prueba que una copia alterada queda bloqueada; se instala solo después de su gate.
+    check: verify/tests/skills.test.ts#installs a local extension only after its gate and proves the hash check on a tampered copy
+  - id: demotion-ends
+    claim: Si la regla de demotion de Frames decide que basta una instrucción, referencia o herramienta, el run termina ahí con esa decisión y no se escribe una skill.
+    check: verify/tests/skills.test.ts#a request that does not need a skill ends at the demotion decision
+steps:
+  # Vía local (por defecto): una extensión privada bajo local/, que nunca se versiona.
+  - id: L00
+    title: Comprende la capacidad local
+    handler: authored
+    agent: RT-04
+    when: { not: { fact: track, eq: system } }
+    template: domains/skills/templates
+    outputs:
+      - { id: local-extension-brief-v1, schema: local-extension-brief-v1 }
+    gate: direction
+  - id: L01
+    title: Diseña la extensión y su impacto documental
+    handler: authored
+    agent: RT-10
+    when: { not: { fact: track, eq: system } }
+    template: domains/skills/templates
+    inputs: [local-extension-brief-v1]
+    outputs:
+      - { id: local-extension-design-v1, schema: markdown }
+      - { id: documentation-impact-plan-v1, schema: documentation-impact-plan-v1 }
+  - id: L02
+    title: Prepara el paquete privado
+    handler: skills.scaffold
+    agent: RT-10
+    when: { not: { fact: track, eq: system } }
+    inputs: [local-extension-brief-v1, local-extension-design-v1, documentation-impact-plan-v1]
+    outputs:
+      - { id: local-extension-manifest-v1, schema: json }
+      - { id: local-extension-package-v1, schema: json }
+  - id: L03
+    title: Valida contratos y contención
+    handler: skills.validate-local
+    agent: RT-11
+    when: { not: { fact: track, eq: system } }
+    inputs: [local-extension-brief-v1]
+    outputs:
+      - { id: local-extension-validation-v1, schema: json }
+      - { id: sandbox-probe-v1, schema: json }
+  - id: L04
+    title: Prepara la activación local
+    handler: skills.activate-local
+    agent: RT-01
+    when: { not: { fact: track, eq: system } }
+    inputs: [local-extension-brief-v1]
+    outputs:
+      - { id: local-activation-receipt-v1, schema: json }
+      - { id: local-extension-index-v1, schema: json }
+    gate: acceptance
+  - id: L05
+    title: Cierra el ciclo de la extensión instalada
+    handler: skills.close-local
+    agent: RT-11
+    when: { not: { fact: track, eq: system } }
+    inputs:
+      [
+        local-extension-brief-v1,
+        local-activation-receipt-v1,
+        documentation-impact-plan-v1,
+        local-extension-package-v1,
+      ]
+    outputs:
+      - { id: local-extension-successor-v1, schema: json }
+      - { id: documentation-closure-receipt-v1, schema: json }
+    gate: outcome
+  # Vía sistema (--fact track=system): una skill candidata con eval y release.
+  - id: S00
+    title: Delimita el sistema de skills
+    handler: authored
+    agent: RT-04
+    when: { fact: track, eq: system }
+    template: domains/skills/templates
+    outputs:
+      - { id: skill-system-case-v1, schema: skill-system-case-v1 }
+    gate: sources-and-spec
+  - id: S01
+    title: Descubre y aplica demotion
+    handler: skills.demotion
+    agent: RT-03
+    when: { fact: track, eq: system }
+    template: domains/skills/templates
+    inputs: [skill-system-case-v1]
+    outputs:
+      - { id: demotion-input, schema: demotion-input-v1 }
+      - { id: discovery-report, schema: markdown }
+      - { id: demotion-decision, schema: json }
+  - id: S02
+    title: Decide topología y responsabilidades
+    handler: authored
+    agent: RT-10
+    when: { all: [{ fact: track, eq: system }, { not: { fact: demoted, eq: true } }] }
+    template: domains/skills/templates
+    inputs: [skill-system-case-v1, demotion-decision]
+    outputs:
+      - { id: capability-map-v1, schema: capability-map-v1 }
+      - { id: architecture-decision-v1, schema: skill-architecture-decision-v1 }
+    gate: direction
+  - id: S03
+    title: Contrata componentes y evaluación
+    handler: authored
+    agent: RT-10
+    when: { all: [{ fact: track, eq: system }, { not: { fact: demoted, eq: true } }] }
+    template: domains/skills/templates
+    inputs: [architecture-decision-v1]
+    outputs:
+      - { id: component-contract-v1, schema: skill-component-contract-v1 }
+      - { id: skill-eval-plan, schema: skill-eval-plan-v1 }
+  - id: S04
+    title: Materializa el candidato
+    handler: authored
+    agent: RT-06
+    when: { all: [{ fact: track, eq: system }, { not: { fact: demoted, eq: true } }] }
+    template: domains/skills/templates
+    inputs: [component-contract-v1, skill-eval-plan]
+    outputs:
+      - { id: skill-candidate, schema: skill-md-v1 }
+      - { id: skill-baseline, schema: skill-md-v1, required: false }
+      - { id: authoring-handoff, schema: markdown }
+  - id: S05
+    title: Valida el candidato y su cadena de suministro
+    handler: skills.static
+    agent: RT-11
+    when: { all: [{ fact: track, eq: system }, { not: { fact: demoted, eq: true } }] }
+    inputs: [skill-candidate, skill-system-case-v1, component-contract-v1]
+    outputs:
+      - { id: static-validation-report, schema: json }
+  - id: S06
+    title: Compara el candidato con la base
+    handler: skills.eval
+    agent: RT-11
+    when: { all: [{ fact: track, eq: system }, { not: { fact: demoted, eq: true } }] }
+    inputs: [skill-candidate, skill-eval-plan]
+    outputs:
+      - { id: skill-eval-run-v1, schema: json }
+      - { id: eval-summary, schema: json }
+  - id: S07
+    title: Revisa y propone el cambio
+    handler: skills.review
+    agent: RT-11
+    when: { all: [{ fact: track, eq: system }, { not: { fact: demoted, eq: true } }] }
+    template: domains/skills/templates
+    inputs: [skill-candidate, eval-summary]
+    outputs:
+      - { id: skill-review-report-v1, schema: skill-review-report-v1 }
+      - { id: skill-change-proposal-v1, schema: skill-change-proposal-v1 }
+    gate: acceptance
+  - id: S08
+    title: Empaqueta el release candidato
+    handler: skills.package
+    agent: RT-01
+    when: { all: [{ fact: track, eq: system }, { not: { fact: demoted, eq: true } }] }
+    inputs:
+      [
+        skill-candidate,
+        static-validation-report,
+        skill-eval-run-v1,
+        eval-summary,
+        skill-review-report-v1,
+        skill-change-proposal-v1,
+      ]
+    outputs:
+      - { id: skill-release-capsule-v1, schema: json }
+      - { id: compatibility-report, schema: json }
+      - { id: restore-plan, schema: markdown }
+  - id: S09
+    title: Resuelve el ciclo de vida
+    handler: skills.lifecycle
+    agent: RT-01
+    when: { all: [{ fact: track, eq: system }, { not: { fact: demoted, eq: true } }] }
+    inputs: [skill-candidate, skill-change-proposal-v1, skill-release-capsule-v1]
+    outputs:
+      - { id: h03-lifecycle-events, schema: json }
+      - { id: migration-guide, schema: markdown }
+      - { id: inventory-delta, schema: json }
+    gate: outcome

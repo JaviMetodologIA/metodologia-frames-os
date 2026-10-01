@@ -1,0 +1,69 @@
+schema: deck-v1
+meta:
+  title: Frames OS mueve tus presentaciones
+  subtitle: Un solo motor para decks, carruseles, videos y cursos
+  lang: es
+  hold: 12
+  transition: fade
+  axis: Una sola fuente tipada produce todas las piezas de la campaña, y cada una se verifica en pantalla.
+  forbidden_terms: [Claude, Vercel]
+acts:
+  - { id: promesa, title: La promesa }
+  - { id: prueba, title: La prueba }
+  - { id: accion, title: Empieza }
+slides:
+  - id: hero
+    act: promesa
+    kind: cover
+    eyebrow: Lanzamiento
+    title: Presentaciones que se mueven, verificadas antes de salir
+    sub: Deck, playbook, workbook, carrusel y video desde la misma fuente.
+    chain: [Deck, Carrusel, Video, Curso]
+    scene_label: Anillo de cuatro formatos con un token que los recorre
+  - id: eje
+    act: promesa
+    kind: axis
+    eyebrow: La idea
+    title: Una fuente, todas las piezas
+    chain: [Escribir deck.yml, Renderizar, Verificar en pantalla, Aceptar]
+    scene_label: Cadena de cuatro pasos que se ilumina en orden
+  - id: formatos
+    act: prueba
+    kind: cards
+    eyebrow: Formatos
+    title: Lo que sale del mismo motor
+    cards:
+      - { title: 'Deck 16:9', fix: 'con notas, transiciones e impresión' }
+      - { title: 'Carrusel 4:5', fix: 'PNG por tarjeta y hoja de contacto' }
+      - { title: 'Playbook', fix: 'scroll con escenas que se revelan' }
+      - { title: 'Workbook', fix: 'ejercicios que guardan tus respuestas' }
+    scene_label: Cuatro tarjetas que se revelan una a una
+  - id: prueba-visual
+    act: prueba
+    kind: zig
+    side: right
+    art: shield
+    eyebrow: Antes de publicar
+    title: Cada pieza pasa por un navegador real
+    sub: Tres anchos, teclado, movimiento reducido y texto dentro del margen.
+    scene_label: Un escudo que se dibuja con anillos que pulsan
+  - id: idiomas
+    act: prueba
+    kind: statement
+    eyebrow: Cuatro idiomas
+    title: Español, inglés, portugués y francés en la misma página
+    scene_label: Anillos que giran alrededor de la frase
+  - id: empieza
+    act: accion
+    kind: close
+    eyebrow: Empieza hoy
+    title: Escribe tu primer deck.yml
+    items: [pnpm frames route "crea una presentación", pnpm frames next]
+    scene_label: Terminal que muestra los dos comandos línea por línea
+    interactive:
+      kind: checklist
+      title: Tu primera pieza
+      items:
+        - Elegí la familia con frames route
+        - Escribí la fuente que pide el paso
+        - Aprobé el gate en mi terminal

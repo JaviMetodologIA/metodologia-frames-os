@@ -1,0 +1,81 @@
+id: trainer
+title: Trainer OS
+frames_route: R6
+status: active
+wave: 5
+intent:
+  examples:
+    - crear una ruta formativa completa sobre este tema
+    - disena un taller completo con actividades y evaluacion
+    - arma un programa de formacion de seis sesiones
+    - run trainer os para esta capacitacion
+  negatives:
+    - crea solo las slides de la clase
+slots:
+  - id: outcomes
+    question: ¿Qué debe poder hacer la persona al terminar el curso?
+    required: true
+  - id: audience
+    question: ¿Para quién es y con qué nivel de partida?
+    required: true
+  - id: sources
+    question: ¿Qué fuentes sostienen el contenido?
+    required: false
+improvements:
+  - id: five-artifacts
+    claim: Landing, masterclass (HTML y PDF), workbook, playbook y biblioteca de prompts salen del núcleo de movimiento con los límites exactos de Trainer OS; Frames solo compilaba un fixture sintético.
+    check: verify/tests/trainer.test.ts#holds every artifact to Frames Trainer OS limits and rejects each broken one
+  - id: design-lock
+    claim: La dirección de diseño la elige la persona entre dos (H01) antes del build; sin elección no hay build.
+    check: verify/tests/trainer.test.ts#does not build before the person picks one of the two directions
+  - id: benchmark-executed
+    claim: El benchmark corre y mide cuatro dimensiones (estructura, accesibilidad, marca y privacidad); la pedagógica la firma una persona. En Frames quedaba not_executed.
+    check: verify/tests/trainer.test.ts#runs the benchmark with four measured dimensions and a signed one
+steps:
+  - id: T00
+    title: Define el curso, sus módulos y dos direcciones de diseño
+    handler: authored
+    agent: RT-04
+    outputs:
+      - { id: course, schema: course-v1 }
+    gate: direction
+  - id: T01
+    title: Escribe landing, masterclass, workbook, playbook y biblioteca
+    handler: authored
+    agent: RT-05
+    inputs: [course]
+    outputs:
+      - { id: landing, schema: deck-v1 }
+      - { id: masterclass, schema: deck-v1 }
+      - { id: trainer-workbook, schema: deck-v1 }
+      - { id: trainer-playbook, schema: deck-v1 }
+      - { id: trainer-prompts, schema: prompts-v1 }
+  - id: T02
+    title: Construye el curso y lo verifica en pantalla
+    handler: trainer.build
+    agent: RT-07
+    inputs: [landing, masterclass, trainer-workbook, trainer-playbook, trainer-prompts]
+    outputs:
+      - { id: landing-html, schema: html }
+      - { id: masterclass-html, schema: html }
+      - { id: masterclass-pdf, schema: pdf }
+      - { id: workbook-html, schema: html }
+      - { id: playbook-html, schema: html }
+      - { id: prompts-html, schema: html }
+      - { id: build-report, schema: markdown }
+  - id: T03
+    title: Empaqueta el curso con sus hashes
+    handler: trainer.package
+    agent: RT-11
+    inputs: [build-report]
+    outputs:
+      - { id: trainer-package, schema: json }
+    gate: acceptance
+  - id: T04
+    title: Corre el benchmark del curso
+    handler: trainer.benchmark
+    agent: RT-09
+    inputs: [trainer-package]
+    outputs:
+      - { id: pedagogy-review, schema: markdown }
+      - { id: benchmark, schema: json }

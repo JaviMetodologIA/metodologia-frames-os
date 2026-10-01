@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "notebook-intent-v1",
+  "purpose": "Cuaderno público con la guía del método",
+  "domain": "metodo-frames",
+  "audience": [
+    "Equipos de contenido"
+  ],
+  "operation": "create",
+  "deliverable": "Guía de estudio con fuentes citadas",
+  "sensitivity": "PUBLIC",
+  "language": "es",
+  "effects": [
+    "EXTERNAL_MUTATION"
+  ]
+}

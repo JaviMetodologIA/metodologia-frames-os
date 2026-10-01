@@ -1,0 +1,15 @@
+{
+  "state": "RENDERED_DRAFT",
+  "kind": "lean-coffee",
+  "edition": "metodologia",
+  "inputSha256": "5697af7fc57861b701ce4c0342e0a4c9ce47baf10cc0969fc14182955170433d",
+  "engineSha256": "46c8e4c9cf63105704debf33d7f57a2cb569fbcb1daaec00eee123847676b3d3",
+  "outputs": {
+    "artifact.html": "01f73ba44c3c14ca3a0ee77973798a305bbae9ad0c69f2e870f2ae8bf3132f7d",
+    "artifact-mobile.html": "94cd48528a9e68ffcbf9e59fa2d28d37ed8e498ef2db30c78d40219b7fb851f1",
+    "artifact-audience.html": "7284a44ec5070685bc17d8d57c3d3871ab08b5b765727f19ca4681728bb0d96f",
+    "artifact-mobile-audience.html": "7eddc01ab98b6544af0fccd03c13fd4011020044ec5e412fb4c7b7d3575fab3d",
+    "artifact.md": "5f71725b16575e327b03e177bacc06a2ae3098b5020985080f25e3e2cf619425"
+  },
+  "advisories": []
+}

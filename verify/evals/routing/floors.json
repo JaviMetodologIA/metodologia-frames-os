@@ -1,0 +1,10 @@
+{
+  "comment": "Pisos que solo suben; bajarlos exige un ADR. v1 medido tras un ajuste generico del scorer; v2 (2026-09-24) escrito antes de medir: es el numero honesto. v3 (2026-09-24) escrito antes de medir, primera medición sin ajuste: 64,3 % top-1, 92,9 % top-3.",
+  "train_top1": 100,
+  "heldout_top1": 58.8,
+  "heldout_top3": 100,
+  "negative_reject": 100,
+  "heldout_v2_top1": 37.5,
+  "heldout_v3_top1": 64.3,
+  "heldout_v3_top3": 92.9
+}

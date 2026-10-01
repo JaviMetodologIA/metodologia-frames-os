@@ -1,0 +1,112 @@
+id: nlm
+title: NotebookLM OS
+frames_route: R10
+status: active
+wave: 5
+intent:
+  examples:
+    - arma un cuaderno de notebooklm con estas fuentes
+    - crea un audio overview en notebooklm
+    - usa gemini notebook para investigar este corpus
+    - prepara las fuentes de marca para notebooklm
+  negatives:
+    - resume este pdf aqui mismo
+slots:
+  - id: purpose
+    question: ¿Para qué es el cuaderno y quién lo va a usar?
+    required: true
+  - id: sources
+    question: ¿Qué fuentes entran (con derechos para usarlas)?
+    required: true
+improvements:
+  - id: frames-runtime
+    claim: El runtime de planeación y de marca de NotebookLM es el de Frames, portado tal cual, y sus tests portados pasan sobre él.
+    check: verify/tests/nlm-frames/notebooklm-os-brand-builder-build-cases.ts#compiles a bounded XML bootstrap and exact N00-N09 plan deterministically
+  - id: gated-effects
+    claim: Una llamada MCP que cambia NotebookLM se niega antes de su gate; después del gate solo se permiten las herramientas de esa etapa, y la ventana se cierra con un recibo con readback por operación.
+    check: verify/tests/nlm.test.ts#an MCP call that changes NotebookLM is denied before its gate and allowed only inside its window
+  - id: study-guide
+    claim: La guía de estudio del cuaderno sale como página HTML con scroll y escenas animadas, verificada en navegador.
+    check: verify/tests/nlm.test.ts#renders the study guide as a verified scroll page
+steps:
+  - id: N00
+    title: Declara la intención del cuaderno
+    handler: authored
+    agent: RT-03
+    outputs:
+      - { id: notebook-intent, schema: notebook-intent-v1 }
+  - id: N01
+    title: Descubre lo que ya existe
+    handler: authored
+    agent: RT-03
+    inputs: [notebook-intent]
+    outputs:
+      - { id: notebook-audit, schema: markdown }
+  - id: N02
+    title: Perfila el cuaderno y su system prompt
+    handler: nlm.profile
+    agent: RT-03
+    inputs: [notebook-intent]
+    outputs:
+      - { id: notebook-profile, schema: notebook-profile-v1 }
+      - { id: system-prompt, schema: markdown }
+  - id: N03
+    title: Planea las fuentes y las operaciones
+    handler: nlm.plan
+    agent: RT-03
+    inputs: [notebook-profile]
+    outputs:
+      - { id: notebook-plan-draft, schema: notebook-plan-draft }
+      - { id: notebook-plan, schema: json }
+    gate: external-effect
+  - id: N04
+    title: Crea el cuaderno e importa las fuentes
+    handler: nlm.materialize
+    agent: RT-10
+    effect: external
+    inputs: [notebook-plan]
+    outputs:
+      - { id: materialize-receipt, schema: json }
+  - id: N05
+    title: Cura y lee de vuelta las fuentes
+    handler: authored
+    agent: RT-09
+    inputs: [materialize-receipt]
+    outputs:
+      - { id: curation-readback, schema: markdown }
+  - id: N06
+    title: Verifica el anclaje y escribe el brief de Studio
+    handler: nlm.studio-brief
+    agent: RT-09
+    inputs: [curation-readback]
+    outputs:
+      - { id: grounding-receipt, schema: markdown }
+      - { id: studio-brief, schema: studio-brief-v1 }
+    gate: external-effect
+  - id: N07
+    title: Genera en Studio
+    handler: nlm.studio
+    agent: RT-10
+    effect: external
+    inputs: [studio-brief]
+    outputs:
+      - { id: studio-receipt, schema: json }
+  - id: N08
+    title: Publica la guía de estudio y la verifica
+    handler: nlm.guide
+    agent: RT-07
+    inputs: [studio-receipt]
+    outputs:
+      - { id: study-guide, schema: deck-v1 }
+      - { id: guide-html, schema: html }
+      - { id: guide-visual-report, schema: markdown }
+    gate: external-effect
+  - id: N09
+    title: Comparte el cuaderno
+    handler: nlm.share
+    agent: RT-10
+    effect: external
+    when: { fact: share, eq: true }
+    inputs: [notebook-plan]
+    outputs:
+      - { id: share-receipt, schema: json }

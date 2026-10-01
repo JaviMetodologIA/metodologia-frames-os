@@ -1,0 +1,35 @@
+# Gates que el motor hace cumplir. Los cuatro checkpoints humanos de ADOPTION-V1 mas un
+# giro correctivo opcional; hard_stop nunca es aprobable por el motor.
+gates:
+  - id: outcome
+    kind: human
+    checkpoint: outcome
+    summary: El resultado observable quedó confirmado por la persona.
+  - id: sources-and-spec
+    kind: human
+    checkpoint: sources_and_spec
+    summary: Fuentes autorizadas y especificación quedan congeladas.
+  - id: direction
+    kind: human
+    checkpoint: direction
+    summary: El brief o la dirección creativa quedan aprobados.
+  - id: acceptance
+    kind: human
+    checkpoint: acceptance
+    summary: RENDERED_DRAFT pasa a aceptado por la persona; no equivale a publicar.
+  - id: correction
+    kind: human
+    checkpoint: correction
+    summary: Giro correctivo opcional antes de rehacer un paso.
+  - id: external-effect
+    kind: human
+    checkpoint: null
+    summary: Autoriza un efecto externo concreto (NotebookLM, n8n, envío) para este run.
+  - id: submission
+    kind: hard_stop
+    checkpoint: null
+    summary: Postular o enviar una candidatura lo hace la persona, fuera del motor.
+  - id: publish
+    kind: hard_stop
+    checkpoint: null
+    summary: Publicar contenido lo hace la persona, fuera del motor.

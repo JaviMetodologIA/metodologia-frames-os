@@ -1,0 +1,23 @@
+# Generados por pnpm gen: nunca conflicto en merge. Regenerar tras merge (pnpm gen).
+AGENTS.md      merge=ours linguist-generated=true
+GEMINI.md      merge=ours linguist-generated=true
+CLAUDE.md      merge=ours linguist-generated=true
+.github/copilot-instructions.md merge=ours linguist-generated=true
+.claude/settings.json merge=ours linguist-generated=true
+**/AGENTS.md   merge=ours linguist-generated=true
+**/GEMINI.md   merge=ours linguist-generated=true
+**/CODEX.md    merge=ours linguist-generated=true
+
+# Normalización
+* text=auto eol=lf
+
+# Binarios
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.webp binary
+*.pdf  binary
+*.zip  binary
+*.mp4  binary
+*.mov  binary

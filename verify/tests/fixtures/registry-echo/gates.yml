@@ -1,0 +1,9 @@
+gates:
+  - id: direction
+    kind: human
+    checkpoint: direction
+    summary: Direccion aprobada.
+  - id: publish
+    kind: hard_stop
+    checkpoint: null
+    summary: Publicar lo hace la persona.

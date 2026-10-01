@@ -1,0 +1,76 @@
+id: career.cv
+title: CV
+frames_route: R7
+status: active
+wave: 6
+intent:
+  examples:
+    - mejora mi cv para esta vacante sin inventar experiencia
+    - actualiza mi hoja de vida
+    - adapta mi resume a este puesto
+    - crear cv en html y markdown con mi experiencia real
+  negatives:
+    - escribe una carta de presentacion
+improvements:
+  - id: evidence-bound
+    claim: Cada texto visible del CV pasa el gate de evidencia de Frames (solo evidencia verificada o confirmada, sin texto sin ligar); Frames lo tenía como librería que solo corrían sus tests.
+    check: verify/tests/career.test.ts#renders a CV only from verified evidence, as HTML, DOCX and a repeatable A4 PDF
+  - id: submission-hard-stop
+    claim: Postular es un hard stop que el motor nunca aprueba; la persona postula fuera.
+    check: verify/tests/career.test.ts#every career family stops at submission and never submits
+steps:
+  - id: C00
+    title: Entiende a la persona y su objetivo
+    handler: authored
+    agent: RT-04
+    template: domains/career/frames/c00-intake/templates
+    outputs:
+      - { id: candidate-foundation-brief-v1, schema: markdown }
+    gate: direction
+  - id: C01
+    title: Reúne y verifica la evidencia
+    handler: authored
+    agent: RT-03
+    inputs: [candidate-foundation-brief-v1]
+    template: domains/career/frames/c01-evidence/templates
+    outputs:
+      - { id: evidence-bank, schema: evidence-bank-v1 }
+      - { id: gap-report, schema: markdown }
+    gate: sources-and-spec
+  - id: C02
+    title: Define el posicionamiento
+    handler: authored
+    agent: RT-04
+    inputs: [evidence-bank]
+    template: domains/career/frames/c02-positioning/templates
+    outputs:
+      - { id: positioning-charter-v1, schema: markdown }
+  - id: C06
+    title: Compila y renderiza el CV
+    handler: career.cv
+    agent: RT-05
+    inputs: [evidence-bank, positioning-charter-v1]
+    template: domains/career/frames/c06-cv/templates
+    outputs:
+      - { id: cv, schema: career-cv-v2 }
+      - { id: cv-html, schema: html }
+      - { id: cv-docx, schema: docx }
+      - { id: cv-pdf, schema: pdf }
+  - id: C08
+    title: Revisa el paquete con otro actor
+    handler: content.review
+    agent: RT-09
+    inputs: [cv-html]
+    template: domains/content/templates
+    outputs:
+      - { id: review-report-v1, schema: markdown }
+      - { id: verdict-v1, schema: markdown }
+      - { id: top5-changes-v1, schema: markdown }
+  - id: C09
+    title: Prepara la postulación y se detiene
+    handler: authored
+    agent: RT-11
+    template: domains/career/frames/c09-submission/templates
+    outputs:
+      - { id: submission-preview-v1, schema: markdown }
+    gate: submission

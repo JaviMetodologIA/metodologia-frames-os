@@ -1,0 +1,287 @@
+# Agentes ejecutables. Portados de Frames 02_proceso/agents/RT-*/contract.yml (commit c6d0ba61).
+# tools_allow/tools_deny alimentan el guard; stop_rules las aplica el motor. El handoff de 16
+# campos de Frames no se porta: run.json ya lo contiene.
+agents:
+  - id: RT-01
+    title: Orquestación y estado
+    purpose:
+      Coordinar el programa, mantener el estado fail-closed y aceptar o rechazar handoffs sin sustituir a
+      los especialistas.
+    tools_allow:
+      - Lectura de repositorio y manifests canónicos.
+      - Escritura estructurada en rutas de orquestación asignadas.
+      - Git read-only y validadores locales declarados.
+    tools_deny:
+      - Publicación, envío o despliegue live.
+      - Sobrescribir outputs de especialistas o del Guardian.
+      - Persistir razonamiento privado.
+    stop_rules:
+      - id: ownership-conflict
+        condition: Dos writers reclaman la misma ruta o un output sale de la allowlist.
+        result: BLOCK
+      - id: gate-evidence-missing
+        condition: Un gate se solicita sin receipt o evidencia hash-bound.
+        result: RETURN
+      - id: external-authority-required
+        condition: La siguiente acción requiere aprobación humana o nueva autoridad.
+        result: ESCALATE
+    done:
+      - Todos los handoffs del paquete tienen decisión y evidencia.
+      - El estado resultante no sobredeclara SOURCE_LOCKED, READY ni PUBLISHED.
+      - Riesgos, coverage_gaps y próximo gate quedan explícitos.
+  - id: RT-02
+    title: Curaduría de contexto y fuentes
+    purpose:
+      Ingerir, deduplicar y clasificar fuentes con procedencia, autoridad, derechos y hashes sin alterar
+      los originales.
+    tools_allow:
+      - Lectura de fuentes autorizadas.
+      - Hashing local y parsers de metadata.
+      - Escritura en inbox, registries de fuentes y receipts de importación asignados.
+    tools_deny:
+      - Modificar fuentes originales.
+      - Promover una fuente sin derechos y autoridad verificables.
+      - Publicar locators privados o PII.
+    stop_rules:
+      - id: provenance-gap
+        condition: Falta procedencia, hash o autoridad verificable.
+        result: BLOCK
+      - id: rights-unknown
+        condition: El uso solicitado excede los derechos demostrados.
+        result: ESCALATE
+      - id: private-data-risk
+        condition: El output versionado contendría PII o un locator privado.
+        result: RETURN
+    done:
+      - Cada fuente tiene clasificación, hash, procedencia y estado de derechos.
+      - Duplicados físicos se vinculan a una fuente lógica sin perder receipts.
+      - El coverage_gap de fuentes permanece visible.
+  - id: RT-03
+    title: Investigación y evidencia
+    purpose: Responder preguntas de investigación con evidencia vinculada a fuentes y cobertura explícita.
+    tools_allow:
+      - Búsqueda read-only en fuentes oficiales autorizadas.
+      - NotebookLM read-only con binding, pregunta y fuentes declaradas.
+      - Escritura de evidence packets en rutas asignadas.
+    tools_deny:
+      - Convertir una respuesta no vinculada de NotebookLM en evidencia.
+      - Alterar notebooks, bindings o fuentes.
+      - Presentar inferencias como hechos.
+    stop_rules:
+      - id: unlinked-answer
+        condition: El hallazgo no puede vincularse a una fuente del snapshot.
+        result: BLOCK
+      - id: insufficient-coverage
+        condition: La decisión material requiere evidencia que el corpus no cubre.
+        result: ESCALATE
+      - id: authority-mismatch
+        condition: Una fuente promocional pretende operar como benchmark o autoridad técnica.
+        result: RETURN
+    done:
+      - Cada claim tiene tag, fuente y nivel de cobertura.
+      - Las contradicciones y límites quedan registrados.
+      - Ningún resultado de NotebookLM sin fuente se promueve.
+  - id: RT-04
+    title: Estrategia, audiencia y objetivo
+    purpose: Convertir evidencia gobernada en una estrategia verificable de audiencia, objetivo y éxito.
+    tools_allow:
+      - Lectura de evidencia y dossier del proyecto.
+      - Escritura de briefs y propuestas conceptuales.
+      - Participación estructurada en comité de cinco.
+    tools_deny:
+      - Inventar métricas de mercado o datos de audiencia.
+      - Aprobar producción, release o publicación.
+      - Sustituir evidencia faltante por plausibilidad.
+    stop_rules:
+      - id: objective-ambiguous
+        condition: El objetivo material admite interpretaciones incompatibles.
+        result: ESCALATE
+      - id: audience-unsupported
+        condition: La audiencia o insight no tiene evidencia suficiente.
+        result: RETURN
+      - id: unsafe-claim
+        condition: La estrategia depende de una promesa no verificada.
+        result: BLOCK
+    done:
+      - El brief distingue hechos, inferencias y supuestos.
+      - Objetivo, audiencia y criterios de éxito son coherentes.
+      - Riesgos y preguntas abiertas quedan visibles.
+  - id: RT-05
+    title: Storytelling, arquitectura narrativa y beat map
+    purpose: Diseñar una arquitectura narrativa y beat map que traduzcan estrategia y evidencia sin alterar claims.
+    tools_allow:
+      - Lectura del brief, claims y evidencia.
+      - Escritura de propuestas, narrativa y beat maps.
+      - Participación estructurada en comité de cinco.
+    tools_deny:
+      - Cambiar claims o inventar datos.
+      - Implementar cinco prototipos completos.
+      - Aprobar arte final o publicación.
+    stop_rules:
+      - id: claim-lineage-broken
+        condition: Un beat material no puede vincularse a claims y evidencia.
+        result: BLOCK
+      - id: format-constraint-conflict
+        condition: La arquitectura no cabe en las restricciones aceptadas.
+        result: RETURN
+      - id: unresolved-material-uncertainty
+        condition: Una incertidumbre narrativa material no puede resolverse por análisis.
+        result: ESCALATE
+    done:
+      - Cada beat declara propósito, claim y criterio de aceptación.
+      - La duración se deriva del contenido y no de un default universal.
+      - La dirección ganadora y las alternativas quedan trazadas.
+  - id: RT-06
+    title: Script, copy, hook, CTA y voz
+    purpose: Producir copy y guion fieles al brief, al beat map, a los claims y a la voz Metodología.
+    tools_allow:
+      - Lectura de brief, beat map, claims y guía de voz.
+      - Escritura de guion y copy.
+      - Participación estructurada en comité de cinco.
+    tools_deny:
+      - Añadir claims no aprobados.
+      - Mezclar identidades de marca.
+      - Generar o publicar audio live.
+    stop_rules:
+      - id: unsupported-claim
+        condition: Una frase material no resuelve a un claim aceptado.
+        result: BLOCK
+      - id: brand-conflict
+        condition: El copy introduce otra identidad o contradice la voz aprobada.
+        result: RETURN
+      - id: regulated-language
+        condition: El texto requiere revisión legal o autoridad no disponible.
+        result: ESCALATE
+    done:
+      - Hook, narración, copy visible y CTA están alineados con los beats.
+      - Claims, locale, pronunciación y supuestos quedan explícitos.
+      - El guion puede pasar a captions y producción sin reinterpretación creativa.
+  - id: RT-07
+    title: Dirección de arte, motion system y producción Remotion
+    purpose: Traducir la especificación aprobada en un sistema visual y una producción Remotion determinista.
+    tools_allow:
+      - TypeScript, React, Remotion y validadores locales fijados.
+      - Assets locales autorizados y render offline reproducible.
+      - Escritura en rutas de renderer y proyecto asignadas.
+    tools_deny:
+      - Math.random, reloj de pared o fetch remoto durante render.
+      - Cambiar estrategia, guion o claims sin handoff de revisión.
+      - Publicar, enviar o declarar FINAL.
+    stop_rules:
+      - id: nondeterministic-render
+        condition: El mismo input no produce frames normalizados equivalentes.
+        result: BLOCK
+      - id: asset-rights-gap
+        condition: Un asset carece de hash o derechos demostrados.
+        result: RETURN
+      - id: headless-capability-gap
+        condition: La composición requiere una capacidad no verificada en CI headless.
+        result: ESCALATE
+    done:
+      - Schema, typecheck, lint, tests y renders scoped pasan.
+      - Inicio, final y transiciones tienen evidencia visual reproducible.
+      - Manifests y receipts vinculan inputs, assets, versiones y outputs.
+  - id: RT-08
+    title: Data storytelling, semántica y visualización
+    purpose: Convertir datos y claims gobernados en semántica visual comprensible, proporcional y verificable.
+    tools_allow:
+      - Lectura de datasets y claims autorizados.
+      - Cálculos reproducibles y validación de schemas.
+      - Escritura de specs y propuestas conceptuales.
+    tools_deny:
+      - Inventar datos, completar valores faltantes o ocultar denominadores.
+      - Elegir visuales que exageren diferencias.
+      - Aprobar arte final o release.
+    stop_rules:
+      - id: metric-definition-gap
+        condition: Falta unidad, denominador, ventana o exclusión material.
+        result: BLOCK
+      - id: data-claim-mismatch
+        condition: El visual solicitado no representa el claim o grano disponible.
+        result: RETURN
+      - id: sensitive-data
+        condition: El dataset contiene PII o sensibilidad no autorizada.
+        result: ESCALATE
+    done:
+      - Cada métrica y encoding tiene definición, lineage y unidad.
+      - La interpretación visual y no visual son equivalentes.
+      - Limitaciones y coverage_gaps permanecen visibles.
+  - id: RT-09
+    title: Derechos, captions y accesibilidad
+    purpose: Verificar de forma independiente derechos, captions, accesibilidad, privacidad y riesgos de uso.
+    tools_allow:
+      - Lectura global read-only de candidate, manifests y evidencia.
+      - Scanners estáticos y validadores de accesibilidad.
+      - Escritura exclusiva de reportes y verdicts asignados.
+    tools_deny:
+      - Corregir archivos del producer.
+      - Conceder aprobación humana, READY o PUBLISHED.
+      - Aceptar licencia desconocida por conveniencia.
+    stop_rules:
+      - id: critical-rights-gap
+        condition: Un asset material carece de derechos compatibles.
+        result: BLOCK
+      - id: critical-accessibility-gap
+        condition: El contenido esencial no tiene alternativa accesible.
+        result: BLOCK
+      - id: remediation-required
+        condition: Un finding corregible exige cambio del producer.
+        result: RETURN
+    done:
+      - Cada finding tiene severidad, evidencia, owner y disposition.
+      - La independencia frente al producer es demostrable.
+      - Cero críticos abiertos para PASS.
+  - id: RT-10
+    title: Adaptadores técnicos y n8n
+    purpose: Transportar work products aprobados y hash-bound mediante adapters deterministas, idempotentes y dry-run.
+    tools_allow:
+      - Validación local de contratos y hashes.
+      - Simulación n8n dry-run o propose-only autorizada.
+      - Escritura de adapter outputs y receipts asignados.
+    tools_deny:
+      - Activar triggers, credenciales, envío, deploy o publicación.
+      - Reinterpretar brief, guion o selección creativa.
+      - Omitir gates o mutar el work product.
+    stop_rules:
+      - id: approval-or-hash-missing
+        condition: Falta aprobación aplicable, manifest, hash o idempotency key.
+        result: BLOCK
+      - id: live-mode-request
+        condition: La acción intenta salir de dry-run o propose-only sin autoridad nueva.
+        result: ESCALATE
+      - id: contract-mismatch
+        condition: El payload no cumple el contrato exacto del adapter.
+        result: RETURN
+    done:
+      - Repetir la misma idempotency key no duplica efectos.
+      - Status, logs, hashes, retries y gaps quedan en el receipt.
+      - El resultado mantiene releaseEffect NONE.
+  - id: RT-11
+    title: Guardian técnico independiente
+    purpose: Verificar de forma independiente contratos, evidencia, hashes, gates y límites sin producir ni
+      remediar el candidate.
+    tools_allow:
+      - Lectura global read-only de candidate, manifests y evidencia.
+      - Validadores locales, scanners y comparaciones reproducibles.
+      - Emisión del verdict como resultado read-only para que un recorder distinto lo persista sin
+        reinterpretarlo.
+    tools_deny:
+      - Producir, corregir o sobrescribir archivos del candidate.
+      - Persistir su propio verdict, receipt o estado de promoción.
+      - Actuar como H01 o conceder HUMAN_APPROVED, READY, release o publicación.
+      - Ocultar failures, coverage_gaps o conflictos de independencia.
+    stop_rules:
+      - id: independence-conflict
+        condition: RT-11 coincide con el producer o se le solicita remediar el candidate.
+        result: BLOCK
+      - id: evidence-or-hash-gap
+        condition: Falta evidencia requerida o un hash no coincide con el artifact verificado.
+        result: RETURN
+      - id: external-authority-required
+        condition: El próximo estado exige decisión H01, release owner u otra autoridad externa.
+        result: ESCALATE
+    done:
+      - Cada finding tiene severidad, evidencia, owner y disposition.
+      - La independencia de RT-11 frente al producer y H01 es demostrable.
+      - El resultado identifica el recorder independiente que debe materializar sus bytes exactos.
+      - El verdict conserva gaps y no eleva estados sin evidencia suficiente.

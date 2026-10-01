@@ -1,0 +1,82 @@
+id: meta.maintain
+title: Mantener Frames
+frames_route: R9
+status: active
+wave: 7
+intent:
+  examples:
+    - mantener el arnes de frames
+    - corregir frames porque un check fallo
+    - migrar un workflow a la version nueva
+    - deprecar una capacidad y actualizar el inventario
+  negatives:
+    - crea contenido para redes
+improvements:
+  - id: verifies-the-change
+    claim: M04 exige, como el handoff de Frames, que los archivos cambiados sean exactamente el write set; además aplica el presupuesto de líneas de la propia orden (Frames solo el tope fijo de 1200) y corre doctor sobre la copia.
+    check: verify/tests/maintain.test.ts#refuses a change that touches a file outside its work order or exceeds its budget
+  - id: docs-against-diff
+    claim: La documentación se cierra contra el diff (cada superficie REQUIRED tiene que haber cambiado) y una deriva del inventario del ecosistema exige su entrada en CHANGELOG.md.
+    check: verify/tests/maintain.test.ts#closes documentation only when the required docs changed and the inventory drift is in the changelog
+  - id: handoff-bound
+    claim: El handoff queda atado al sha del candidato verificado; una edición posterior a M04 lo reabre.
+    check: verify/tests/maintain.test.ts#hands off a candidate bound to its sha and refuses one edited after verify
+steps:
+  - id: M00
+    title: Congela la base y el inventario
+    handler: maintain.freeze
+    agent: RT-01
+    outputs:
+      - { id: inspection, schema: json }
+      - { id: inventory-base, schema: json }
+  - id: M01
+    title: Clasifica el mantenimiento
+    handler: authored
+    agent: RT-01
+    template: domains/maintain/templates
+    inputs: [inspection]
+    outputs:
+      - { id: maintenance-request, schema: maintenance-request-v1 }
+  - id: M02
+    title: Planea el cambio y su impacto documental
+    handler: maintain.plan
+    agent: RT-10
+    template: domains/maintain/templates
+    inputs: [maintenance-request, inspection]
+    outputs:
+      - { id: work-order, schema: work-order-v1 }
+      - { id: plan-report, schema: markdown }
+    gate: direction
+  - id: M03
+    title: Implementa el cambio acotado
+    handler: authored
+    agent: RT-10
+    inputs: [work-order]
+    outputs:
+      - { id: implementation-notes, schema: markdown }
+  - id: M04
+    title: Verifica el candidato
+    handler: maintain.verify
+    agent: RT-11
+    inputs: [inspection, work-order, implementation-notes]
+    outputs:
+      - { id: verify, schema: json }
+      - { id: verify-report, schema: markdown }
+    gate: acceptance
+  - id: M05
+    title: Sincroniza documentación e inventario
+    handler: maintain.docs
+    agent: RT-11
+    inputs: [verify, work-order, inventory-base]
+    outputs:
+      - { id: docs-closure-receipt, schema: json }
+      - { id: inventory-delta, schema: json }
+  - id: M06
+    title: Entrega y prepara la promoción
+    handler: maintain.handoff
+    agent: RT-01
+    inputs: [verify, work-order, maintenance-request]
+    outputs:
+      - { id: handoff, schema: json }
+      - { id: handoff-report, schema: markdown }
+    gate: outcome

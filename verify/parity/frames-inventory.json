@@ -1,0 +1,1199 @@
+{
+  "frames_commit": "c6d0ba61",
+  "entries": [
+    {
+      "kind": "cli",
+      "id": "carousel:build",
+      "title": "node --import tsx scripts/build-carousel-pilot.ts",
+      "source": "package.json",
+      "destination": "content.carousel"
+    },
+    {
+      "kind": "cli",
+      "id": "carousel:render",
+      "title": "node --import tsx renderers/static-social/scripts/render-carousel.ts",
+      "source": "package.json",
+      "destination": "content.carousel"
+    },
+    {
+      "kind": "cli",
+      "id": "cb",
+      "title": "node --import tsx skills/metodologia-certificate-builder/scripts/render-certificates.ts",
+      "source": "package.json",
+      "destination": "deck.immersive"
+    },
+    {
+      "kind": "cli",
+      "id": "doctor",
+      "title": "node --import tsx scripts/doctor.ts",
+      "source": "package.json",
+      "destination": "meta.maintain"
+    },
+    {
+      "kind": "cli",
+      "id": "frames:assist",
+      "title": "node 05_verificacion/scripts/frames-assist.mjs",
+      "source": "package.json",
+      "destination": "engine:classify"
+    },
+    {
+      "kind": "cli",
+      "id": "frames:extend",
+      "title": "node --import tsx 05_verificacion/scripts/frames-extend.ts",
+      "source": "package.json",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "cli",
+      "id": "frames:maintain",
+      "title": "node --import tsx 05_verificacion/scripts/frames-maintain.ts",
+      "source": "package.json",
+      "destination": "meta.maintain"
+    },
+    {
+      "kind": "cli",
+      "id": "host:install",
+      "title": "node --import tsx 05_verificacion/scripts/install-host-adapter.ts",
+      "source": "package.json",
+      "destination": "engine:gen"
+    },
+    {
+      "kind": "cli",
+      "id": "mw:run",
+      "title": "node --import tsx 02_proceso/workflows/multimedia/_runner/run.ts",
+      "source": "package.json",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "cli",
+      "id": "render:all",
+      "title": "node --import tsx renderers/remotion/scripts/render-project.ts",
+      "source": "package.json",
+      "destination": "video.method"
+    },
+    {
+      "kind": "cli",
+      "id": "trainer",
+      "title": "node --import tsx 02_proceso/workflows/trainer-os/runner.ts",
+      "source": "package.json",
+      "destination": "trainer"
+    },
+    {
+      "kind": "cli",
+      "id": "video-os",
+      "title": "node --import tsx 02_proceso/workflows/video-os/_runner/video-os.ts",
+      "source": "package.json",
+      "destination": "video.method"
+    },
+    {
+      "kind": "deliverable",
+      "id": "L00/local-extension-brief-v1",
+      "title": "local-extension-brief-v1",
+      "source": "02_proceso/workflows/local-extensions/l00-intake/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "L01/documentation-impact-plan-v1",
+      "title": "documentation-impact-plan-v1",
+      "source": "02_proceso/workflows/local-extensions/l01-design/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "L01/local-extension-design-v1",
+      "title": "local-extension-design-v1",
+      "source": "02_proceso/workflows/local-extensions/l01-design/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "L02/local-extension-manifest-v1",
+      "title": "local-extension-manifest-v1",
+      "source": "02_proceso/workflows/local-extensions/l02-scaffold/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "L02/local-extension-package-v1",
+      "title": "local-extension-package-v1",
+      "source": "02_proceso/workflows/local-extensions/l02-scaffold/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "L03/local-extension-validation-v1",
+      "title": "local-extension-validation-v1",
+      "source": "02_proceso/workflows/local-extensions/l03-validate/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "L03/sandbox-probe-v1",
+      "title": "sandbox-probe-v1",
+      "source": "02_proceso/workflows/local-extensions/l03-validate/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "L04/local-activation-receipt-v1",
+      "title": "local-activation-receipt-v1",
+      "source": "02_proceso/workflows/local-extensions/l04-activate/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "L04/local-extension-index-v1",
+      "title": "local-extension-index-v1",
+      "source": "02_proceso/workflows/local-extensions/l04-activate/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "L05/documentation-closure-receipt-v1",
+      "title": "documentation-closure-receipt-v1",
+      "source": "02_proceso/workflows/local-extensions/l05-evolve/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "L05/local-extension-successor-v1",
+      "title": "local-extension-successor-v1",
+      "source": "02_proceso/workflows/local-extensions/l05-evolve/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P00/brand-charter-v1",
+      "title": "Charter de marca",
+      "source": "02_proceso/workflows/multimedia/p00-definir-sistema/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P00/brand-os-v1",
+      "title": "Brand OS",
+      "source": "02_proceso/workflows/multimedia/p00-definir-sistema/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P00/calibration-sample-v1",
+      "title": "Muestra de calibración",
+      "source": "02_proceso/workflows/multimedia/p00-definir-sistema/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P00/pilot-plan-v1",
+      "title": "Plan piloto",
+      "source": "02_proceso/workflows/multimedia/p00-definir-sistema/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P01/capture-card-v1",
+      "title": "Ficha de captura",
+      "source": "02_proceso/workflows/multimedia/p01-curar-material/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P01/digest-shortlist-v1",
+      "title": "Digest y shortlist",
+      "source": "02_proceso/workflows/multimedia/p01-curar-material/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P01/triage-record-v1",
+      "title": "Registro de triage",
+      "source": "02_proceso/workflows/multimedia/p01-curar-material/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P02/claim-register-v1",
+      "title": "Registro de claims",
+      "source": "02_proceso/workflows/multimedia/p02-investigar/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P02/opportunity-map-v1",
+      "title": "Mapa de oportunidades",
+      "source": "02_proceso/workflows/multimedia/p02-investigar/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P02/question-bank-v1",
+      "title": "Banco de preguntas",
+      "source": "02_proceso/workflows/multimedia/p02-investigar/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P03/ab-concepts-v1",
+      "title": "Conceptos A/B",
+      "source": "02_proceso/workflows/multimedia/p03-crear-brief/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P03/brief-campaign-map-v1",
+      "title": "Brief y mapa de campaña",
+      "source": "02_proceso/workflows/multimedia/p03-crear-brief/workflow.yml",
+      "destination": "content.campaign"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P03/campaign-charter-v1",
+      "title": "Charter de campaña",
+      "source": "02_proceso/workflows/multimedia/p03-crear-brief/workflow.yml",
+      "destination": "content.campaign"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P03/definition-of-ready-v1",
+      "title": "Definition of Ready",
+      "source": "02_proceso/workflows/multimedia/p03-crear-brief/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P03/executive-presentation-v1",
+      "title": "Presentación ejecutiva",
+      "source": "02_proceso/workflows/multimedia/p03-crear-brief/workflow.yml",
+      "destination": "deck.immersive"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P04/batch-plan-v1",
+      "title": "Plan por lotes",
+      "source": "02_proceso/workflows/multimedia/p04-calendarizar/workflow.yml",
+      "destination": "content.campaign"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P04/board-v1",
+      "title": "Tablero de producción",
+      "source": "02_proceso/workflows/multimedia/p04-calendarizar/workflow.yml",
+      "destination": "content.campaign"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P04/content-grid-v1",
+      "title": "Parrilla de contenidos",
+      "source": "02_proceso/workflows/multimedia/p04-calendarizar/workflow.yml",
+      "destination": "content.campaign"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P04/editorial-calendar-v1",
+      "title": "Cronograma editorial",
+      "source": "02_proceso/workflows/multimedia/p04-calendarizar/workflow.yml",
+      "destination": "content.campaign"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P05/asset-map-v1",
+      "title": "Mapa de activos",
+      "source": "02_proceso/workflows/multimedia/p05-disenar-pieza/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P05/continuity-bible-v1",
+      "title": "Biblia de continuidad",
+      "source": "02_proceso/workflows/multimedia/p05-disenar-pieza/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P05/creative-spec-v1",
+      "title": "Especificación creativa",
+      "source": "02_proceso/workflows/multimedia/p05-disenar-pieza/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P05/derivatives-v1",
+      "title": "Sistema de derivados",
+      "source": "02_proceso/workflows/multimedia/p05-disenar-pieza/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P05/piece-family-spec-v1",
+      "title": "Ficha de familia de pieza",
+      "source": "02_proceso/workflows/multimedia/p05-disenar-pieza/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P05/universal-prompts-v1",
+      "title": "Pack de prompts de producción",
+      "source": "02_proceso/workflows/multimedia/p05-disenar-pieza/workflow.yml",
+      "destination": "content.prompts"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P06/asset-manifest-v1",
+      "title": "Manifiesto de activos",
+      "source": "02_proceso/workflows/multimedia/p06-crear-activos/workflow.yml",
+      "destination": "content.prompts"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P06/asset-package-v1",
+      "title": "Paquete de piezas candidatas",
+      "source": "02_proceso/workflows/multimedia/p06-crear-activos/workflow.yml",
+      "destination": "content.prompts"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P06/capability-report-v1",
+      "title": "Reporte de capacidad",
+      "source": "02_proceso/workflows/multimedia/p06-crear-activos/workflow.yml",
+      "destination": "content.prompts"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P06/tool-run-evidence-v1",
+      "title": "Evidencia de ejecución",
+      "source": "02_proceso/workflows/multimedia/p06-crear-activos/workflow.yml",
+      "destination": "content.prompts"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P07/review-report-v1",
+      "title": "Reporte de revisión",
+      "source": "02_proceso/workflows/multimedia/p07-revisar/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P07/top5-changes-v1",
+      "title": "Cambios prioritarios",
+      "source": "02_proceso/workflows/multimedia/p07-revisar/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P07/verdict-v1",
+      "title": "Veredicto",
+      "source": "02_proceso/workflows/multimedia/p07-revisar/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P08/edit-candidate-v1",
+      "title": "Candidate editado",
+      "source": "02_proceso/workflows/multimedia/p08-editar/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P08/edl-v1",
+      "title": "Lista de decisiones de edición",
+      "source": "02_proceso/workflows/multimedia/p08-editar/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P08/export-matrix-v1",
+      "title": "Matriz de exportación",
+      "source": "02_proceso/workflows/multimedia/p08-editar/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P09/learning-report-v1",
+      "title": "Reporte de aprendizaje",
+      "source": "02_proceso/workflows/multimedia/p09-distribuir/workflow.yml",
+      "destination": "content.campaign"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P09/platform-package-v1",
+      "title": "Paquete por plataforma",
+      "source": "02_proceso/workflows/multimedia/p09-distribuir/workflow.yml",
+      "destination": "content.campaign"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P09/publication-record-v1",
+      "title": "Registro de publicación",
+      "source": "02_proceso/workflows/multimedia/p09-distribuir/workflow.yml",
+      "destination": "content.campaign"
+    },
+    {
+      "kind": "deliverable",
+      "id": "P09/results-dashboard-v1",
+      "title": "Dashboard de resultados",
+      "source": "02_proceso/workflows/multimedia/p09-distribuir/workflow.yml",
+      "destination": "content.campaign"
+    },
+    {
+      "kind": "deliverable",
+      "id": "S00/skill-system-case-v1",
+      "title": "skill-system-case-v1",
+      "source": "02_proceso/workflows/skill-systems/s00-intake/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "S01/demotion-decision",
+      "title": "demotion-decision",
+      "source": "02_proceso/workflows/skill-systems/s01-discovery/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "S01/discovery-report",
+      "title": "discovery-report",
+      "source": "02_proceso/workflows/skill-systems/s01-discovery/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "S02/architecture-decision-v1",
+      "title": "architecture-decision-v1",
+      "source": "02_proceso/workflows/skill-systems/s02-architecture/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "S02/capability-map-v1",
+      "title": "capability-map-v1",
+      "source": "02_proceso/workflows/skill-systems/s02-architecture/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "S03/component-contract-v1",
+      "title": "component-contract-v1",
+      "source": "02_proceso/workflows/skill-systems/s03-contract/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "S03/skill-eval-plan",
+      "title": "skill-eval-plan",
+      "source": "02_proceso/workflows/skill-systems/s03-contract/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "S04/authoring-handoff",
+      "title": "authoring-handoff",
+      "source": "02_proceso/workflows/skill-systems/s04-author/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "S04/skill-candidate",
+      "title": "skill-candidate",
+      "source": "02_proceso/workflows/skill-systems/s04-author/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "S05/static-validation-report",
+      "title": "static-validation-report",
+      "source": "02_proceso/workflows/skill-systems/s05-validate/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "S06/eval-summary",
+      "title": "eval-summary",
+      "source": "02_proceso/workflows/skill-systems/s06-evaluate/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "S06/skill-eval-run-v1",
+      "title": "skill-eval-run-v1",
+      "source": "02_proceso/workflows/skill-systems/s06-evaluate/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "S07/skill-change-proposal-v1",
+      "title": "skill-change-proposal-v1",
+      "source": "02_proceso/workflows/skill-systems/s07-review/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "S07/skill-review-report-v1",
+      "title": "skill-review-report-v1",
+      "source": "02_proceso/workflows/skill-systems/s07-review/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "S08/compatibility-report",
+      "title": "compatibility-report",
+      "source": "02_proceso/workflows/skill-systems/s08-package/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "S08/restore-plan",
+      "title": "restore-plan",
+      "source": "02_proceso/workflows/skill-systems/s08-package/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "S08/skill-release-capsule-v1",
+      "title": "skill-release-capsule-v1",
+      "source": "02_proceso/workflows/skill-systems/s08-package/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "S09/h03-lifecycle-events",
+      "title": "h03-lifecycle-events",
+      "source": "02_proceso/workflows/skill-systems/s09-lifecycle/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "S09/inventory-delta",
+      "title": "inventory-delta",
+      "source": "02_proceso/workflows/skill-systems/s09-lifecycle/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "deliverable",
+      "id": "S09/migration-guide",
+      "title": "migration-guide",
+      "source": "02_proceso/workflows/skill-systems/s09-lifecycle/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "nlm-command",
+      "id": "audit",
+      "title": "desde N01",
+      "source": "02_proceso/workflows/notebooklm-os/commands.yml",
+      "destination": "nlm"
+    },
+    {
+      "kind": "nlm-command",
+      "id": "brand-audit",
+      "title": "desde N01",
+      "source": "02_proceso/workflows/notebooklm-os/commands.yml",
+      "destination": "nlm"
+    },
+    {
+      "kind": "nlm-command",
+      "id": "brand-build",
+      "title": "desde N02",
+      "source": "02_proceso/workflows/notebooklm-os/commands.yml",
+      "destination": "nlm"
+    },
+    {
+      "kind": "nlm-command",
+      "id": "brand-content",
+      "title": "desde N07",
+      "source": "02_proceso/workflows/notebooklm-os/commands.yml",
+      "destination": "nlm"
+    },
+    {
+      "kind": "nlm-command",
+      "id": "brand-evolve",
+      "title": "desde N02",
+      "source": "02_proceso/workflows/notebooklm-os/commands.yml",
+      "destination": "nlm"
+    },
+    {
+      "kind": "nlm-command",
+      "id": "brand-init",
+      "title": "desde N00",
+      "source": "02_proceso/workflows/notebooklm-os/commands.yml",
+      "destination": "nlm"
+    },
+    {
+      "kind": "nlm-command",
+      "id": "brand-verify",
+      "title": "desde N08",
+      "source": "02_proceso/workflows/notebooklm-os/commands.yml",
+      "destination": "nlm"
+    },
+    {
+      "kind": "nlm-command",
+      "id": "create",
+      "title": "desde N04",
+      "source": "02_proceso/workflows/notebooklm-os/commands.yml",
+      "destination": "nlm"
+    },
+    {
+      "kind": "nlm-command",
+      "id": "curate",
+      "title": "desde N03",
+      "source": "02_proceso/workflows/notebooklm-os/commands.yml",
+      "destination": "nlm"
+    },
+    {
+      "kind": "nlm-command",
+      "id": "evolve",
+      "title": "desde N02",
+      "source": "02_proceso/workflows/notebooklm-os/commands.yml",
+      "destination": "nlm"
+    },
+    {
+      "kind": "nlm-command",
+      "id": "init",
+      "title": "desde N00",
+      "source": "02_proceso/workflows/notebooklm-os/commands.yml",
+      "destination": "nlm"
+    },
+    {
+      "kind": "nlm-command",
+      "id": "share",
+      "title": "desde N09",
+      "source": "02_proceso/workflows/notebooklm-os/commands.yml",
+      "destination": "nlm"
+    },
+    {
+      "kind": "nlm-command",
+      "id": "status",
+      "title": "desde N01",
+      "source": "02_proceso/workflows/notebooklm-os/commands.yml",
+      "destination": "nlm"
+    },
+    {
+      "kind": "nlm-command",
+      "id": "studio",
+      "title": "desde N07",
+      "source": "02_proceso/workflows/notebooklm-os/commands.yml",
+      "destination": "nlm"
+    },
+    {
+      "kind": "nlm-command",
+      "id": "sync",
+      "title": "desde N05",
+      "source": "02_proceso/workflows/notebooklm-os/commands.yml",
+      "destination": "nlm"
+    },
+    {
+      "kind": "nlm-command",
+      "id": "verify",
+      "title": "desde N08",
+      "source": "02_proceso/workflows/notebooklm-os/commands.yml",
+      "destination": "nlm"
+    },
+    {
+      "kind": "profile",
+      "id": "commercial-proposal",
+      "title": "perfil o skill de presentacion/mejora",
+      "source": "router.yml R6 + 03_artefactos/skills",
+      "destination": "deck.immersive"
+    },
+    {
+      "kind": "profile",
+      "id": "content-os-bento-slides",
+      "title": "perfil o skill de presentacion/mejora",
+      "source": "router.yml R6 + 03_artefactos/skills",
+      "destination": "deck.immersive"
+    },
+    {
+      "kind": "profile",
+      "id": "content-os-slideshow",
+      "title": "perfil o skill de presentacion/mejora",
+      "source": "router.yml R6 + 03_artefactos/skills",
+      "destination": "deck.immersive"
+    },
+    {
+      "kind": "profile",
+      "id": "improve",
+      "title": "perfil o skill de presentacion/mejora",
+      "source": "router.yml R6 + 03_artefactos/skills",
+      "destination": "improve"
+    },
+    {
+      "kind": "route",
+      "id": "R0",
+      "title": "ambiguo",
+      "source": "02_proceso/governance/router.yml",
+      "destination": "engine:classify"
+    },
+    {
+      "kind": "route",
+      "id": "R1",
+      "title": "nuevo proyecto / crear proyecto",
+      "source": "02_proceso/governance/router.yml",
+      "destination": "engine:runs"
+    },
+    {
+      "kind": "route",
+      "id": "R10",
+      "title": "crear, auditar, curar, sincronizar u operar NotebookLM OS o un notebook generador de contenido de marca",
+      "source": "02_proceso/governance/router.yml",
+      "destination": "nlm"
+    },
+    {
+      "kind": "route",
+      "id": "R2",
+      "title": "retomar / continuar / nombre proyecto conocido",
+      "source": "02_proceso/governance/router.yml",
+      "destination": "engine:runs"
+    },
+    {
+      "kind": "route",
+      "id": "R3",
+      "title": "tarea nueva + proyecto activo",
+      "source": "02_proceso/governance/router.yml",
+      "destination": "engine:runs"
+    },
+    {
+      "kind": "route",
+      "id": "R3-LOOSE",
+      "title": "tarea nueva sin proyecto",
+      "source": "02_proceso/governance/router.yml",
+      "destination": "engine:runs"
+    },
+    {
+      "kind": "route",
+      "id": "R4",
+      "title": "seguir / ongoing / tarea en progreso",
+      "source": "02_proceso/governance/router.yml",
+      "destination": "engine:runs"
+    },
+    {
+      "kind": "route",
+      "id": "R5",
+      "title": "eval / ablation",
+      "source": "02_proceso/governance/router.yml",
+      "destination": "engine:eval"
+    },
+    {
+      "kind": "route",
+      "id": "R6",
+      "title": "crear, planear, revisar o editar una pieza de contenido",
+      "source": "02_proceso/governance/router.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "route",
+      "id": "R7",
+      "title": "crear CV, carta, buscar empleo, postular o continuar candidatura",
+      "source": "02_proceso/governance/router.yml",
+      "destination": "career.cv"
+    },
+    {
+      "kind": "route",
+      "id": "R8",
+      "title": "crear, ampliar, corregir o retirar una extensión privada de Frames",
+      "source": "02_proceso/governance/router.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "route",
+      "id": "R9",
+      "title": "corregir, evolucionar, migrar o deprecar el arnés Frames",
+      "source": "02_proceso/governance/router.yml",
+      "destination": "meta.maintain"
+    },
+    {
+      "kind": "step",
+      "id": "C00",
+      "title": "Intake privado del candidato",
+      "source": "02_proceso/workflows/career/c00-intake/workflow.yml",
+      "destination": "career.cv"
+    },
+    {
+      "kind": "step",
+      "id": "C01",
+      "title": "Reconciliación de evidencia",
+      "source": "02_proceso/workflows/career/c01-evidence/workflow.yml",
+      "destination": "career.cv"
+    },
+    {
+      "kind": "step",
+      "id": "C02",
+      "title": "Posicionamiento profesional",
+      "source": "02_proceso/workflows/career/c02-positioning/workflow.yml",
+      "destination": "career.cv"
+    },
+    {
+      "kind": "step",
+      "id": "C03",
+      "title": "Descubrimiento de oportunidades",
+      "source": "02_proceso/workflows/career/c03-discovery/workflow.yml",
+      "destination": "career.search"
+    },
+    {
+      "kind": "step",
+      "id": "C04",
+      "title": "Validación y scoring de vacantes",
+      "source": "02_proceso/workflows/career/c04-scoring/workflow.yml",
+      "destination": "career.search"
+    },
+    {
+      "kind": "step",
+      "id": "C05",
+      "title": "Diseño de candidatura",
+      "source": "02_proceso/workflows/career/c05-application-design/workflow.yml",
+      "destination": "career.cover"
+    },
+    {
+      "kind": "step",
+      "id": "C06",
+      "title": "CV spec-first, design-system-first y evidence-bound",
+      "source": "02_proceso/workflows/career/c06-cv/workflow.yml",
+      "destination": "career.cv"
+    },
+    {
+      "kind": "step",
+      "id": "C07",
+      "title": "Carta basada en evidencia",
+      "source": "02_proceso/workflows/career/c07-cover-letter/workflow.yml",
+      "destination": "career.cover"
+    },
+    {
+      "kind": "step",
+      "id": "C08",
+      "title": "QA del paquete de candidatura",
+      "source": "02_proceso/workflows/career/c08-package-qa/workflow.yml",
+      "destination": "career.cv"
+    },
+    {
+      "kind": "step",
+      "id": "C09",
+      "title": "Preparación de postulación y aprendizaje",
+      "source": "02_proceso/workflows/career/c09-submission/workflow.yml",
+      "destination": "career.cover"
+    },
+    {
+      "kind": "step",
+      "id": "L00",
+      "title": "Comprender la capacidad local",
+      "source": "02_proceso/workflows/local-extensions/l00-intake/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "step",
+      "id": "L01",
+      "title": "Diseñar la extensión",
+      "source": "02_proceso/workflows/local-extensions/l01-design/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "step",
+      "id": "L02",
+      "title": "Preparar el paquete privado",
+      "source": "02_proceso/workflows/local-extensions/l02-scaffold/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "step",
+      "id": "L03",
+      "title": "Validar contratos y contención",
+      "source": "02_proceso/workflows/local-extensions/l03-validate/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "step",
+      "id": "L04",
+      "title": "Activar e indexar localmente",
+      "source": "02_proceso/workflows/local-extensions/l04-activate/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "step",
+      "id": "L05",
+      "title": "Evolucionar o retirar",
+      "source": "02_proceso/workflows/local-extensions/l05-evolve/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "step",
+      "id": "M00",
+      "title": "Congelar base e inventario",
+      "source": "02_proceso/workflows/maintenance/m00-freeze/workflow.yml",
+      "destination": "meta.maintain"
+    },
+    {
+      "kind": "step",
+      "id": "M01",
+      "title": "Clasificar mantenimiento",
+      "source": "02_proceso/workflows/maintenance/m01-classify/workflow.yml",
+      "destination": "meta.maintain"
+    },
+    {
+      "kind": "step",
+      "id": "M02",
+      "title": "Planear cambio e impacto documental",
+      "source": "02_proceso/workflows/maintenance/m02-plan/workflow.yml",
+      "destination": "meta.maintain"
+    },
+    {
+      "kind": "step",
+      "id": "M03",
+      "title": "Implementar cambio acotado",
+      "source": "02_proceso/workflows/maintenance/m03-implement/workflow.yml",
+      "destination": "meta.maintain"
+    },
+    {
+      "kind": "step",
+      "id": "M04",
+      "title": "Verificar candidate",
+      "source": "02_proceso/workflows/maintenance/m04-verify/workflow.yml",
+      "destination": "meta.maintain"
+    },
+    {
+      "kind": "step",
+      "id": "M05",
+      "title": "Sincronizar documentación e inventarios",
+      "source": "02_proceso/workflows/maintenance/m05-sync-docs/workflow.yml",
+      "destination": "meta.maintain"
+    },
+    {
+      "kind": "step",
+      "id": "M06",
+      "title": "Entregar y preparar promoción",
+      "source": "02_proceso/workflows/maintenance/m06-handoff/workflow.yml",
+      "destination": "meta.maintain"
+    },
+    {
+      "kind": "step",
+      "id": "P00",
+      "title": "Define tu sistema creativo",
+      "source": "02_proceso/workflows/multimedia/p00-definir-sistema/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "step",
+      "id": "P01",
+      "title": "Convierte tu día a día en oportunidades de contenido",
+      "source": "02_proceso/workflows/multimedia/p01-curar-material/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "step",
+      "id": "P02",
+      "title": "Investiga y fortalece una idea",
+      "source": "02_proceso/workflows/multimedia/p02-investigar/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "step",
+      "id": "P03",
+      "title": "Crea el brief o la campaña",
+      "source": "02_proceso/workflows/multimedia/p03-crear-brief/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "step",
+      "id": "P04",
+      "title": "Construye un calendario editorial realista",
+      "source": "02_proceso/workflows/multimedia/p04-calendarizar/workflow.yml",
+      "destination": "content.campaign"
+    },
+    {
+      "kind": "step",
+      "id": "P05",
+      "title": "Diseña la pieza multimedia",
+      "source": "02_proceso/workflows/multimedia/p05-disenar-pieza/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "step",
+      "id": "P06",
+      "title": "Crea los activos multimedia",
+      "source": "02_proceso/workflows/multimedia/p06-crear-activos/workflow.yml",
+      "destination": "content.prompts"
+    },
+    {
+      "kind": "step",
+      "id": "P07",
+      "title": "Revisa material multimedia",
+      "source": "02_proceso/workflows/multimedia/p07-revisar/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "step",
+      "id": "P08",
+      "title": "Edita, compone y reutiliza",
+      "source": "02_proceso/workflows/multimedia/p08-editar/workflow.yml",
+      "destination": "content.piece"
+    },
+    {
+      "kind": "step",
+      "id": "P09",
+      "title": "Empaqueta, publica, conversa o aprende",
+      "source": "02_proceso/workflows/multimedia/p09-distribuir/workflow.yml",
+      "destination": "content.campaign"
+    },
+    {
+      "kind": "step",
+      "id": "S00",
+      "title": "Delimitar el sistema de skills",
+      "source": "02_proceso/workflows/skill-systems/s00-intake/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "step",
+      "id": "S01",
+      "title": "Descubrir y aplicar demotion",
+      "source": "02_proceso/workflows/skill-systems/s01-discovery/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "step",
+      "id": "S02",
+      "title": "Decidir topología y responsabilidades",
+      "source": "02_proceso/workflows/skill-systems/s02-architecture/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "step",
+      "id": "S03",
+      "title": "Contratar componentes y evaluación",
+      "source": "02_proceso/workflows/skill-systems/s03-contract/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "step",
+      "id": "S04",
+      "title": "Materializar el candidate",
+      "source": "02_proceso/workflows/skill-systems/s04-author/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "step",
+      "id": "S05",
+      "title": "Validar candidate y supply chain",
+      "source": "02_proceso/workflows/skill-systems/s05-validate/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "step",
+      "id": "S06",
+      "title": "Comparar candidate con baseline",
+      "source": "02_proceso/workflows/skill-systems/s06-evaluate/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "step",
+      "id": "S07",
+      "title": "Revisar y proponer cambio",
+      "source": "02_proceso/workflows/skill-systems/s07-review/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "step",
+      "id": "S08",
+      "title": "Empaquetar release candidate",
+      "source": "02_proceso/workflows/skill-systems/s08-package/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "step",
+      "id": "S09",
+      "title": "Resolver lifecycle H-03",
+      "source": "02_proceso/workflows/skill-systems/s09-lifecycle/workflow.yml",
+      "destination": "skills.build"
+    },
+    {
+      "kind": "step",
+      "id": "V00",
+      "title": "Video OS",
+      "source": "02_proceso/workflows/video-os/_schema",
+      "destination": "video.method"
+    },
+    {
+      "kind": "step",
+      "id": "V01",
+      "title": "Video OS",
+      "source": "02_proceso/workflows/video-os/_schema",
+      "destination": "video.method"
+    },
+    {
+      "kind": "step",
+      "id": "V02",
+      "title": "Video OS",
+      "source": "02_proceso/workflows/video-os/_schema",
+      "destination": "video.method"
+    },
+    {
+      "kind": "step",
+      "id": "V03",
+      "title": "Video OS",
+      "source": "02_proceso/workflows/video-os/_schema",
+      "destination": "video.method"
+    },
+    {
+      "kind": "step",
+      "id": "V04",
+      "title": "Video OS",
+      "source": "02_proceso/workflows/video-os/_schema",
+      "destination": "video.method"
+    },
+    {
+      "kind": "trainer-mode",
+      "id": "benchmark",
+      "title": "trainer --mode benchmark",
+      "source": "02_proceso/workflows/trainer-os/runner.ts",
+      "destination": "trainer"
+    },
+    {
+      "kind": "trainer-mode",
+      "id": "build",
+      "title": "trainer --mode build",
+      "source": "02_proceso/workflows/trainer-os/runner.ts",
+      "destination": "trainer"
+    },
+    {
+      "kind": "trainer-mode",
+      "id": "intake",
+      "title": "trainer --mode intake",
+      "source": "02_proceso/workflows/trainer-os/runner.ts",
+      "destination": "trainer"
+    },
+    {
+      "kind": "trainer-mode",
+      "id": "package",
+      "title": "trainer --mode package",
+      "source": "02_proceso/workflows/trainer-os/runner.ts",
+      "destination": "trainer"
+    },
+    {
+      "kind": "trainer-mode",
+      "id": "spec",
+      "title": "trainer --mode spec",
+      "source": "02_proceso/workflows/trainer-os/runner.ts",
+      "destination": "trainer"
+    },
+    {
+      "kind": "trainer-mode",
+      "id": "verify",
+      "title": "trainer --mode verify",
+      "source": "02_proceso/workflows/trainer-os/runner.ts",
+      "destination": "trainer"
+    },
+    {"kind": "skill", "id": "edu-immersive-class", "title": "edu-immersive-class", "source": "skills/aula/edu-immersive-class/SKILL.md", "source_sha256": "395ede8575648829b94913a71f3a911e977d03bf0ccdc14e00f7e5381c2fcace", "destination": "aula"},
+    {"kind": "skill", "id": "edu-index", "title": "edu-index", "source": "skills/aula/edu-index/SKILL.md", "source_sha256": "a27a0abad06ce3cb38daf72d3650825e2992497fe33787144ace590068dcaefd", "destination": "aula"},
+    {"kind": "skill", "id": "edu-lean-coffee", "title": "edu-lean-coffee", "source": "skills/aula/edu-lean-coffee/SKILL.md", "source_sha256": "3c49d9826ad13c5c72cf89123b3eed9a101febe6076fc7f2534f47c6ea0b4b9b", "destination": "aula"},
+    {"kind": "skill", "id": "edu-masterclass", "title": "edu-masterclass", "source": "skills/aula/edu-masterclass/SKILL.md", "source_sha256": "c7ae48b35d9a771772e4f9bd0448cd4ea1c2eb867b3c551b9a0718d6b2019108", "destination": "aula"},
+    {"kind": "skill", "id": "edu-module", "title": "edu-module", "source": "skills/aula/edu-module/SKILL.md", "source_sha256": "bfaa1911006acff723accbeaf81071a0ecdb1944a80df0ebb44a62e7f1b2f774", "destination": "aula"},
+    {"kind": "skill", "id": "edu-playbook", "title": "edu-playbook", "source": "skills/aula/edu-playbook/SKILL.md", "source_sha256": "928e1534ddad5a77742b691b50f34742e90ecefe1f1fbada6b238835b6f40290", "destination": "aula"},
+    {"kind": "skill", "id": "edu-playbook-immersive", "title": "edu-playbook-immersive", "source": "skills/aula/edu-playbook-immersive/SKILL.md", "source_sha256": "35f6f19d05f791eea9c69fe41575e09735ed1a3d3ac1ba008fef123b578fb1d0", "destination": "aula"},
+    {"kind": "skill", "id": "edu-workbook", "title": "edu-workbook", "source": "skills/aula/edu-workbook/SKILL.md", "source_sha256": "651ab7caadf399c9e848456a61ba69375e8677ea627d1f2df8518b88ec22b028", "destination": "aula"},
+    {"kind": "skill", "id": "metodologia-dynamic-commercial-decks", "title": "metodologia-dynamic-commercial-decks", "source": "skills/aula/metodologia-dynamic-commercial-decks/SKILL.md", "source_sha256": "db923f34a5e7fba617feddb065d32b593aee2ed0740d5a7029687853d6a9dcc6", "destination": "deck.immersive"},
+    {"kind": "skill", "id": "metodologia-edu-immersive-class", "title": "metodologia-edu-immersive-class", "source": "skills/aula/metodologia-edu-immersive-class/SKILL.md", "source_sha256": "2f116fad00b0e9d25c6722fdce3a7f7de339dbb1c612c5f9e8fbc1ec2cee7077", "destination": "aula"},
+    {"kind": "skill", "id": "metodologia-edu-index", "title": "metodologia-edu-index", "source": "skills/aula/metodologia-edu-index/SKILL.md", "source_sha256": "d6a8cecb822a972b8bd775fe6d3b0b4d9bf99bfe0f30522a6da31be2dc5a548d", "destination": "aula"},
+    {"kind": "skill", "id": "metodologia-edu-lean-coffee", "title": "metodologia-edu-lean-coffee", "source": "skills/aula/metodologia-edu-lean-coffee/SKILL.md", "source_sha256": "cc248dceda9ff8dd8f7778aec4080d8028033a605562278fec6511281815b5d4", "destination": "aula"},
+    {"kind": "skill", "id": "metodologia-edu-masterclass", "title": "metodologia-edu-masterclass", "source": "skills/aula/metodologia-edu-masterclass/SKILL.md", "source_sha256": "b79652d3228002953aa5e945761a89d6de3d17620ede484491a9fd536f9a9827", "destination": "aula"},
+    {"kind": "skill", "id": "metodologia-edu-module", "title": "metodologia-edu-module", "source": "skills/aula/metodologia-edu-module/SKILL.md", "source_sha256": "821e601076a901bc1fe899520bbb5590506d64a9cf57ff1e1104e4034c884479", "destination": "aula"},
+    {"kind": "skill", "id": "metodologia-edu-playbook", "title": "metodologia-edu-playbook", "source": "skills/aula/metodologia-edu-playbook/SKILL.md", "source_sha256": "4a6b4d0cc938cdc72a263d23171ed3ce73903b95c901077ec166b8b7dc7e963d", "destination": "aula"},
+    {"kind": "skill", "id": "metodologia-edu-playbook-immersive", "title": "metodologia-edu-playbook-immersive", "source": "skills/aula/metodologia-edu-playbook-immersive/SKILL.md", "source_sha256": "e88dc5abee9a68b1e518f01c84e8bdd9ae583ca5286692465d03e37acbba4886", "destination": "aula"},
+    {"kind": "skill", "id": "metodologia-edu-workbook", "title": "metodologia-edu-workbook", "source": "skills/aula/metodologia-edu-workbook/SKILL.md", "source_sha256": "505ed23a0d921504a04954d7c17d92d2338436a59c4c31b7cff40757906a1b5e", "destination": "aula"},
+    {"kind": "skill", "id": "white-label-dynamic-commercial-decks", "title": "white-label-dynamic-commercial-decks", "source": "skills/aula/white-label-dynamic-commercial-decks/SKILL.md", "source_sha256": "d25925efe9e865f0655a2f47b45c70d8fea06884f4f0894ad9bcb6b1ac64a805", "destination": "deck.immersive"}
+  ]
+}

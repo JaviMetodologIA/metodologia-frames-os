@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "notebook-plan-v1",
+  "profileId": "public-example",
+  "provider": "notebooklm",
+  "targetNotebookDigest": null,
+  "operations": [
+    {
+      "operationId": "create-private",
+      "stage": "N04",
+      "action": "create",
+      "sourceIds": [],
+      "requiredGate": "NLM_PLAN_APPROVED",
+      "effect": "EXTERNAL_MUTATION"
+    }
+  ],
+  "sourceIds": [],
+  "permissions": [],
+  "stopRules": [
+    "Stop without approval"
+  ],
+  "rollback": [
+    "Archive an unshared draft"
+  ]
+}

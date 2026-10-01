@@ -1,0 +1,83 @@
+id: video.method
+title: Método explicado con diagramas y video
+frames_route: R6
+status: active
+wave: 4
+intent:
+  examples:
+    - explica este metodo con diagramas animados
+    - crea un video que explique el framework paso a paso
+    - necesito un method explainer con guion y storyboard
+    - convierte este proceso en un video de diagramas
+  negatives:
+    - crea una presentacion de slides
+slots:
+  - id: method
+    question: ¿Qué método o proceso explica el video, y para quién?
+    required: true
+  - id: format
+    question: ¿Vertical 9:16 (por defecto), 4:5 o cuadrado?
+    required: false
+improvements:
+  - id: renders
+    claim: El video de método se renderiza a MP4 desde el mismo deck-v1 y el mismo núcleo de movimiento; Video OS de Frames solo planificaba y validaba JSON.
+    check: verify/tests/video.test.ts#renders a method explainer to MP4 with captions equal to the narration
+  - id: transitions
+    claim: Las láminas se unen con la transición que declaran (fundido, empuje, zoom) dentro del MP4.
+    check: verify/tests/video.test.ts#joins beats with their declared transitions on a shared timeline
+  - id: contract
+    claim: Cumple el contrato de Frames (9:16 1080×1920, 30 fps, 15 a 180 s, hasta 30 beats, voz de hasta 1000 caracteres, 3,2 palabras por segundo, 8 elementos de 160 caracteres).
+    check: verify/tests/video.test.ts#holds the storyboard to Frames method explainer contract
+  - id: deterministic
+    claim: Dos renders del mismo storyboard dan el mismo MP4 byte a byte (Frames lo exigía y solo lo verificaba en su piloto de Remotion).
+    check: verify/tests/capture.test.ts#encodes an mp4 whose bytes repeat
+steps:
+  - id: V00
+    title: Define el método y su audiencia
+    handler: content.brief
+    agent: RT-04
+    template: domains/content/templates
+    outputs:
+      - { id: brief, schema: frames-brief-v1 }
+      - { id: brief-html, schema: html }
+    gate: direction
+  - id: V01
+    title: Escribe el storyboard con la narración de cada beat
+    handler: authored
+    agent: RT-06
+    inputs: [brief]
+    outputs:
+      - { id: storyboard, schema: storyboard-v1 }
+  - id: V02
+    title: Renderiza el video, sus subtítulos y su manifiesto
+    handler: video.render
+    agent: RT-07
+    inputs: [storyboard]
+    outputs:
+      - { id: video-html, schema: html }
+      - { id: video-mp4, schema: mp4 }
+      - { id: video-captions, schema: vtt }
+      - { id: video-manifest, schema: json }
+      - { id: video-visual-report, schema: markdown }
+  - id: V03
+    title: Revisa el video con otro actor
+    handler: content.review
+    agent: RT-09
+    inputs: [video-mp4]
+    template: domains/content/templates
+    outputs:
+      - { id: review-report-v1, schema: markdown }
+      - { id: verdict-v1, schema: markdown }
+      - { id: top5-changes-v1, schema: markdown }
+  - id: V04
+    title: Versión final para aceptación
+    handler: video.final
+    agent: RT-11
+    inputs: [storyboard]
+    outputs:
+      - { id: final-html, schema: html }
+      - { id: final-mp4, schema: mp4 }
+      - { id: final-captions, schema: vtt }
+      - { id: final-manifest, schema: json }
+      - { id: final-visual-report, schema: markdown }
+    gate: acceptance

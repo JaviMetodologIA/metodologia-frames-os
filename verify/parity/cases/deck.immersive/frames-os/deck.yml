@@ -1,0 +1,300 @@
+schema: deck-v1
+meta:
+  title: Lo declarado es lo ejecutado
+  subtitle: Por qué Frames OS nace como sucesor y no como copia
+  lang: es
+  langs: [es, en, pt, fr]
+  hold: 14
+  transition: fade
+  axis: Un sistema agéntico solo es confiable si lo que declara es exactamente lo que ejecuta.
+  forbidden_terms: [Claude, Vercel]
+acts:
+  - { id: apertura, title: Apertura }
+  - { id: brecha, title: La brecha }
+  - { id: metodo, title: El método }
+  - { id: prueba, title: La prueba }
+slides:
+  - id: portada
+    act: apertura
+    kind: cover
+    eyebrow: Frames OS · sucesor de Frames ContentOS
+    title: Lo declarado es lo ejecutado
+    sub: Un registro tipado que el motor lee, y del que salen los checks, los adapters y los docs.
+    chain: [Registro, Motor, Gates, Verify]
+    scene_label: Anillo de cuatro etapas con un token que las recorre
+    notes: Abrir con la pregunta que el lector puede hacerle a su propio sistema.
+  - id: pregunta
+    act: apertura
+    kind: question
+    eyebrow: Pregunta
+    title: ¿Cuánto de lo que declara tu sistema se ejecuta de verdad?
+    sub: Rutas, agentes, gates. Cuenta solo lo que corre.
+    scene_label: Tarjetas que se apilan frente a una revisión
+  - id: eje
+    act: apertura
+    kind: axis
+    eyebrow: La idea que sostiene todo
+    title: Si no se ejecuta, no existe
+    sub: Cada declaración necesita un ejecutor y una prueba que falle si falta.
+    chain: [Declarar en el registro, Ejecutar desde el motor, Probar con verify, Aceptar con un gate humano]
+    scene_label: Cadena de cuatro pasos que se ilumina en orden
+  - id: sec-brecha
+    act: brecha
+    kind: section
+    eyebrow: Sección 01
+    title: La brecha
+    num: '01'
+    chain: [Rutas, Workflows, Agentes, Gates]
+    scene_label: Anillo de sección con el número uno
+  - id: frames-numeros
+    act: brecha
+    kind: metrics
+    eyebrow: Lo que Frames declaraba
+    title: Declarado frente a ejecutado
+    metrics:
+      - { value: '12', label: rutas declaradas, source: router.yml de Frames }
+      - { value: '2', label: handlers que materializaba su entrada, source: frames-assist en Frames }
+    scene_label: Dos cifras estáticas con barras que crecen debajo
+    notes: Las cifras no se animan; solo las barras.
+  - id: brecha-flujo
+    act: brecha
+    kind: flow
+    eyebrow: Dónde se rompía
+    title: El pedido entraba por un clasificador de palabras clave
+    chain: [Pedido, Keywords, Ruta, Brief]
+    takeaway: El resto del sistema solo lo leían los tests.
+    scene_label: Flujo de cuatro cajas con un token que avanza
+  - id: reglas
+    act: brecha
+    kind: list
+    eyebrow: Tres reglas
+    title: Lo que el sucesor exige a cada declaración
+    items:
+      - Un ejecutor en el código
+      - Una prueba que falle si falta
+      - Un gate humano antes de cualquier efecto externo
+    scene_label: Tres hitos que se marcan en orden
+  - id: caso-brief
+    act: brecha
+    kind: case
+    eyebrow: Caso real
+    title: El check decía verde; la plantilla seguía sin llenar
+    sub: Un detector que solo buscaba tokens en minúscula dejaba pasar los de Frames, que van en mayúscula.
+    lesson: Un control que nunca viste fallar no prueba nada.
+    scene_label: Semáforo en verde que se agrieta y se pone rojo
+  - id: zig-registro
+    act: brecha
+    kind: zig
+    side: left
+    art: precision
+    transition: zoom
+    eyebrow: La forma difusa
+    title: De palabras clave sueltas a un registro tipado
+    sub: El ruteo deja de vivir en ternarios y pasa a un archivo que el motor lee.
+    scene_label: Una forma difusa que se resuelve en una retícula
+  - id: sec-metodo
+    act: metodo
+    kind: section
+    transition: push
+    eyebrow: Sección 02
+    title: El método
+    num: '02'
+    chain: [Inventario, Port, Paridad, Mejora]
+    scene_label: Anillo de sección con el número dos
+  - id: ciclo
+    act: metodo
+    kind: cycle
+    eyebrow: Un paso a la vez
+    title: Cada paso termina en un artefacto que el siguiente lee
+    chain: [Brief, Especificación, Pieza, Revisión, Final]
+    scene_label: Ciclo de cinco nodos con un documento que los recorre
+  - id: capas
+    act: metodo
+    kind: zig
+    side: right
+    art: layers
+    chain: [REGISTRO, MOTOR, VERIFY]
+    eyebrow: Capas
+    title: Registro, motor y verificación, una sobre otra
+    sub: Cada capa se apoya en la de abajo y ninguna se salta.
+    scene_label: Tres capas isométricas que se apilan
+  - id: escena-datos
+    act: metodo
+    kind: scene
+    transition: morph
+    eyebrow: Escenas como datos
+    title: La ilustración también se escribe como datos
+    sub: El host describe formas, iconos y pistas de movimiento; el motor las dibuja con los tokens de la marca.
+    scene_label: Un documento se convierte en una presentación mientras dos engranajes giran
+    scene:
+      dur: 10
+      freeze: 0.9
+      elements:
+        - { type: circle, cx: 1160, cy: 450, r: 300, stroke: line, width: 2, draw: [0.02, 0.3] }
+        - { type: icon, name: file-text, x: 960, y: 450, size: 170, stroke: c2, draw: [0.04, 0.24] }
+        - { type: path, d: 'M1060 450 H1250', stroke: accent, width: 5, draw: [0.28, 0.42] }
+        - { type: path, d: 'M1230 430 L1252 450 L1230 470', stroke: accent, width: 5, op: [[0, 0], [0.42, 0], [0.45, 1], [0.97, 1], [1, 0]] }
+        - { type: icon, name: presentation, x: 1335, y: 450, size: 160, stroke: accent, draw: [0.45, 0.65] }
+        - { type: icon, name: cog, x: 1080, y: 250, size: 90, stroke: c4, origin: [1080, 250], rotate: [[0, 0], [1, 360]] }
+        - { type: icon, name: cog, x: 1150, y: 300, size: 60, stroke: c2, origin: [1150, 300], rotate: [[0, 360], [1, 0]] }
+        - { type: text, x: 960, y: 590, text: deck.yml, size: 24, anchor: middle, fill: muted, op: [[0, 0], [0.2, 0], [0.25, 1], [0.97, 1], [1, 0]] }
+        - { type: text, x: 1335, y: 590, text: HTML inmersivo, size: 24, anchor: middle, bold: true, fill: accent, op: [[0, 0], [0.62, 0], [0.67, 1], [0.97, 1], [1, 0]] }
+  - id: comparacion
+    act: metodo
+    kind: statement
+    eyebrow: Antes y después
+    title: Lo que cambia del sistema viejo al nuevo
+    table:
+      head: [Capa, Frames, Frames OS]
+      rows:
+        - [Ruteo, keywords en código, registro leído en runtime]
+        - [Gates, un string, token de un uso]
+        - [Verify, 28 pasos, tri-estado con ratchet]
+    scene_label: Anillos que giran detrás de la tabla
+  - id: casillas
+    act: metodo
+    kind: boxes
+    eyebrow: Tres veredictos
+    title: Cada caso se clasifica en una de tres casillas
+    boxes:
+      - { label: equal, detail: Igual a Frames, note: Sin mejora declarada }
+      - { label: superset, detail: Hace más que Frames, note: Con su test }
+      - { label: red, detail: Perdió algo, note: Bloquea }
+    scene_label: Tres cajas que aparecen en orden
+  - id: priorizar
+    act: metodo
+    kind: matrix
+    eyebrow: Qué portar primero
+    title: Impacto contra riesgo de perder algo
+    axes: [Impacto para quien usa Frames, Riesgo de pérdida]
+    scene_label: Matriz de dos ejes con cuatro puntos
+  - id: gates
+    act: metodo
+    kind: pipeline
+    eyebrow: Gates que el motor hace cumplir
+    title: La aprobación es de un uso y está atada al contenido
+    chain: [Brief, Gate humano, Pieza, Revisión, Aceptación]
+    gate: 1
+    scene_label: Línea con un candado que se abre cuando llega la persona
+    interactive:
+      kind: rubric
+      title: ¿Cuánto hace cumplir tu sistema?
+      rows:
+        - Una aprobación humana no se puede falsificar
+        - El agente no puede aprobarse a sí mismo
+        - Un efecto externo espera a su gate
+      scale: [Nada, En parte, Siempre]
+  - id: olas
+    act: metodo
+    kind: timeline
+    eyebrow: El recorrido
+    title: Ocho olas, una familia a la vez
+    chain: [Esqueleto, Pieza, Decks, Contenido, Carrera, Video, NotebookLM, Skills]
+    scene_label: Línea de tiempo de ocho olas que se dibuja
+  - id: sec-prueba
+    act: prueba
+    kind: section
+    eyebrow: Sección 03
+    title: La prueba
+    num: '03'
+    chain: [Inventario, Golden, Held-out]
+    scene_label: Anillo de sección con el número tres
+  - id: verify
+    act: prueba
+    kind: terminal
+    eyebrow: Lo que prueba verify
+    title: Nada se pierde y lo nuevo tiene test
+    items:
+      - $ pnpm verify
+      - 168 capacidades de Frames con destino
+      - brief idéntico byte a byte a Frames
+      - 4 mejoras con su test
+      - held-out v2 en 37,5 por ciento
+    scene_label: Terminal que escribe el comando y pasa de rojo a listo
+  - id: honestidad
+    act: prueba
+    kind: cards
+    eyebrow: Lo incómodo
+    title: El número que no me gusta también se publica
+    cards:
+      - { title: Held-out v2, fix: '37,5 % escrito antes de medir' }
+      - { title: Held-out v1, fix: '58,8 % parcialmente visto' }
+    scene_label: Dos tarjetas que se revelan con su cifra
+    interactive:
+      kind: quiz
+      question: ¿Qué cifra de ruteo es la más honesta?
+      options:
+        - La de entrenamiento, porque es la más alta
+        - La del held-out escrito antes de medir
+        - La del held-out que ya se había visto
+      answer: 1
+      explain: Solo el conjunto escrito antes de medir no pudo influir en el ajuste; por eso se publica aunque sea la más baja.
+  - id: escalera
+    act: prueba
+    kind: stairs
+    transition: push
+    eyebrow: Lo que sigue
+    title: Una familia por ola, cada una con su prueba
+    chain: [Pieza, Decks, Contenido, Carrera, Video, NotebookLM, Skills]
+    scene_label: Escalera de siete peldaños con una persona que sube
+  - id: cita
+    act: prueba
+    kind: quote
+    transition: morph
+    eyebrow: La regla
+    title: «Si no se ejecuta, no existe.»
+    sub: Todo lo demás en este repo es consecuencia de esa frase.
+    scene_label: Comillas que se dibujan entre anillos
+  - id: revelar
+    act: prueba
+    kind: reveal
+    transition: zoom
+    eyebrow: El resultado
+    title: El deck que estás viendo salió de este motor
+    sub: Un deck-v1, unos tokens y pnpm frames deck.
+    scene_label: Dos paneles que se abren y dejan pasar la luz
+  - id: reto
+    act: prueba
+    kind: challenge
+    eyebrow: Tu turno
+    title: Cuenta en tu sistema lo que corre de verdad
+    items:
+      - Lista lo que declara
+      - Marca lo que ejecuta
+      - Escribe la prueba que falta
+    scene_label: Anillo que se llena como un temporizador
+    interactive:
+      kind: checklist
+      title: Tu inventario
+      items:
+        - Listé lo que mi sistema declara
+        - Marqué lo que ejecuta de verdad
+        - Escribí la prueba que faltaba
+  - id: lanzamiento
+    act: prueba
+    kind: zig
+    side: right
+    art: rocket
+    transition: none
+    eyebrow: Lo que viene
+    title: El mismo motor mueve carruseles, videos y cursos
+    sub: Cada familia nueva reusa escenas, ilustraciones y transiciones en vez de traer las suyas.
+    scene_label: Un cohete que se dibuja y flota con su estela
+  - id: tesis
+    act: prueba
+    kind: statement
+    eyebrow: En una frase
+    title: Si no se ejecuta, no existe
+    sub: Y si se ejecuta, tiene que poder probarse.
+    scene_label: Anillos que giran alrededor de la frase
+  - id: cierre
+    act: prueba
+    kind: close
+    eyebrow: Cierre
+    title: Pregunta por lo que corre, no por lo que se declara
+    items: [registry/, engine/, domains/, verify/, docs/adr/0001-sucesor.md]
+    links: [{ label: Volver al eje, href: '#eje' }]
+    scene_label: Árbol del repositorio que aparece línea por línea
+    interactive:
+      kind: notes
+      prompt: ¿Qué vas a contar primero en tu propio sistema, y cómo lo vas a probar?

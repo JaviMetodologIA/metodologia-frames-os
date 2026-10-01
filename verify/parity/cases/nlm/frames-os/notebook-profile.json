@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "notebook-profile-v1",
+  "profileId": "public-example",
+  "displayName": "Public Notebook Profile",
+  "provider": "notebooklm",
+  "identity": "Evidence-grounded public knowledge workspace",
+  "systemPrompt": {
+    "schemaVersion": "notebook-system-prompt-v1",
+    "profileId": "public-example",
+    "version": "v1.0",
+    "owner": "Example owner",
+    "identity": "Public Knowledge Assistant",
+    "purpose": "Answer from approved sources and expose gaps.",
+    "audiences": [
+      "General audience"
+    ],
+    "capabilities": [
+      "Synthesize selected sources"
+    ],
+    "limits": [
+      "No external mutation without its gate"
+    ],
+    "sourceHierarchy": [
+      "Control",
+      "Canon",
+      "Evidence"
+    ],
+    "evidenceTaxonomy": [
+      "supported",
+      "coverage_gap"
+    ],
+    "privacyAndRights": [
+      "Use only approved sources"
+    ],
+    "studioContract": [
+      "Use explicit source IDs"
+    ],
+    "responseContract": [
+      "Cite sources and name coverage gaps"
+    ],
+    "promptInjectionDefense": true,
+    "inventionForbidden": true
+  },
+  "taxonomy": [
+    "00 Control",
+    "10 Canon",
+    "20 Evidence",
+    "30 Templates",
+    "40 Golden References",
+    "50 Assets",
+    "60 Operations",
+    "90 Archive"
+  ],
+  "sourceBudget": {
+    "controls": 4,
+    "assetsAndExamples": 4,
+    "working": 8
+  },
+  "roles": [
+    "Notebook Conductor",
+    "Profile Architect",
+    "Source Curator",
+    "Asset Steward",
+    "Studio Director",
+    "Grounding Verifier",
+    "Notebook Guardian"
+  ],
+  "policies": [
+    "Fail closed when evidence, rights or scope are unknown"
+  ],
+  "gates": [
+    "NLM_PLAN_APPROVED",
+    "NLM_SYNC_APPROVED",
+    "NLM_STUDIO_GENERATION_APPROVED",
+    "NLM_SHARE_AUTHORIZED",
+    "NLM_DESTRUCTIVE_AUTHORIZED"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "schema_version": "demotion-input-v1",
+  "repeatable": true,
+  "needsSpecializedJudgment": false,
+  "instructionSufficient": true,
+  "referenceSufficient": false,
+  "toolSufficient": false
+}

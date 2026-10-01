@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data:">
+<title>Nuestra presentación</title>
+<style>
+body{margin:0;font-family:system-ui;background:#ffffff;color:#222222}
+.hero{max-width:1200px;padding:40px;background:#0a122a;color:#ffffff}
+.note{color:#444444;background:#ffffff}
+.pulse{animation:pulse 2s infinite}@keyframes pulse{50%{transform:scale(1.1)}}
+@media (prefers-reduced-motion: reduce){.pulse{animation:none}}
+</style>
+</head>
+<body>
+<div class="hero"><h1>Nuestra presentación del método</h1><img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="pulse" alt=""></div>
+<p class="note">Este texto ahora se lee bien.</p>
+<svg viewBox="0 0 10 10" aria-hidden="true"><circle cx="5" cy="5" r="4"/></svg>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "source": "Frames README 'Opcion 1' + router.yml signal_patterns (commit c6d0ba61); casos que el sistema viejo ya prometia",
+  "cases": [
+    { "text": "Ayúdame a crear un carrusel para explicar esta idea.", "expect": "content.carousel" },
+    { "text": "Convierte este informe en una presentación ejecutiva.", "expect": "deck.immersive" },
+    {
+      "text": "Quiero una campaña de cuatro semanas para lanzar este servicio.",
+      "expect": "content.campaign"
+    },
+    { "text": "Mejora mi CV para esta vacante sin inventar experiencia.", "expect": "career.cv" },
+    { "text": "Escribe una cover letter que complemente mi CV.", "expect": "career.cover" },
+    { "text": "Ayúdame a encontrar oportunidades compatibles con mi perfil.", "expect": "career.search" },
+    { "text": "Necesito una skill para revisar propuestas antes de enviarlas.", "expect": "skills.build" },
+    { "text": "crear contenido", "expect": "content.piece" },
+    { "text": "planear campaña", "expect": "content.campaign" },
+    { "text": "explicar un método", "expect": "video.method" },
+    { "text": "propuesta comercial", "expect": "deck.immersive" },
+    { "text": "crear una ruta formativa", "expect": "trainer" },
+    { "text": "crear un taller completo", "expect": "trainer" },
+    { "text": "hoja de vida", "expect": "career.cv" },
+    { "text": "buscar vacantes", "expect": "career.search" },
+    { "text": "crear una skill local", "expect": "skills.build" },
+    { "text": "crear un workflow privado", "expect": "skills.build" },
+    { "text": "mantener el arnés", "expect": "meta.maintain" },
+    { "text": "migrar workflow", "expect": "meta.maintain" },
+    { "text": "NotebookLM", "expect": "nlm" },
+    { "text": "Gemini Notebook", "expect": "nlm" }
+  ]
+}

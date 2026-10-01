@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "hooks": {
+    "preToolUse": [
+      {
+        "matcher": "bash|edit|create",
+        "type": "command",
+        "command": "node engine/guard/hook.ts --host copilot"
+      }
+    ]
+  }
+}

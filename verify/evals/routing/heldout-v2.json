@@ -1,0 +1,24 @@
+{
+  "source": "Escrito el 2026-09-24 antes de medir, sin mirar los fallos del scorer. Nunca se edita para pasar.",
+  "cases": [
+    { "text": "redactame un hilo sobre por que los datos limpios importan", "expect": "content.piece" },
+    {
+      "text": "quiero un newsletter para clientes con las novedades del trimestre",
+      "expect": "content.piece"
+    },
+    { "text": "prepara la charla del webinar con diapositivas y efectos", "expect": "deck.immersive" },
+    { "text": "necesito unas slides para presentar la estrategia al comite", "expect": "deck.immersive" },
+    { "text": "hazme laminas para instagram resumiendo el reporte", "expect": "content.carousel" },
+    { "text": "organiza el calendario editorial de octubre por canal", "expect": "content.campaign" },
+    { "text": "escribe los prompts para generar la portada y tres variantes", "expect": "content.prompts" },
+    { "text": "anima un diagrama que explique las seis etapas del proceso", "expect": "video.method" },
+    { "text": "mi hoja de vida necesita enfocarse en liderazgo tecnico", "expect": "career.cv" },
+    { "text": "redacta la carta de motivacion para la beca", "expect": "career.cover" },
+    { "text": "que ofertas de trabajo en ia encajan con mi perfil", "expect": "career.search" },
+    { "text": "pule este informe que ya escribi y dime que cambiaste", "expect": "improve" },
+    { "text": "carga el corpus de marca en notebooklm y genera un resumen en audio", "expect": "nlm" },
+    { "text": "construye una skill que valide facturas antes de enviarlas", "expect": "skills.build" },
+    { "text": "planea un curso de cuatro semanas con evaluaciones", "expect": "trainer" },
+    { "text": "un validador del repo esta rojo, arreglalo", "expect": "meta.maintain" }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "source": "Frames 02_proceso/workflows/career/_runner",
+  "weights": {
+    "evidence": 30,
+    "hard_requirements": 20,
+    "constraints": 15,
+    "transferability": 10,
+    "publication_quality": 10,
+    "sector": 5,
+    "application_friction": 5,
+    "legitimate_contact": 5
+  },
+  "blocks_on_mandatory": true,
+  "runner_for_c04": false
+}

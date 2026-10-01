@@ -1,0 +1,69 @@
+id: content.prompts
+title: Imágenes y miniclips
+frames_route: R6
+status: active
+wave: 3
+intent:
+  examples:
+    - crea prompts de imagen para esta campana
+    - necesito variantes de imagen con restricciones de marca
+    - genera un prompt pack para un miniclip de diez segundos
+    - traduce esta idea en prompts visuales con criterios de calidad
+  negatives:
+    - edita mi video largo
+slots:
+  - id: families
+    question: ¿Para qué piezas son los prompts (imagen, miniclip, gráfica, carrusel, historia, texto)?
+    required: true
+  - id: tools
+    question: ¿Con qué herramientas se van a usar?
+    required: false
+improvements:
+  - id: library
+    claim: Los prompts salen en una biblioteca HTML offline que se filtra por texto o familia, rellena variables y copia el prompt listo; Frames P05 no tenía código que produjera un prompt.
+    check: verify/tests/prompts.test.ts#renders an interactive prompt library from a typed pack
+  - id: library-verified
+    claim: La biblioteca pasa un gate en navegador real (filtros, variables, copiar, recarga y almacenamiento bloqueado); una biblioteca que no filtra falla.
+    check: verify/tests/prompts.test.ts#the library gate catches a search that does not filter
+  - id: fields-filled
+    claim: Los entregables de activos (P06) conservan los campos de Frames y no pasan sin llenar.
+    check: verify/tests/campaign.test.ts#a campaign deliverable with an unfilled Frames field fails
+steps:
+  - id: Q01
+    title: Crea el brief de las piezas
+    handler: content.brief
+    agent: RT-04
+    template: domains/content/templates
+    outputs:
+      - { id: brief, schema: frames-brief-v1 }
+      - { id: brief-html, schema: html }
+    gate: direction
+  - id: P05
+    title: Escribe los prompts de producción
+    handler: authored
+    agent: RT-06
+    inputs: [brief]
+    template: domains/content/templates
+    outputs:
+      - { id: universal-prompts-v1, schema: deliverable-v1 }
+      - { id: prompts, schema: prompts-v1 }
+  - id: Q03
+    title: Publica la biblioteca de prompts y la verifica
+    handler: prompts.library
+    agent: RT-07
+    inputs: [prompts]
+    outputs:
+      - { id: prompts-library, schema: html }
+      - { id: library-report, schema: markdown }
+  - id: P06
+    title: Crea los activos y deja su evidencia
+    handler: authored
+    agent: RT-06
+    inputs: [prompts-library]
+    template: domains/content/templates
+    outputs:
+      - { id: asset-package-v1, schema: deliverable-v1 }
+      - { id: asset-manifest-v1, schema: deliverable-v1 }
+      - { id: capability-report-v1, schema: deliverable-v1 }
+      - { id: tool-run-evidence-v1, schema: deliverable-v1 }
+    gate: acceptance

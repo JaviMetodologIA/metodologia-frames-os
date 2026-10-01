@@ -1,0 +1,34 @@
+{
+  "packs": [
+    {
+      "id": "lucide",
+      "npm": "lucide-static",
+      "version": "1.48.0",
+      "integrity": "sha512-ZUGgZ4rzlLfVbhN2Zi37TMrTaSpXAbWx6Y/xZxKSDLPiqxtTK7Mw2M+oBJa0gjV8p3+CWBHh48u+IC9+jKlUjA==",
+      "licence": "ISC",
+      "osi": true,
+      "optional": false,
+      "used_by": "domains/motion/icons.ts"
+    },
+    {
+      "id": "docx",
+      "npm": "docx",
+      "version": "9.7.1",
+      "integrity": "sha512-ilXFf9Moz47ABjFpDiA5s1w9lpb4EFSp7+5iiJSbfyYDM+bpZdAgLlSr7fW4aXhVe/E+F6QCv0EvRVFEd5CsWg==",
+      "licence": "MIT",
+      "osi": true,
+      "optional": false,
+      "used_by": "domains/career/frames/_runner/cv-docx.ts"
+    },
+    {
+      "id": "jszip",
+      "npm": "jszip",
+      "version": "3.10.1",
+      "integrity": "sha512-xXDvecyTpGLrqFrvkrUSoxxfJI5AH7U8zxxtVclpsUtMCq4JQ290LY8AW5c7Ggnr/Y/oK+bQMbqK2qmtk3pN4g==",
+      "licence": "MIT OR GPL-3.0-or-later (se usa bajo MIT)",
+      "osi": true,
+      "optional": false,
+      "used_by": "domains/career/frames/_runner/cv-docx-validation.ts"
+    }
+  ]
+}

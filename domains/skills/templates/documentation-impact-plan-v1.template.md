@@ -1,0 +1,86 @@
+# documentation-impact-plan-v1
+
+Escribe un JSON con esta forma; el motor lo valida contra su schema al correr `next`.
+Ejemplo válido (caso `verify/parity/cases/skills.build/frames-os/documentation-impact-plan-v1.json`):
+
+```json
+{
+  "schemaVersion": "documentation-impact-plan-v1",
+  "planId": "local.revisor.propuestas.docs",
+  "changeClass": "CREATE",
+  "scope": "PROJECT_LOCAL",
+  "affectedIds": ["local.revisor.propuestas"],
+  "surfaces": [
+    {
+      "surface": "QUICK_START",
+      "disposition": "NOT_APPLICABLE",
+      "reasonCode": "LOCAL_SCOPE_ONLY"
+    },
+    {
+      "surface": "FUNCTIONAL_GUIDE",
+      "disposition": "REQUIRED",
+      "sourceRefs": ["local/extensions/revisor/propuestas/documentation.md"]
+    },
+    {
+      "surface": "TECHNICAL_REFERENCE",
+      "disposition": "NOT_APPLICABLE",
+      "reasonCode": "LOCAL_SCOPE_ONLY"
+    },
+    {
+      "surface": "ARCHITECTURE",
+      "disposition": "NOT_APPLICABLE",
+      "reasonCode": "LOCAL_SCOPE_ONLY"
+    },
+    {
+      "surface": "WORKFLOW_SEQUENCE",
+      "disposition": "REQUIRED",
+      "sourceRefs": ["local/extensions/revisor/propuestas/sequence.md"]
+    },
+    {
+      "surface": "SKILL_CONTEXT",
+      "disposition": "NOT_APPLICABLE",
+      "reasonCode": "LOCAL_SCOPE_ONLY"
+    },
+    {
+      "surface": "TEMPLATES_DELIVERABLES",
+      "disposition": "NOT_APPLICABLE",
+      "reasonCode": "LOCAL_SCOPE_ONLY"
+    },
+    {
+      "surface": "ROUTING_COMMANDS",
+      "disposition": "NOT_APPLICABLE",
+      "reasonCode": "LOCAL_SCOPE_ONLY"
+    },
+    {
+      "surface": "TROUBLESHOOTING",
+      "disposition": "NOT_APPLICABLE",
+      "reasonCode": "LOCAL_SCOPE_ONLY"
+    },
+    {
+      "surface": "ADR",
+      "disposition": "NOT_APPLICABLE",
+      "reasonCode": "LOCAL_SCOPE_ONLY"
+    },
+    {
+      "surface": "CHANGELOG_COMPATIBILITY",
+      "disposition": "NOT_APPLICABLE",
+      "reasonCode": "LOCAL_SCOPE_ONLY"
+    },
+    {
+      "surface": "INDEXES_INVENTORIES",
+      "disposition": "NOT_APPLICABLE",
+      "reasonCode": "LOCAL_SCOPE_ONLY"
+    },
+    {
+      "surface": "PORTAL",
+      "disposition": "NOT_APPLICABLE",
+      "reasonCode": "LOCAL_SCOPE_ONLY"
+    },
+    {
+      "surface": "TESTS_EXAMPLES",
+      "disposition": "REQUIRED",
+      "sourceRefs": ["local/extensions/revisor/propuestas/fixtures/positive.json"]
+    }
+  ]
+}
+```

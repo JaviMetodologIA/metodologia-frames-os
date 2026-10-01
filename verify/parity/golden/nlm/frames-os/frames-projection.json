@@ -1,0 +1,23 @@
+{
+  "source": "Frames 02_proceso/workflows/notebooklm-os",
+  "commands": 16,
+  "external": {
+    "create": {
+      "stage": "N04",
+      "gate": "NLM_PLAN_APPROVED"
+    },
+    "studio": {
+      "stage": "N07",
+      "gate": "NLM_STUDIO_GENERATION_APPROVED"
+    },
+    "sync": {
+      "stage": "N05",
+      "gate": "NLM_SYNC_APPROVED"
+    },
+    "share": {
+      "stage": "N09",
+      "gate": "NLM_SHARE_AUTHORIZED"
+    }
+  },
+  "calls_notebooklm": false
+}

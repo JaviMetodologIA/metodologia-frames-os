@@ -1,0 +1,119 @@
+schema: deck-v1
+meta:
+  title: Playbook del curso
+  subtitle: Presentaciones que se verifican, capítulo por capítulo
+  lang: es
+  axis: Una pieza está lista cuando pasó por un navegador real y una persona la aceptó.
+acts:
+  - { id: fuente, title: La fuente }
+  - { id: piezas, title: Las piezas }
+  - { id: verificar, title: Verificar y aceptar }
+slides:
+  - id: idea-eje
+    act: fuente
+    kind: list
+    eyebrow: Capítulo 1
+    title: Define la idea eje
+    items:
+      - Escribe la idea eje en una sola frase
+      - Comprueba que cada lámina la sostiene
+    scene_label: Una frase que se ilumina en el centro
+  - id: actos
+    act: fuente
+    kind: list
+    eyebrow: Capítulo 2
+    title: Ordena el relato en actos
+    items:
+      - Nombra entre tres y cinco actos
+      - Asigna cada lámina a un acto
+    scene_label: Cuatro columnas que se llenan en orden
+  - id: tipos-lamina
+    act: fuente
+    kind: list
+    eyebrow: Capítulo 3
+    title: Elige el tipo de cada lámina
+    items:
+      - Elige el tipo por la pregunta que responde
+      - Agrega la cadena a los tipos que la piden
+    scene_label: Tarjetas que se reparten sobre una mesa
+  - id: escenas
+    act: fuente
+    kind: list
+    eyebrow: Capítulo 4
+    title: Nombra cada escena
+    items:
+      - Describe la animación en pocas palabras
+      - Evita movimientos que distraen de la idea
+    scene_label: Un trazo que se dibuja y se queda quieto
+  - id: cifras-fuente
+    act: fuente
+    kind: list
+    eyebrow: Capítulo 5
+    title: Muestra cada cifra con su fuente
+    items:
+      - Cita la fuente de cada cifra
+      - Deja la cifra quieta en pantalla
+    scene_label: Dos cifras estáticas con barras que crecen debajo
+  - id: presentacion
+    act: piezas
+    kind: list
+    eyebrow: Capítulo 6
+    title: Arma la presentación inmersiva
+    items:
+      - Define transiciones coherentes entre actos
+      - Escribe notas para quien presenta
+    scene_label: Láminas que se deslizan con una transición suave
+  - id: carrusel
+    act: piezas
+    kind: list
+    eyebrow: Capítulo 7
+    title: Deriva el carrusel
+    items:
+      - Abre con la conclusión
+      - Cierra con una llamada a la acción
+    scene_label: Tarjetas que avanzan de izquierda a derecha
+  - id: video
+    act: piezas
+    kind: list
+    eyebrow: Capítulo 8
+    title: Deriva el video
+    items:
+      - Escribe la narración de cada beat
+      - Revisa que los subtítulos coincidan
+    scene_label: Línea de tiempo con marcas que se encienden
+  - id: gates-fuente
+    act: verificar
+    kind: list
+    eyebrow: Capítulo 9
+    title: Pasa los gates de fuente
+    items:
+      - Corre el gate y lee cada línea en rojo
+      - Corrige la fuente, nunca la salida
+    scene_label: Una lista roja que se vuelve verde
+  - id: navegador
+    act: verificar
+    kind: list
+    eyebrow: Capítulo 10
+    title: Revisa en un navegador real
+    items:
+      - Prueba teclado, toque y movimiento reducido
+      - Imprime la pieza y busca cortes
+    scene_label: Una lupa que recorre la pantalla
+  - id: aceptacion
+    act: verificar
+    kind: list
+    eyebrow: Capítulo 11
+    title: Consigue la aceptación de una persona
+    items:
+      - Muestra la pieza a quien decide
+      - Registra la decisión y sus comentarios
+    scene_label: Un candado que se abre con una firma
+  - id: entrega
+    act: verificar
+    kind: list
+    eyebrow: Capítulo 12
+    title: Sella y entrega el paquete
+    items:
+      - Genera el paquete con las huellas de cada archivo
+      - Comparte solo la versión aceptada
+    scene_label: Una caja que se cierra con un sello

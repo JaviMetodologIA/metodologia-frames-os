@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "BeforeTool": [
+      {
+        "matcher": "(run_shell_command|write_file|replace|mcp_.*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node engine/guard/hook.ts --host gemini",
+            "timeout": 10000
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,177 @@
+schema: deck-v1
+meta:
+  title: Presentaciones que se verifican
+  subtitle: Masterclass de noventa minutos con Frames OS
+  lang: es
+  axis: Una pieza está lista cuando pasó por un navegador real y una persona la aceptó.
+acts:
+  - { id: apertura, title: Apertura }
+  - { id: fuente, title: La fuente }
+  - { id: piezas, title: Las piezas }
+  - { id: verificar, title: Verificar y aceptar }
+slides:
+  - id: portada
+    act: apertura
+    kind: cover
+    eyebrow: Masterclass de MetodologIA
+    title: Presentaciones que se verifican
+    sub: De una fuente tipada a una pieza revisada en un navegador real.
+    chain: [Fuente, Gates, Navegador, Aceptación]
+    scene_label: Anillo de cuatro etapas con un punto que las recorre
+    minutes: 6
+  - id: pregunta
+    act: apertura
+    kind: question
+    eyebrow: Pregunta de entrada
+    title: ¿Quién revisó en pantalla la última lámina que publicaste?
+    sub: Piensa en la última pieza que salió y en quién la vio antes que el público.
+    scene_label: Tarjetas que se apilan frente a una revisión
+    minutes: 6
+  - id: eje
+    act: apertura
+    kind: axis
+    eyebrow: La idea que sostiene todo
+    title: Si no pasó por el navegador, no está lista
+    sub: Cada pieza necesita una fuente, unos gates, una revisión real y una aceptación.
+    chain: [Escribir la fuente, Pasar los gates, Revisar en navegador, Aceptar con una persona]
+    scene_label: Cadena de cuatro pasos que se ilumina en orden
+    minutes: 6
+  - id: sec-fuente
+    act: fuente
+    kind: section
+    eyebrow: Sección 01
+    title: La fuente tipada
+    num: '01'
+    chain: [Meta, Actos, Láminas, Escenas]
+    scene_label: Anillo de sección con el número uno
+    minutes: 6
+  - id: anatomia
+    act: fuente
+    kind: list
+    eyebrow: Anatomía de un deck-v1
+    title: Lo que lleva cada archivo
+    items:
+      - Meta con título, idioma y la idea eje
+      - Actos que ordenan el relato
+      - Láminas con tipo, título y escena
+      - Notas para quien presenta
+    scene_label: Cuatro bloques que se apilan de abajo hacia arriba
+    minutes: 6
+  - id: tipos
+    act: fuente
+    kind: cards
+    eyebrow: Tipos de lámina
+    title: Elige el tipo por la pregunta que responde
+    cards:
+      - { title: Eje, fix: La idea central con su cadena. }
+      - { title: Flujo, fix: Pasos en orden con un punto que avanza. }
+      - { title: Métricas, fix: Cifras quietas con su fuente. }
+      - { title: Cierre, fix: La acción que sigue. }
+    scene_label: Cuatro tarjetas que entran una tras otra
+    minutes: 6
+  - id: cifras
+    act: fuente
+    kind: statement
+    eyebrow: Regla de oro
+    title: Las cifras se muestran con su fuente y nunca se animan.
+    sub: Un contador que sube publica un número falso durante unos segundos.
+    scene_label: Una frase que aparece sobre un brillo suave
+    minutes: 6
+  - id: taller-fuente
+    act: fuente
+    kind: challenge
+    eyebrow: Práctica extendida
+    title: Escribe la fuente de tu propia presentación
+    sub: Toma una presentación que ya tengas y reescríbela como deck-v1 con su idea eje.
+    scene_label: Un reloj de arena que gira mientras se escribe
+    minutes: 10
+    extended: true
+  - id: sec-piezas
+    act: piezas
+    kind: section
+    eyebrow: Sección 02
+    title: Una fuente, tres piezas
+    num: '02'
+    chain: [Presentación, Carrusel, Video]
+    scene_label: Anillo de sección con el número dos
+    minutes: 6
+  - id: carrusel
+    act: piezas
+    kind: flow
+    eyebrow: Carrusel
+    title: El carrusel abre con la conclusión
+    chain: [Conclusión, Tensión, Evidencia, Acción]
+    scene_label: Flujo de cuatro tarjetas con un punto que avanza
+    minutes: 6
+  - id: video
+    act: piezas
+    kind: timeline
+    eyebrow: Video
+    title: El video se arma por beats con narración
+    chain: [Guion, Narración, Subtítulos, Captura]
+    scene_label: Línea de tiempo con cuatro marcas que se encienden
+    minutes: 6
+  - id: taller-piezas
+    act: piezas
+    kind: challenge
+    eyebrow: Práctica extendida
+    title: Saca un carrusel y un video de tu fuente
+    sub: Agrega roles de carrusel y narración por beat sin tocar el contenido principal.
+    scene_label: Una pieza que se divide en dos caminos
+    minutes: 10
+    extended: true
+  - id: sec-verificar
+    act: verificar
+    kind: section
+    eyebrow: Sección 03
+    title: Verificar y aceptar
+    num: '03'
+    chain: [Gates, Navegador, Persona, Paquete]
+    scene_label: Anillo de sección con el número tres
+    minutes: 6
+  - id: gates
+    act: verificar
+    kind: pipeline
+    eyebrow: Los gates
+    title: Qué revisa cada gate antes del navegador
+    chain: [Esquema, Tildes, Colores de marca, Enlaces, Aceptación humana]
+    gate: 4
+    scene_label: Tubería de cinco nodos con un candado en el último
+    minutes: 6
+  - id: navegador
+    act: verificar
+    kind: list
+    eyebrow: En un navegador real
+    title: Lo que se prueba con la pieza abierta
+    items:
+      - Navegación con teclado y con toque
+      - Movimiento reducido respetado
+      - Impresión sin cortes
+      - Ninguna carga de red
+    scene_label: Cuatro casillas que se marcan en orden
+    minutes: 6
+  - id: taller-verificar
+    act: verificar
+    kind: challenge
+    eyebrow: Práctica extendida
+    title: Corre los gates y corrige la fuente
+    sub: Cada línea en rojo se corrige en la fuente, nunca en el HTML generado.
+    scene_label: Una lista roja que se vuelve verde línea por línea
+    minutes: 10
+    extended: true
+  - id: aceptacion
+    act: verificar
+    kind: quote
+    eyebrow: La última palabra
+    title: La pieza la acepta una persona, no el script.
+    sub: Los gates prueban lo que se puede medir; la persona decide si la pieza sirve.
+    scene_label: Una cita que aparece con un trazo suave
+    minutes: 6
+  - id: cierre
+    act: verificar
+    kind: close
+    eyebrow: Tu siguiente paso
+    title: Publica solo lo que se verificó
+    sub: Fuente, gates, navegador y aceptación. En ese orden, cada vez.
+    scene_label: Un punto de llegada que se ilumina al final del recorrido
+    minutes: 6

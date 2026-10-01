@@ -1,0 +1,114 @@
+schema: deck-v1
+meta:
+  title: Lo declarado es lo ejecutado
+  subtitle: Ocho tarjetas sobre cómo auditar un sistema agéntico
+  lang: es
+  hold: 8
+  transition: push
+  axis: Un sistema agéntico solo es confiable si lo que declara es exactamente lo que ejecuta.
+  forbidden_terms: [Claude, Vercel]
+  caption: >-
+    Un sistema agéntico puede declarar doce rutas y ejecutar dos. Estas ocho tarjetas muestran cómo
+    contarlo, qué lo delata y qué prueba falta para que lo declarado sea lo ejecutado.
+  alt: >-
+    Carrusel de ocho tarjetas con ilustraciones animadas sobre la brecha entre lo que un sistema
+    agéntico declara y lo que ejecuta, y cómo cerrarla con pruebas.
+  cta: Cuenta hoy lo que corre en tu sistema
+acts:
+  - { id: idea, title: La idea }
+  - { id: prueba, title: La prueba }
+slides:
+  - id: conclusion
+    act: idea
+    kind: cover
+    role: conclusion
+    sources: [registry/, engine/run.ts]
+    eyebrow: Auditoría agéntica
+    title: Si no se ejecuta, no existe
+    sub: Lo que un sistema declara y lo que ejecuta rara vez coinciden.
+    chain: [Registro, Motor, Gates, Verify]
+    scene_label: Anillo de cuatro etapas con un token que las recorre
+    alt: Anillo con cuatro etapas, registro, motor, gates y verify, recorrido por un punto dorado.
+  - id: tension
+    act: idea
+    kind: statement
+    role: tension
+    sources: [verify/parity/frames-inventory.json]
+    eyebrow: La brecha
+    title: Doce rutas declaradas, dos que corren
+    sub: El resto vive en documentos que ningún motor lee.
+    scene_label: Anillos que giran alrededor de la frase
+    alt: Anillos concéntricos que giran detrás del texto sobre doce rutas declaradas y dos ejecutadas.
+  - id: registro
+    act: idea
+    kind: zig
+    role: support
+    sources: [registry/schema.ts]
+    pillar: P1
+    side: left
+    art: precision
+    eyebrow: Paso 1
+    title: Un registro tipado que el motor lee
+    sub: El ruteo deja de vivir en ternarios y pasa a un archivo con esquema.
+    scene_label: Una forma difusa que se resuelve en una retícula precisa
+    alt: Una forma difusa que se dibuja y se convierte en una retícula con un punto dorado al centro.
+  - id: cifras
+    act: prueba
+    kind: metrics
+    role: evidence
+    eyebrow: Lo medido
+    title: Cuánto corre de verdad
+    metrics:
+      - { value: '46/168', label: capacidades que ejecutan, source: pnpm port:stats }
+      - { value: '19/19', label: escenas de la referencia B, source: pnpm refs }
+    sources: [pnpm port:stats, pnpm refs]
+    scene_label: Dos cifras estáticas con su fuente debajo
+    alt: Dos cifras, 46 de 168 capacidades y 19 de 19 escenas, cada una con la fuente que la calcula.
+  - id: gates
+    act: prueba
+    kind: pipeline
+    role: support
+    sources: [engine/run.ts, registry/gates.yml]
+    pillar: P2
+    eyebrow: Paso 2
+    title: Una aprobación que no se falsifica
+    chain: [Brief, Gate humano, Pieza, Aceptación]
+    gate: 1
+    scene_label: Tubería con un candado que se abre solo con una persona
+    alt: Tubería de cuatro etapas en la que un candado se abre cuando aparece una persona.
+  - id: accion
+    act: prueba
+    kind: challenge
+    role: action
+    sources: [docs/scope.md]
+    eyebrow: Tu turno
+    title: Cuenta lo que corre
+    items:
+      - Lista lo que declara
+      - Marca lo que ejecuta
+      - Escribe la prueba que falta
+    scene_label: Anillo que se llena como un temporizador
+    alt: Un anillo que se llena como un temporizador alrededor de una persona.
+  - id: verify
+    act: prueba
+    kind: zig
+    role: support
+    sources: [verify/run.ts]
+    pillar: P3
+    side: right
+    art: shield
+    eyebrow: Paso 3
+    title: Una prueba que falla si falta algo
+    sub: Si no hay prueba, la declaración no cuenta.
+    scene_label: Un escudo que se dibuja con anillos que pulsan
+    alt: Un escudo con una marca de verificación que se dibuja mientras anillos pulsan a su alrededor.
+  - id: cta
+    act: prueba
+    kind: close
+    role: cta
+    sources: [docs/ESTADO.md]
+    eyebrow: Empieza hoy
+    title: Cuenta hoy lo que corre en tu sistema
+    items: [registry/, engine/, verify/]
+    scene_label: Árbol del repositorio que aparece línea por línea
+    alt: Árbol de carpetas registry, engine y verify que aparece línea por línea.

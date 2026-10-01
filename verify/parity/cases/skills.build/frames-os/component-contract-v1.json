@@ -1,0 +1,14 @@
+{
+  "schema_version": "skill-component-contract-v1",
+  "component_id": "SKILL-REVISOR",
+  "kind": "SKILL",
+  "inputs_schema_ref": "docs/scope.md",
+  "outputs_schema_ref": "docs/scope.md",
+  "effect_class": "E1",
+  "read_set": [],
+  "write_set": [],
+  "fallback": "revisión manual con la lista de chequeo del equipo",
+  "acceptance": ["lista cada cifra sin fuente con su línea"],
+  "owner": "consultor",
+  "content_sha256": "d67aaa9297faef88fcbf31539e598b83ddf432742bee7a9bbfe609aefd1ef382"
+}
