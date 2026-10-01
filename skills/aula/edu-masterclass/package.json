@@ -1,8 +1,8 @@
 {
   "name": "edu-masterclass",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "kind": "masterclass",
   "edition": "white-label",
   "license": "MIT",
-  "sourceEngineSha256": "b5879b8c6612ecb656fa57b5ab1cf46a1c02d7304883fb6a64b31b2da12b6879"
+  "sourceEngineSha256": "91a0d64ab7b424794dd843700a3caccd31e064d723af8c89aac20ccc8641fb07"
 }

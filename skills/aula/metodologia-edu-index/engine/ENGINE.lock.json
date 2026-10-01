@@ -1,9 +1,9 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.1",
   "source": "03_artefactos/renderers/frames-aula",
   "files": {
-    "runtime.py": "b5879b8c6612ecb656fa57b5ab1cf46a1c02d7304883fb6a64b31b2da12b6879",
-    "app.js": "419af7db06f627b9fb9fad9102cfce60d420e8e41af04194563035b8edaf8026",
+    "runtime.py": "91a0d64ab7b424794dd843700a3caccd31e064d723af8c89aac20ccc8641fb07",
+    "app.js": "2e2774c5dcafee3333ff3a9197644d5c0ede81aff4b39e18ef2624c6b151ccf6",
     "style.css": "9988e18f78c5a5b5cf134320390456079eecd49e161961b6001e411e9033c0d5",
     "LICENSE": "1e49b3472e4f5e683092bd71002aacde84fb11e2f1b20b1864ba47627a3d4949",
     "migrate.py": "fd64b96f45fb540fe893aad04836db8d2c024dc645bda02236e51736f17b1364",

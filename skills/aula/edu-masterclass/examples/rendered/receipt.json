@@ -3,12 +3,12 @@
   "kind": "masterclass",
   "edition": "white-label",
   "inputSha256": "6b0d5d74f073986436c57bbaec86bd8dbe812b44827c972c818d7b9a64d7fe20",
-  "engineSha256": "46c8e4c9cf63105704debf33d7f57a2cb569fbcb1daaec00eee123847676b3d3",
+  "engineSha256": "038d4ef2e4c0f604233f610ea939137bb0b2289b35ca2cd5a1886d6a451f1290",
   "outputs": {
-    "artifact.html": "58a6d2857b83768cdb77db4ed47aa0f2c13e4b44af71066072c88464094d65b4",
-    "artifact-mobile.html": "c8e772371dba369c99a92397da4a61ca1c9b22b96784fdcab0fbe68d82a9b878",
-    "artifact-audience.html": "8314176be08899bda1e7afbd7664d454735a196c2fb58d46f7d1c24105e697fb",
-    "artifact-mobile-audience.html": "4fc684999c2f592c529493b011088b45d68965dc78c5d607aee54276844151cf",
+    "artifact.html": "c4384c3568960a62b17618e5ee1dd6cf914a2bfe187706d60f84bdbbe92230f9",
+    "artifact-mobile.html": "6075b6189e40375daa85838bf57d952f98558de2cbd16099bbeed33e08575606",
+    "artifact-audience.html": "895f6b75a05e36ce7ddc307fe64223bdf869b18aed3d6eed0af3d78d83db6651",
+    "artifact-mobile-audience.html": "b5cf17149ee82dbe4314b10ac9c1e0ccf6b31bb5cc7ef1d699dbd6ef43e501a2",
     "artifact.md": "a83e5daf42988ae3a0dde136f516e660b1ea1a9782814a3860254f1802a7469a"
   },
   "advisories": []

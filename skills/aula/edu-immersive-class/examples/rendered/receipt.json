@@ -3,12 +3,12 @@
   "kind": "immersive-class",
   "edition": "white-label",
   "inputSha256": "fb47776e2622ecfcf312e302d72f93a2ea3aa4d440a72c3e869726f4156d6a42",
-  "engineSha256": "46c8e4c9cf63105704debf33d7f57a2cb569fbcb1daaec00eee123847676b3d3",
+  "engineSha256": "038d4ef2e4c0f604233f610ea939137bb0b2289b35ca2cd5a1886d6a451f1290",
   "outputs": {
-    "artifact.html": "3a31766fd15b811ce247b0b7594f49d9a6fc08d5cf23bb897c27aa545eb029a1",
-    "artifact-mobile.html": "747067a90e918bc3126dada8b9a5ddd3619c9161f34b886273c04051cfecedac",
-    "artifact-audience.html": "9272f790eca2cfeea1531ca57f0c35fb7cc7be2fada676efbd277d138e7ff62e",
-    "artifact-mobile-audience.html": "11fd376bc3dbb97d183f40231b7ca483e3dfd9892524db36ebca12b7180fd899",
+    "artifact.html": "285d1dd305d3ad7f098c691771e6260946c081a20e602a94300386cd81338232",
+    "artifact-mobile.html": "1649273ca3536c5573c7eb3d84a940a7ec04efbd1ae7026edf83e1ad1edd719e",
+    "artifact-audience.html": "404f31528e46f31d80a54d1c4ba725644516d518adfa1b2a03c3d1e36d2f65ec",
+    "artifact-mobile-audience.html": "c93be820bc01c8a0c4ce7e745c8b5aabb857c8ebb9c86de187acc9bdace6dd51",
     "artifact.md": "9c61a7bad26612db74e8d535ab4f15c04e6a564e021cbb5db6446789c62b46bb"
   },
   "advisories": []

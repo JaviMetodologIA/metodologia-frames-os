@@ -6,6 +6,7 @@ Formato: una entrada por versión; cada línea dice qué cambió y qué lo prueb
 
 - Familia `aula` con ocho formatos y edición MetodologIA predeterminada; marca blanca por solicitud explícita. Las 18 skills incluyen dos decks comerciales dentro de `deck.immersive` con `renderer=frames-aula`.
 - El catálogo runtime verifica fuentes, paquetes y handlers. El bridge comparte el motor Aula con Frames actual, conserva `frames-aula-v1` y entrega salidas mediante la autoridad del run.
+- Paquetes Aula `1.0.1`: idioma y título iniciales, etiquetas accesibles, estado del borrador y cambio de idioma coherentes en ES/EN/PT/FR. El motor usa una sola tabla de etiquetas; los bancos opcionales permanecen fijados a `v1.0.0`.
 - Dirección, especificación y aceptación conservan gates humanos con hashes actuales. La generación local produce `RENDERED_DRAFT`; no publica ni acredita aceptación humana.
 - Desktop, tableta, móvil, interacción, rechazos y recorridos de las 18 combinaciones verificados. Se preservan tests y pisos históricos de routing.
 - Publicación inicial en snapshot sanitizado, licencia MIT para código propio y atribución a Franklin Ospina y Javier Montaño. Avisos por componente en `NOTICE`.

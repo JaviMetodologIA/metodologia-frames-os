@@ -2,6 +2,12 @@
 """Original offline Frames Aula renderer. Python standard library only."""
 import argparse, copy, hashlib, html, json, pathlib, re, sys
 ROOT=pathlib.Path(__file__).resolve().parent
+SHELL_UI={
+    'es':['Revisión humana pendiente','Saltar al contenido','Idioma','Secciones','Estado'],
+    'en':['Human review pending','Skip to content','Language','Sections','State'],
+    'pt':['Revisão humana pendente','Ir para o conteúdo','Idioma','Seções','Estado'],
+    'fr':['Relecture humaine en attente','Aller au contenu','Langue','Sections','État'],
+}
 KINDS=('immersive-class','masterclass','workbook','lean-coffee','playbook','playbook-immersive','index','module','dynamic-commercial-decks')
 def localized(x,lang='es'):
     return x.get(lang,x.get('es',next(iter(x.values()),''))) if isinstance(x,dict) else str(x or '')
@@ -117,7 +123,7 @@ def default_prompt(section,lang):
     fields=section.get('fields',[])+section.get('settings',[])
     return re.sub(r'\{\{(.*?)\}\}',lambda match:localized(next((field.get('default','') for field in fields if field['key']==match[1]),''),lang),localized(section.get('prompt'),lang))
 def markdown(d,lang):
-    lines=['# '+localized(d['title'],lang),'','Estado: RENDERED_DRAFT','']
+    lines=['# '+localized(d['title'],lang),'',SHELL_UI.get(lang,SHELL_UI['es'])[4]+': RENDERED_DRAFT','']
     for section in d['sections']:
         lines+=['## '+localized(section['title'],lang),'',localized(section.get('body'),lang),'']
         if section.get('prompt'): lines+=['```text',default_prompt(section,lang),'```','']
@@ -125,9 +131,10 @@ def markdown(d,lang):
 def render(d,kind,edition):
     brand={'name':'MetodologIA' if edition=='metodologia' else 'Tu marca','colors':{'night':'#0a122a' if edition=='metodologia' else '#152238','gold':'#8a6d00' if edition=='metodologia' else '#334155','white':'#ffffff'}}
     if edition=='white-label': brand.update(d.get('brand',{}))
-    payload=json.dumps({'data':d,'kind':kind,'brand':brand},ensure_ascii=False).replace('<','\\u003c')
+    lang=d.get('language','es'); shell=SHELL_UI.get(lang,SHELL_UI['es'])
+    payload=json.dumps({'data':d,'kind':kind,'brand':brand,'shellUi':SHELL_UI},ensure_ascii=False).replace('<','\\u003c')
     css=(ROOT/'style.css').read_text()+':root{--ink:'+brand['colors'].get('night','#0a122a')+';--canvas:'+brand['colors'].get('white','#ffffff')+';--accent:'+brand['colors'].get('gold','#8a6d00')+'}'; js=(ROOT/'app.js').read_text()
-    return '<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+html.escape(localized(d['title']))+'</title><style>'+css+'</style><body><a class="skip" href="#main">Saltar al contenido</a><header><strong id="brand"></strong><select id="language" aria-label="Idioma"></select><button id="motion">Pausar animación</button><button id="projection">Proyectar</button><button onclick="window.print()">Imprimir</button></header><main id="main" tabindex="-1"></main><nav aria-label="Secciones"><button id="prev">Anterior</button><span id="position" aria-live="polite"></span><button id="next">Siguiente</button></nav><footer>RENDERED_DRAFT · Revisión humana pendiente</footer><script type="application/json" id="payload">'+payload+'</script><script>'+js+'</script></body></html>'
+    return '<!doctype html><html lang="'+html.escape(lang)+'"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+html.escape(localized(d['title'],lang))+'</title><style>'+css+'</style><body><a class="skip" href="#main">'+shell[1]+'</a><header><strong id="brand"></strong><select id="language" aria-label="'+shell[2]+'"></select><button id="motion">Pausar animación</button><button id="projection">Proyectar</button><button onclick="window.print()">Imprimir</button></header><main id="main" tabindex="-1"></main><nav aria-label="'+shell[3]+'"><button id="prev">Anterior</button><span id="position" aria-live="polite"></span><button id="next">Siguiente</button></nav><footer>RENDERED_DRAFT · '+shell[0]+'</footer><script type="application/json" id="payload">'+payload+'</script><script>'+js+'</script></body></html>'
 def output_plan(d,kind,edition):
     if kind=='module': return [k+'.html' for k in KINDS[:6]]+['index.html','workbook.md','manifest.json','receipt.json']
     mapping={'desktop':'artifact.html','mobile':'artifact-mobile.html','audience':'artifact-audience.html','mobile-audience':'artifact-mobile-audience.html','markdown':'artifact.md'}
