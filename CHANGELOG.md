@@ -6,6 +6,8 @@ Formato: una entrada por versión; cada línea dice qué cambió y qué lo prueb
 
 - Familia `aula` con ocho formatos y edición MetodologIA predeterminada; marca blanca por solicitud explícita. Las 18 skills incluyen dos decks comerciales dentro de `deck.immersive` con `renderer=frames-aula`.
 - El catálogo runtime verifica fuentes, paquetes y handlers. El bridge comparte el motor Aula con Frames actual, conserva `frames-aula-v1` y entrega salidas mediante la autoridad del run.
+- Paquetes Aula `1.0.3`: las paletas parciales se normalizan una sola vez para validar contraste y renderizar todos los colores de las escenas. Los nombres de marca blanca deben ser texto no vacío; el perfil predeterminado se conserva para una configuración de marca vacía.
+- Paquetes Aula `1.0.2`: la configuración de marca debe conservar contraste de texto en canvas y superficies blancas fijas (4.5:1), pie y progreso (4.5:1), y foco fijo sobre canvas (3:1). Los colores inválidos se rechazan antes de escribir; los perfiles parciales usan los mismos respaldos que el CSS.
 - Paquetes Aula `1.0.1`: idioma y título iniciales, etiquetas accesibles, estado del borrador y cambio de idioma coherentes en ES/EN/PT/FR. El motor usa una sola tabla de etiquetas; los bancos opcionales permanecen fijados a `v1.0.0`.
 - Dirección, especificación y aceptación conservan gates humanos con hashes actuales. La generación local produce `RENDERED_DRAFT`; no publica ni acredita aceptación humana.
 - Desktop, tableta, móvil, interacción, rechazos y recorridos de las 18 combinaciones verificados. Se preservan tests y pisos históricos de routing.
