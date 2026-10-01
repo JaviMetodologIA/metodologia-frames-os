@@ -13,6 +13,16 @@ fuente, handler y árbol íntegro por hashes. El motor verifica el catálogo al 
 Un import explícito de paquetes portables mediante `scripts/sync-aula-packages.ts`
 reconcilia el motor con sus copias autónomas; `--check` no escribe. [CÓDIGO]
 
+La importación adapta únicamente dos superficies de metadata al host sucesor:
+`LINEAGE.yml` resuelve sus autoridades al catálogo, esta ADR, la familia nativa y
+el handler de Aula; `context.md` se genera desde nombre, formato y edición, con
+rutas `skills/aula`, comandos CLI y gates de esa familia. Las referencias de
+Frames ContentOS permanecen en el snapshot portable original; no se presentan
+como comandos ejecutables del sucesor. La transformación es explícita, idempotente
+y se calcula también en `--check`, antes de comparar hashes y sin escribir.
+El catálogo liga los bytes adaptados. `SKILL.md`, motor, inputs, outputs y schemas
+permanecen intactos; no hay conversión de campos ni pérdida de contenido. [CÓDIGO]
+
 El bridge en `engine/aula/` ejecuta Python estándar en staging temporal confinado,
 verifica plan, archivos y recibo, y devuelve bytes. Los handlers de dominio entregan
 esos bytes exclusivamente mediante `ctx.write`. Un módulo conserva seis páginas,
