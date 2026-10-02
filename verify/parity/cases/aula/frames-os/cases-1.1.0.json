@@ -7,7 +7,7 @@
   },
   "catalog": {
     "ref": "registry/aula-capabilities.json",
-    "sha256": "e045d95dc70e272378b8fef2e4c53abe6836bcc18db1134481ad9021acba32ce"
+    "sha256": "f9d4b63fd4621f2438c63b7ab8fc2d5fa92ab9f79f25fe50ef7e3ae0ca1daa47"
   },
   "capabilities": [
     {
