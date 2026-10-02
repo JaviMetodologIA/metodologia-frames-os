@@ -101,7 +101,7 @@ improvements:
     claim:
       Los decks comerciales ejecutan las dos skills de marca sobre frames-aula-v1 y requieren intake y especificación
       aprobados, preservando deck-v1 y sus escenas.
-    check: verify/tests/aula.test.ts#executes all eighteen edition and format combinations through native human gates
+    check: verify/tests/aula.test.ts#executes the historical eighteen edition and format combinations through native human gates
 steps:
   - id: D01
     title: Crea el brief de la presentación
@@ -144,6 +144,8 @@ steps:
     outputs:
       - id: aula-source
         schema: frames-aula-v1
+      - id: aula-build-bindings
+        schema: aula-build-bindings-v1
     gate: sources-and-spec
   - id: DC03
     title: Renderizar el deck comercial
@@ -154,6 +156,7 @@ steps:
       eq: frames-aula
     inputs:
       - aula-source
+      - aula-build-bindings
       - commercial-intake
     outputs:
       - id: aula-html

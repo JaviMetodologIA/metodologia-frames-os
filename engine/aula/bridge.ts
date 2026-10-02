@@ -15,9 +15,26 @@ import path from 'node:path';
 import { z } from 'zod';
 import { repoPath } from '../paths.ts';
 import { digest, selectAula, type AulaKind, type Edition } from './catalog.ts';
+import {
+  BuildFields,
+  buildMetadata,
+  verifyBuildDependencies,
+  assertSameBuildBinding,
+} from './dependencies.ts';
 
 const Name = z.string().regex(/^[a-z][a-z0-9-]*\.(html|md|json)$/);
-const Plan = z.object({ outputs: z.array(Name).min(2).max(10) }).strict();
+const Plan = z
+  .object({ outputs: z.array(Name).min(2).max(30), ...BuildFields })
+  .strict()
+  .superRefine((plan, ctx) => {
+    const imported = new Set(
+      (plan.buildDependencies ?? [])
+        .filter((dep) => dep.role === 'linked-piece' && dep.ref.startsWith('input/'))
+        .map((dep) => dep.ref.slice(6)),
+    );
+    if (imported.size > 20 || plan.outputs.filter((name) => !imported.has(name)).length > 10)
+      ctx.addIssue({ code: 'custom', message: 'AULA-PLAN-LIMIT' });
+  });
 const Receipt = z
   .object({
     state: z.literal('RENDERED_DRAFT'),
@@ -27,6 +44,7 @@ const Receipt = z
     engineSha256: z.string(),
     outputs: z.record(Name, z.string()),
     advisories: z.array(z.unknown()),
+    ...BuildFields,
   })
   .strict();
 
@@ -39,6 +57,7 @@ export function aulaBuild(
   edition: Edition,
   build = true,
   assets: Record<string, Buffer> = {},
+  bank?: { root: string; ref: string },
 ) {
   const selected = selectAula(kind, edition);
   const stage = mkdtempSync(path.join(realpathSync(os.tmpdir()), 'frames-aula-'));
@@ -53,7 +72,6 @@ export function aulaBuild(
       Name.parse(name);
       if (data.length > 2 * 1024 * 1024 || !name.endsWith('.html')) throw new Error('AULA-ASSET-LIMIT');
       writeFileSync(path.join(stage, name), data);
-      writeFileSync(path.join(out, name), data);
     }
     const invoke = (command: string) => {
       const result = spawnSync(
@@ -69,6 +87,7 @@ export function aulaBuild(
           input,
           '--out',
           out,
+          ...(bank ? ['--bank', bank.root] : []),
         ],
         {
           encoding: 'utf8',
@@ -84,12 +103,27 @@ export function aulaBuild(
     };
     invoke('check');
     const original = Plan.parse(JSON.parse(invoke('plan')) as unknown);
-    if (attachments.some((name) => original.outputs.includes(name)))
-      throw new Error('AULA-ASSET-OUTPUT-COLLISION');
-    const plan = { outputs: [...original.outputs, ...attachments] };
+    const binding = buildMetadata(original, bank?.ref);
+    if (binding.profile && binding.profile.id !== edition) throw new Error('AULA-PROFILE-EDITION-MISMATCH');
+    verifyBuildDependencies(repoPath(selected.catalog.engine.source), stage, bank?.root, binding);
+    for (const name of attachments.filter((name) => original.outputs.includes(name)))
+      if (
+        !binding.buildDependencies?.some(
+          (dep) =>
+            dep.role === 'linked-piece' &&
+            dep.ref === 'input/' + name &&
+            dep.sha256 === digest(assets[name]!),
+        )
+      )
+        throw new Error('AULA-ASSET-OUTPUT-COLLISION');
+    const externalAttachments = attachments.filter((name) => !original.outputs.includes(name));
+    const plan = { ...original, outputs: [...original.outputs, ...externalAttachments] };
     if (new Set(plan.outputs).size !== plan.outputs.length) throw new Error('AULA-PLAN-DUPLICATE');
-    if (!build) return { ...selected, plan, files: new Map<string, Buffer>() };
+    if (!build) return { ...selected, plan, binding, files: new Map<string, Buffer>() };
+    for (const name of externalAttachments) writeFileSync(path.join(out, name), assets[name]!);
     const receipt = Receipt.parse(JSON.parse(invoke('build')) as unknown);
+    assertSameBuildBinding(binding, buildMetadata(receipt, bank?.ref));
+    verifyBuildDependencies(repoPath(selected.catalog.engine.source), stage, bank?.root, binding);
     if (readdirSync(out).sort().join() !== [...plan.outputs].sort().join())
       throw new Error('AULA-OUTPUT-SET-MISMATCH');
     const files = new Map<string, Buffer>();
@@ -111,9 +145,13 @@ export function aulaBuild(
     )
       throw new Error('AULA-RECEIPT-MISMATCH');
     for (const [name, bytes] of files)
-      if (name !== 'receipt.json' && !attachments.includes(name) && receipt.outputs[name] !== digest(bytes))
+      if (
+        name !== 'receipt.json' &&
+        !externalAttachments.includes(name) &&
+        receipt.outputs[name] !== digest(bytes)
+      )
         throw new Error(`AULA-OUTPUT-HASH: ${name}`);
-    if (Object.keys(receipt.outputs).length !== files.size - 1 - attachments.length)
+    if (Object.keys(receipt.outputs).length !== files.size - 1 - externalAttachments.length)
       throw new Error('AULA-RECEIPT-OUTPUTS-MISMATCH');
     // Native HTML gates require a no-network CSP. This adapter layer preserves the
     // frozen source engine and binds the resulting bytes, including module siblings.
@@ -146,7 +184,7 @@ export function aulaBuild(
         ) + '\n',
       ),
     );
-    return { ...selected, plan, files };
+    return { ...selected, plan, binding, files };
   } finally {
     rmSync(stage, { recursive: true, force: true });
   }

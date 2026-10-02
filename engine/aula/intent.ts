@@ -15,11 +15,24 @@ export function aulaIntent(request: string): AulaIntent | null {
     .toLowerCase();
   const edition = /marca blanca|white[ -]label/.test(text) ? 'white-label' : 'metodologia';
   if (/\b(notebooklm|notebook|nlm)\b/.test(text)) return null;
+  if (/\btrainer\b/.test(text)) return null;
+  if (
+    /\bworkshop\b|taller inmersivo/.test(text) ||
+    /\b(deck|presentacion|presentation)\b.*\b(facilitar|facilitate)\b.*\btaller\b/.test(text)
+  )
+    return {
+      family: 'aula',
+      kind: 'workshop-immersive',
+      edition,
+      renderer: 'frames-aula',
+    };
   if (
     /\b(comercial|commercial|prospeccion)\b/.test(text) &&
     /\b(deck|presentacion|presentation|propuesta)\b/.test(text)
   )
     return { family: 'deck.immersive', kind: 'dynamic-commercial-decks', edition, renderer: 'frames-aula' };
+  if (/clase inmersiva|sesion presentada/.test(text))
+    return { family: 'aula', kind: 'immersive-class', edition, renderer: 'frames-aula' };
   // A full Trainer course and the historical slide/masterclass routes remain distinct.
   if (
     /\b(trainer|curso|programa|capacitacion)\b/.test(text) ||

@@ -1,0 +1,7 @@
+skill_id: edu-workshop-immersive
+version: 1.2.0
+lifecycle_state: active
+execution_scope: local-draft-generation
+authority_refs: [registry/aula-capabilities.json, docs/adr/0007-aula-y-decks-comerciales.md, registry/families/aula.yml, domains/aula/index.ts]
+external_fragments_reused: false
+publication_authority: false

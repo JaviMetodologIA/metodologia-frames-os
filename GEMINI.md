@@ -32,7 +32,7 @@ Sucesor de Frames ContentOS. Lo declarado en `registry/` es lo que el motor ejec
 ## Reglas
 
 - Una sola marca por entregable: MetodologIA por defecto; marca blanca por solicitud explícita. Identidades privadas entran por tokens externos.
-- Aula usa sus ocho formatos; decks comerciales seleccionan `renderer=frames-aula`. El catálogo liga las 18 skills al motor por hashes.
+- Aula usa nueve formatos, incluido el taller inmersivo; decks comerciales seleccionan `renderer=frames-aula`. El catálogo liga las 20 skills al motor por hashes.
 - Sin efectos externos (publicar, enviar, NotebookLM, n8n) sin gate humano consumido.
 - Generados (este archivo, adapters de host, settings): edita `engine/gen.ts` o `registry/` y corre `pnpm gen`.
 - Alcance de escritura: `docs/scope.md` (el guard lo aplica).

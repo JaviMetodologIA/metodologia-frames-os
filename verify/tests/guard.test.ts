@@ -1,7 +1,28 @@
 import { spawnSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { decide, globToRegExp, loadScope, type ToolCall } from '../../engine/guard/policy.ts';
 import { repoPath } from '../../engine/paths.ts';
+import { privacyScanBody, SECRETS } from '../checks/index.ts';
+
+it('scans outside exact OFL fonts and keeps unknown embedded bytes in the scan', () => {
+  const fonts = repoPath('engine/aula/runtime/assets/core/fonts');
+  const uri = (bytes: Buffer) => `data:font/ttf;base64,${bytes.toString('base64')}`;
+  const aws = ['AKIA', 'A'.repeat(16)].join('');
+  const pattern = SECRETS.find(([, label]) => label === 'AWS key')![0];
+  for (const name of ['Poppins-Bold.ttf', 'Montserrat-VariableFont_wght.ttf']) {
+    const bytes = readFileSync(`${fonts}/${name}`);
+    expect(privacyScanBody(uri(bytes))).toBe('data:font/ttf;base64,[verified-ofl-font]');
+    expect(pattern.test(privacyScanBody(`${aws} ${uri(bytes)}`))).toBe(true);
+    expect(pattern.test(privacyScanBody(`${uri(bytes)} ${aws}`))).toBe(true);
+    const altered = Buffer.from(bytes);
+    altered[0] = altered.readUInt8(0) ^ 1;
+    expect(privacyScanBody(uri(altered))).toBe(uri(altered));
+    expect(privacyScanBody(uri(bytes).replace('font/ttf', 'image/png'))).toContain(bytes.toString('base64'));
+  }
+  expect(privacyScanBody(uri(Buffer.from(aws)))).toBe(uri(Buffer.from(aws)));
+  expect(pattern.test(privacyScanBody(`data:font/ttf;base64,${aws}`))).toBe(true);
+});
 
 const bash = (command: string): ToolCall => ({ kind: 'bash', command });
 const write = (file: string, content = 'x'): ToolCall => ({ kind: 'write', file, content });

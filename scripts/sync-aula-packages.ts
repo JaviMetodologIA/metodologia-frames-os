@@ -1,7 +1,7 @@
 // Import an explicitly chosen portable snapshot; --check is strictly read-only.
 import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import { AULA_KINDS, digest } from '../engine/aula/catalog.ts';
+import { AULA_KINDS, Edition, digest } from '../engine/aula/catalog.ts';
 import { repoPath } from '../engine/paths.ts';
 
 const args = process.argv.slice(2);
@@ -104,7 +104,7 @@ const entries = readdirSync(source, { withFileTypes: true })
     const meta = JSON.parse(readFileSync(path.join(dir, 'package.json'), 'utf8')) as PackageMeta;
     if (
       !AULA_KINDS.includes(meta.kind as (typeof AULA_KINDS)[number]) ||
-      !['metodologia', 'white-label'].includes(meta.edition)
+      !Edition.options.includes(meta.edition as (typeof Edition.options)[number])
     )
       throw new Error(`unsupported package: ${e.name}`);
     if (e.name !== meta.name || !/^[a-z0-9-]+$/.test(meta.name)) throw new Error('package identity mismatch');
@@ -112,12 +112,22 @@ const entries = readdirSync(source, { withFileTypes: true })
       ...meta,
       source: `skills/aula/${meta.name}`,
       handler: 'aula.render' as const,
-      files: files(dir, '', (file, body) => nativeMetadata(meta, file, body)),
+      files: Object.fromEntries(
+        Object.entries({
+          ...files(dir, '', (file, body) => nativeMetadata(meta, file, body)),
+          'context.md': digest(nativeMetadata(meta, 'context.md', Buffer.alloc(0))),
+        }).sort(([a], [b]) => a.localeCompare(b)),
+      ),
     };
   })
   .sort((a, b) => a.name.localeCompare(b.name));
-if (entries.length !== 18 || new Set(entries.map((e) => `${e.kind}/${e.edition}`)).size !== 18)
-  throw new Error('exactly eighteen kind/edition combinations required');
+const expectedCount = AULA_KINDS.length * Edition.options.length;
+const pairs = new Set(entries.map((entry) => `${entry.kind}/${entry.edition}`));
+if (entries.length !== expectedCount || pairs.size !== expectedCount)
+  throw new Error(`exactly ${expectedCount} kind/edition combinations required`);
+for (const kind of AULA_KINDS)
+  for (const edition of Edition.options)
+    if (!pairs.has(`${kind}/${edition}`)) throw new Error(`kind/edition missing: ${kind}/${edition}`);
 const engineSource = path.join(source, entries[0]!.name, 'engine');
 const engineFiles = files(engineSource);
 for (const skill of entries)
@@ -138,7 +148,8 @@ const catalog = {
   })),
 };
 const text = JSON.stringify(catalog, null, 2) + '\n';
-// Only the eighteen appended rows change; historical inventory bytes stay intact.
+// Refresh only current supplemental hashes and append the two new workshops.
+// Original Frames inventory rows keep their bytes and positions.
 const inventoryFile = repoPath('verify/parity/frames-inventory.json');
 const inventoryText = readFileSync(inventoryFile, 'utf8');
 let nextInventory = inventoryText;
@@ -147,7 +158,31 @@ for (const entry of entries) {
     `^(    \\{[^\\n]*"id": "${entry.name}"[^\\n]*"source_sha256": ")[a-f0-9]{64}("[^\\n]*\\},?)$`,
     'm',
   );
-  if (!pattern.test(nextInventory)) throw new Error(`supplemental inventory row missing: ${entry.name}`);
+  if (!pattern.test(nextInventory)) {
+    if (
+      entry.kind !== 'workshop-immersive' ||
+      !['edu-workshop-immersive', 'metodologia-edu-workshop-immersive'].includes(entry.name)
+    )
+      throw new Error(`supplemental inventory row missing: ${entry.name}`);
+    const inventory = JSON.parse(nextInventory) as { entries: { id: string }[] };
+    if (inventory.entries.some((row) => row.id === entry.name))
+      throw new Error(`supplemental inventory identity collision: ${entry.name}`);
+    const end = '\n  ]\n}\n';
+    if (!nextInventory.endsWith(end)) throw new Error('supplemental inventory closing shape');
+    const row = {
+      kind: 'skill',
+      id: entry.name,
+      title: entry.name,
+      source: `${entry.source}/SKILL.md`,
+      source_sha256: entry.files['SKILL.md'],
+      destination: 'aula',
+    };
+    const rowText = `{${Object.entries(row)
+      .map(([key, value]) => `${JSON.stringify(key)}: ${JSON.stringify(value)}`)
+      .join(', ')}}`;
+    nextInventory = nextInventory.slice(0, -end.length) + ',\n    ' + rowText + end;
+    continue;
+  }
   nextInventory = nextInventory.replace(
     pattern,
     (_match: string, head: string, tail: string) => head + entry.files['SKILL.md'] + tail,
@@ -169,13 +204,17 @@ if (check) {
     mkdirSync(path.dirname(target), { recursive: true });
     for (const f of Object.keys(e.files)) {
       mkdirSync(path.dirname(path.join(target, f)), { recursive: true });
-      writeFileSync(path.join(target, f), nativeMetadata(e, f, readFileSync(path.join(source, e.name, f))));
+      const body = f === 'context.md' ? Buffer.alloc(0) : readFileSync(path.join(source, e.name, f));
+      writeFileSync(path.join(target, f), nativeMetadata(e, f, body));
     }
   }
   const target = repoPath(catalog.engine.source);
   if (existsSync(target)) rmSync(target, { recursive: true, force: true });
   mkdirSync(target, { recursive: true });
-  for (const f of Object.keys(engineFiles)) cpSync(path.join(engineSource, f), path.join(target, f));
+  for (const f of Object.keys(engineFiles)) {
+    mkdirSync(path.dirname(path.join(target, f)), { recursive: true });
+    cpSync(path.join(engineSource, f), path.join(target, f));
+  }
   writeFileSync(repoPath('registry/aula-capabilities.json'), text);
   if (inventoryText !== nextInventory) writeFileSync(inventoryFile, nextInventory);
 }
