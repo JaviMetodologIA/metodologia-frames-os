@@ -136,6 +136,7 @@ export const EXT: Record<string, string> = {
   'work-order-v1': '.json',
   'skill-md-v1': '.md',
   'frames-aula-v1': '.json',
+  'aula-build-bindings-v1': '.json',
   'commercial-intake-v1': '.json',
   'aula-receipt-v1': '.json',
 };

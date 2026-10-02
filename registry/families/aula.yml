@@ -50,12 +50,13 @@ steps:
     inputs: [brief]
     outputs:
       - { id: aula-source, schema: frames-aula-v1 }
+      - { id: aula-build-bindings, schema: aula-build-bindings-v1 }
     gate: sources-and-spec
   - id: A03
     title: Construir HTML y comprobar archivos
     handler: aula.render
     agent: RT-07
-    inputs: [aula-source]
+    inputs: [aula-source, aula-build-bindings]
     outputs:
       - { id: aula-html, schema: html }
       - { id: aula-receipt, schema: aula-receipt-v1 }

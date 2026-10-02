@@ -51,3 +51,9 @@ Límites: cinco escenas originales, sin paridad con el banco interno de Amaris.
 Office necesita dependencias opcionales y una plantilla compatible, y entrega texto
 estático. Trainer conserva su familia y sus gates; Aula no altera su evaluación.
 Jarvis permanece en fallback local. [CONFIG]
+
+## Snapshot1.1.0
+
+[METODOLOGIA] El mismo motor portable incluye núcleo32iconos/16escenas y fuentes locales autorizadas; bancos opcionales v1.1.0 amplían a256/160. La especificación nativa añade `aula-build-bindings-v1`, aprobada junto con la fuente: SHA del código y paquete, política en fuente, perfil, fuentes, assets seleccionados y companions HTML. Antes de render y aceptación se compara con el estado actual.
+
+[METODOLOGIA] Autoría nueva: comercial8slides, académica13, con extensión explícita en brief; histórica íntegra. MetodologIA es predeterminada, marca blanca por petición. Clase inmersiva explícita prevalece sobre capacitación genérica; Trainer permanece separado. Las18skills están catalogadas y se regeneran desde el snapshot común, sin promoción de piezas humanas por tests.

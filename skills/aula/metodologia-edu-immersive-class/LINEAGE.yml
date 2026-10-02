@@ -1,5 +1,5 @@
 skill_id: metodologia-edu-immersive-class
-version: 1.0.3
+version: 1.1.0
 lifecycle_state: active
 execution_scope: local-draft-generation
 authority_refs: [registry/aula-capabilities.json, docs/adr/0007-aula-y-decks-comerciales.md, registry/families/aula.yml, domains/aula/index.ts]

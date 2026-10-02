@@ -5,6 +5,7 @@ import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { loadRegistry } from '../../engine/registry.ts';
 import { repoPath } from '../../engine/paths.ts';
+import { digest } from '../../engine/aula/catalog.ts';
 
 // Tracked + untracked-but-not-ignored files: what a commit would carry.
 export function versionedFiles(): string[] {
@@ -32,11 +33,24 @@ const PRIVACY_EXEMPT = new Set([
   'verify/tests/guard.test.ts',
 ]);
 
+const OFL_FONTS = new Set([
+  '983676516167748b74de6f4771fb384c664fd913acb8b471122ecacf5da5ea6c',
+  '0f7b311b2f3279e4eef9b2f968bcdbab6e28f4daeb1f049f4f278a902bcd82f7',
+]);
+export function privacyScanBody(body: string): string {
+  return body.replace(/data:font\/ttf;base64,([A-Za-z0-9+/]+={0,2})/g, (uri, encoded: string) => {
+    const bytes = Buffer.from(encoded, 'base64');
+    return bytes.toString('base64') === encoded && OFL_FONTS.has(digest(bytes))
+      ? 'data:font/ttf;base64,[verified-ofl-font]'
+      : uri;
+  });
+}
+
 export function checkPrivacy(): string[] {
   const problems: string[] = [];
   for (const f of versionedFiles()) {
     if (PRIVACY_EXEMPT.has(f) || !TEXT.test(path.basename(f))) continue;
-    const body = readFileSync(repoPath(f), 'utf8');
+    const body = privacyScanBody(readFileSync(repoPath(f), 'utf8'));
     for (const [re, what] of SECRETS) if (re.test(body)) problems.push(`${f}: ${what}`);
   }
   return problems;

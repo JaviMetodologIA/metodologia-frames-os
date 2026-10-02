@@ -38,8 +38,9 @@ import {
   evaluateSkillRunV1,
 } from '../../domains/skills/frames/skill-systems/governance.ts';
 import YAML from 'yaml';
+import { z } from 'zod';
 import { aulaBuild } from '../../engine/aula/bridge.ts';
-import { digest, loadAulaCatalog } from '../../engine/aula/catalog.ts';
+import { AulaKind, Edition, digest, loadAulaCatalog, type AulaCatalog } from '../../engine/aula/catalog.ts';
 
 export type CaseResult = { verdict: 'equal' | 'superset' | 'red'; detail: string };
 
@@ -801,36 +802,136 @@ COMPARATORS['meta.maintain'] = (caseDir, goldenDir) => {
     : { verdict: 'equal', detail: 'mismas reglas que Frames' };
 };
 
+const AULA_BASELINE_SHA256 = '6c691379b76842ed4ee9d23141a7b722ab9f078553521664954a47ce6228c84d';
+const AulaCaseHash = z.string().regex(/^[a-f0-9]{64}$/);
+const CompanionName = z.string().regex(/^[a-z][a-z0-9-]*\.html$/);
+const AulaCaseCapability = z
+  .object({
+    id: z.string().regex(/^[a-z0-9-]+$/),
+    kind: AulaKind,
+    edition: Edition,
+    inputSha256: AulaCaseHash,
+  })
+  .strict();
+const AulaBaseline = z
+  .object({
+    schema: z.literal('aula-succession-case-v1'),
+    origin: z.string().min(1),
+    capabilities: z.array(AulaCaseCapability).length(18),
+  })
+  .strict();
+const AulaSuccessor = z
+  .object({
+    schema: z.literal('aula-succession-case-v2'),
+    version: z.literal('1.1.0'),
+    supersedes: z
+      .object({
+        ref: z.literal('verify/parity/cases/aula/frames-os/cases.json'),
+        sha256: z.literal(AULA_BASELINE_SHA256),
+      })
+      .strict(),
+    catalog: z
+      .object({
+        ref: z.literal('registry/aula-capabilities.json'),
+        sha256: AulaCaseHash,
+      })
+      .strict(),
+    capabilities: z
+      .array(
+        AulaCaseCapability.extend({
+          version: z.literal('1.1.0'),
+          companions: z.record(CompanionName, AulaCaseHash),
+        }).strict(),
+      )
+      .length(18),
+  })
+  .strict();
+
+// The historical capture is immutable; new inputs require this explicit successor.
+// Runtime catalog/bridge checks still verify complete trees and confined attachments.
+export function validateAulaParitySuccession(
+  baselineBody: string,
+  successorBody: string,
+  catalogBody: string,
+) {
+  const baseline = AulaBaseline.parse(JSON.parse(baselineBody) as unknown);
+  const current = AulaSuccessor.parse(JSON.parse(successorBody) as unknown);
+  const catalog = JSON.parse(catalogBody) as AulaCatalog;
+  if (digest(baselineBody) !== current.supersedes.sha256)
+    throw new Error('AULA-PARITY-HISTORICAL-BASELINE-CHANGED');
+  if (digest(catalogBody) !== current.catalog.sha256) throw new Error('AULA-PARITY-CATALOG-STALE');
+  for (const cases of [baseline.capabilities, current.capabilities])
+    if (new Set(cases.map((skill) => skill.id)).size !== 18)
+      throw new Error('AULA-PARITY-REQUIRES-EIGHTEEN-UNIQUE-CAPABILITIES');
+  for (const expected of current.capabilities) {
+    const original = baseline.capabilities.find((skill) => skill.id === expected.id);
+    const skill = catalog.capabilities.find((skill) => skill.id === expected.id);
+    if (
+      !original ||
+      !skill ||
+      original.kind !== expected.kind ||
+      original.edition !== expected.edition ||
+      skill.kind !== expected.kind ||
+      skill.edition !== expected.edition ||
+      skill.version !== expected.version
+    )
+      throw new Error(`AULA-PARITY-CAPABILITY-CHANGED: ${expected.id}`);
+    if (skill.files['examples/input.json'] !== expected.inputSha256)
+      throw new Error(`AULA-PARITY-INPUT-CHANGED: ${expected.id}`);
+    const names =
+      skill.kind === 'index'
+        ? Object.keys(skill.files)
+            .filter((ref) => /^examples\/[^/]+\.html$/.test(ref))
+            .map((ref) => ref.slice(9))
+            .sort()
+        : [];
+    if (names.join('\n') !== Object.keys(expected.companions).sort().join('\n'))
+      throw new Error(`AULA-PARITY-COMPANION-SET: ${expected.id}`);
+    for (const name of names)
+      if (skill.files[`examples/${name}`] !== expected.companions[name])
+        throw new Error(`AULA-PARITY-COMPANION-HASH: ${expected.id}/${name}`);
+  }
+  return current;
+}
+
 export function compare(family: string, name: string): CaseResult {
   if (family === 'aula') {
-    const frozen = JSON.parse(
-      readFileSync(repoPath('verify/parity/cases/aula', name, 'cases.json'), 'utf8'),
-    ) as { capabilities: { id: string; kind: string; edition: string; inputSha256: string }[] };
-    const catalog = loadAulaCatalog();
-    const errors: string[] = [];
-    if (frozen.capabilities.length !== 18 || new Set(frozen.capabilities.map((s) => s.id)).size !== 18)
-      errors.push('baseline requires eighteen unique capabilities');
-    for (const expected of frozen.capabilities) {
-      const skill = catalog.capabilities.find((s) => s.id === expected.id);
-      if (!skill || skill.kind !== expected.kind || skill.edition !== expected.edition) {
-        errors.push(`missing capability: ${expected.id}`);
-        continue;
+    try {
+      const catalog = loadAulaCatalog();
+      const frozen = validateAulaParitySuccession(
+        readFileSync(repoPath('verify/parity/cases/aula', name, 'cases.json'), 'utf8'),
+        readFileSync(repoPath('verify/parity/cases/aula', name, 'cases-1.1.0.json'), 'utf8'),
+        readFileSync(repoPath('registry/aula-capabilities.json'), 'utf8'),
+      );
+      const errors: string[] = [];
+      for (const expected of frozen.capabilities) {
+        const skill = catalog.capabilities.find((skill) => skill.id === expected.id)!;
+        const source = readFileSync(repoPath(skill.source, 'examples/input.json'), 'utf8');
+        if (digest(source) !== expected.inputSha256) errors.push(`successor input changed: ${expected.id}`);
+        try {
+          const assets = Object.fromEntries(
+            Object.entries(expected.companions).map(([name, hash]) => {
+              const bytes = readFileSync(repoPath(skill.source, 'examples', name));
+              if (digest(bytes) !== hash)
+                throw new Error(`AULA-PARITY-COMPANION-HASH: ${expected.id}/${name}`);
+              return [name, bytes];
+            }),
+          );
+          aulaBuild(source, skill.kind, skill.edition, false, assets);
+        } catch (e) {
+          errors.push((e as Error).message);
+        }
       }
-      const source = readFileSync(repoPath(skill.source, 'examples/input.json'), 'utf8');
-      if (digest(source) !== expected.inputSha256) errors.push(`baseline input changed: ${expected.id}`);
-      try {
-        aulaBuild(source, skill.kind, skill.edition, false);
-      } catch (e) {
-        errors.push((e as Error).message);
-      }
+      return errors.length
+        ? { verdict: 'red', detail: errors.join('; ') }
+        : {
+            verdict: 'superset',
+            detail:
+              '18 versioned1.1.0 Aula/deck sources and linked HTML resolve to native hash-bound handlers; historical case preserved',
+          };
+    } catch (e) {
+      return { verdict: 'red', detail: (e as Error).message };
     }
-    return errors.length
-      ? { verdict: 'red', detail: errors.join('; ') }
-      : {
-          verdict: 'superset',
-          detail:
-            '18 frozen Aula/deck sources resolve to native hash-bound handlers; historical inventory preserved',
-        };
   }
   const cmp = COMPARATORS[family];
   if (!cmp) return { verdict: 'red', detail: `sin comparador para ${family}` };

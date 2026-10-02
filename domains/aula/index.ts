@@ -13,6 +13,13 @@ import {
   type SchemaCheck,
 } from '../../engine/handler-kit.ts';
 import { within } from '../../engine/paths.ts';
+import {
+  BuildFields,
+  BuildBindings,
+  buildMetadata,
+  bankRootForRun,
+  assertSameBuildBinding,
+} from '../../engine/aula/dependencies.ts';
 
 const Hash = z.string().regex(/^[a-f0-9]{64}$/);
 const Approval = z
@@ -41,8 +48,20 @@ export const AulaReceipt = z
     engineFiles: z.record(Ref, Hash),
     approvals: z.record(z.string(), z.object({ nonce: z.string(), artifacts: z.record(Ref, Hash) }).strict()),
     outputs: z.record(Ref, Hash),
+    ...BuildFields,
+    bankRef: Ref.optional(),
+    buildBindingsSha256: Hash.optional(),
   })
-  .strict();
+  .strict()
+  .superRefine((receipt, ctx) => {
+    try {
+      buildMetadata(receipt, receipt.bankRef);
+    } catch (error) {
+      ctx.addIssue({ code: 'custom', message: (error as Error).message });
+    }
+    if (receipt.engineVersion && !receipt.buildBindingsSha256)
+      ctx.addIssue({ code: 'custom', message: 'AULA-BUILD-BINDINGS-MISSING' });
+  });
 
 const selected = (ctx: HandlerCtx) => ({
   kind: AulaKind.parse(
@@ -66,6 +85,7 @@ function gateProof(ctx: Pick<HandlerCtx, 'runDir'>, gate: string) {
   const artifacts: Record<string, string> = {};
   for (const out of step.outputs) {
     if (!out.file.startsWith(ctx.runDir + path.sep)) throw new Error('AULA-APPROVAL-PATH');
+    within(ctx.runDir, path.relative(ctx.runDir, out.file));
     const hash = digest(readFileSync(out.file));
     if (approval.artifact_shas[out.id] !== hash || out.sha256 !== hash)
       throw new Error(`AULA-APPROVAL-STALE: ${gate}`);
@@ -129,12 +149,17 @@ const check =
 function boundAssets(sourceFile: string, raw: string): Record<string, Buffer> {
   const doc = JSON.parse(raw) as { assetFiles?: unknown };
   if (doc.assetFiles === undefined) return {};
-  const hashes = z.record(z.string().regex(/^[a-z][a-z0-9-]*\.html$/), Hash).parse(doc.assetFiles);
+  const hashes = z
+    .record(z.string().regex(/^[a-z][a-z0-9-]*\.html$/), Hash)
+    .refine((files) => Object.keys(files).length <= 20, 'AULA-ASSET-LIMIT')
+    .parse(doc.assetFiles);
   const assets: Record<string, Buffer> = {};
   const dir = path.dirname(sourceFile);
   for (const [name, hash] of Object.entries(hashes)) {
     const file = within(dir, name);
     if (lstatSync(file).isSymbolicLink()) throw new Error('AULA-ASSET-SYMLINK');
+    if (!lstatSync(file).isFile() || lstatSync(file).size > 2 * 1024 * 1024)
+      throw new Error('AULA-ASSET-LIMIT');
     const bytes = readFileSync(file);
     if (digest(bytes) !== hash) throw new Error(`AULA-ASSET-HASH: ${name}`);
     assets[name] = bytes;
@@ -147,7 +172,7 @@ const sourceHandler: Handler = async (ctx) => {
     const { kind, edition } = selected(ctx);
     gateProof(ctx, 'direction');
     const capability = selectAula(kind, edition).skill;
-    const absent = missingFrom(ctx);
+    const absent = missingFrom(ctx).filter((o) => o.id !== 'aula-build-bindings');
     if (absent.length)
       return requestFromHost(ctx, absent, [
         `Capacidad: ${capability.id}; fuente completa frames-aula-v1.`,
@@ -156,6 +181,7 @@ const sourceHandler: Handler = async (ctx) => {
       ]);
     const file = ctx.outputs.find((o) => o.id === 'aula-source')?.file;
     if (!file) throw new Error('AULA-SOURCE-NOT-DECLARED');
+    within(ctx.runDir, relTo(ctx, file));
     const raw = readFileSync(file, 'utf8');
     Source.parse(JSON.parse(raw) as unknown);
     if (kind === 'dynamic-commercial-decks') {
@@ -172,7 +198,35 @@ const sourceHandler: Handler = async (ctx) => {
           throw new Error('AULA-INTAKE-SPEC-MISMATCH: pillars');
       }
     }
-    aulaBuild(raw, kind, edition, false, boundAssets(file, raw));
+    const bankRef = ctx.facts.aula_bank === undefined ? undefined : Ref.parse(ctx.facts.aula_bank);
+    const bankRoot = bankRootForRun(ctx.runDir, bankRef);
+    const result = aulaBuild(
+      raw,
+      kind,
+      edition,
+      false,
+      boundAssets(file, raw),
+      bankRoot ? { root: bankRoot, ref: bankRef! } : undefined,
+    );
+    const bindings = ctx.outputs.find((o) => o.id === 'aula-build-bindings');
+    if (bindings)
+      ctx.write(
+        relTo(ctx, bindings.file),
+        JSON.stringify(
+          BuildBindings.parse({
+            schema: 'aula-build-bindings-v1',
+            engineFiles: result.catalog.engine.files,
+            skillSha256: result.skill.files['SKILL.md'],
+            sourceSha256: digest(raw),
+            kind,
+            edition,
+            ...result.binding,
+          }),
+          null,
+          2,
+        ) + '\n',
+      );
+    else if (result.binding.engineVersion || bankRef) throw new Error('AULA-BUILD-BINDINGS-NOT-DECLARED');
     return { status: 'done', note: `especificación válida · ${capability.id} · aprobación humana pendiente` };
   } catch (e) {
     return { status: 'blocked', note: (e as Error).message };
@@ -190,7 +244,44 @@ const renderHandler: Handler = async (ctx) => {
     const source = ctx.inputs['aula-source'];
     if (!source) throw new Error('AULA-SOURCE-MISSING');
     const raw = readFileSync(source, 'utf8');
-    const result = aulaBuild(raw, kind, edition, true, boundAssets(source, raw));
+    const bindingsFile = ctx.inputs['aula-build-bindings'];
+    if (
+      bindingsFile &&
+      approvals['sources-and-spec'].artifacts[relTo(ctx, bindingsFile)] !== digest(readFileSync(bindingsFile))
+    )
+      throw new Error('AULA-BUILD-BINDING-NOT-APPROVED');
+    const approvedBinding = bindingsFile
+      ? BuildBindings.parse(JSON.parse(readFileSync(bindingsFile, 'utf8')) as unknown)
+      : undefined;
+    if (
+      approvedBinding &&
+      (approvedBinding.sourceSha256 !== digest(raw) ||
+        approvedBinding.kind !== kind ||
+        approvedBinding.edition !== edition ||
+        approvedBinding.bankRef !== ctx.facts.aula_bank)
+    )
+      throw new Error('AULA-BUILD-BINDING-SOURCE-MISMATCH');
+    const snapshot = selectAula(kind, edition);
+    if (
+      approvedBinding &&
+      (JSON.stringify(approvedBinding.engineFiles) !== JSON.stringify(snapshot.catalog.engine.files) ||
+        approvedBinding.skillSha256 !== snapshot.skill.files['SKILL.md'])
+    )
+      throw new Error('AULA-BUILD-BINDING-ENGINE-STALE');
+    const bankRoot = bankRootForRun(ctx.runDir, approvedBinding?.bankRef);
+    const result = aulaBuild(
+      raw,
+      kind,
+      edition,
+      true,
+      boundAssets(source, raw),
+      bankRoot ? { root: bankRoot, ref: approvedBinding!.bankRef! } : undefined,
+    );
+    if (!approvedBinding && result.binding.engineVersion) throw new Error('AULA-BUILD-BINDINGS-MISSING');
+    assertSameBuildBinding(
+      approvedBinding ? buildMetadata(approvedBinding, approvedBinding.bankRef) : {},
+      result.binding,
+    );
     const html = ctx.outputs.find((o) => o.id === 'aula-html');
     const receiptOut = ctx.outputs.find((o) => o.id === 'aula-receipt');
     if (!html || !receiptOut) throw new Error('AULA-OUTPUT-NOT-DECLARED');
@@ -225,6 +316,8 @@ const renderHandler: Handler = async (ctx) => {
       engineFiles: result.catalog.engine.files,
       approvals,
       outputs,
+      ...result.binding,
+      ...(bindingsFile ? { buildBindingsSha256: digest(readFileSync(bindingsFile)) } : {}),
     });
     ctx.write(relTo(ctx, receiptOut.file), JSON.stringify(receipt, null, 2) + '\n');
     return {
@@ -262,13 +355,47 @@ export const receiptCheck: SchemaCheck = (content, file) => {
     if (r.source !== 'artifacts/aula-source.json') throw new Error('AULA-RECEIPT-SOURCE-MISMATCH');
     const sourceFile = within(run, r.source);
     const source = readFileSync(sourceFile, 'utf8');
-    const expected = aulaBuild(
+    const bindingsFile = within(run, 'artifacts/aula-build-bindings.json');
+    const approvedBinding = r.buildBindingsSha256
+      ? BuildBindings.parse(JSON.parse(readFileSync(bindingsFile, 'utf8')) as unknown)
+      : undefined;
+    if (
+      r.buildBindingsSha256 &&
+      r.approvals['sources-and-spec']?.artifacts['artifacts/aula-build-bindings.json'] !==
+        r.buildBindingsSha256
+    )
+      throw new Error('AULA-BUILD-BINDING-NOT-APPROVED');
+    if (r.buildBindingsSha256 && digest(readFileSync(bindingsFile)) !== r.buildBindingsSha256)
+      throw new Error('AULA-BUILD-BINDING-STALE');
+    if (
+      approvedBinding &&
+      (approvedBinding.sourceSha256 !== digest(source) ||
+        approvedBinding.kind !== r.kind ||
+        approvedBinding.edition !== r.edition)
+    )
+      throw new Error('AULA-BUILD-BINDING-SOURCE-MISMATCH');
+    if (r.engineVersion && !approvedBinding) throw new Error('AULA-BUILD-BINDINGS-MISSING');
+    if (
+      approvedBinding &&
+      (JSON.stringify(approvedBinding.engineFiles) !== JSON.stringify(chosen.catalog.engine.files) ||
+        approvedBinding.skillSha256 !== chosen.skill.files['SKILL.md'])
+    )
+      throw new Error('AULA-BUILD-BINDING-ENGINE-STALE');
+    const bankRoot = bankRootForRun(run, approvedBinding?.bankRef);
+    const fresh = aulaBuild(
       source,
       r.kind,
       r.edition,
       false,
       boundAssets(sourceFile, source),
-    ).plan.outputs.map((name) => `artifacts/aula/${name}`);
+      bankRoot ? { root: bankRoot, ref: approvedBinding!.bankRef! } : undefined,
+    );
+    assertSameBuildBinding(buildMetadata(r, r.bankRef), fresh.binding);
+    assertSameBuildBinding(
+      approvedBinding ? buildMetadata(approvedBinding, approvedBinding.bankRef) : {},
+      fresh.binding,
+    );
+    const expected = fresh.plan.outputs.map((name) => `artifacts/aula/${name}`);
     expected.push('artifacts/aula-html.html');
     if (expected.sort().join() !== Object.keys(r.outputs).sort().join())
       throw new Error('AULA-RECEIPT-FILES-MISMATCH');
@@ -318,5 +445,6 @@ export const aula: { handlers: Record<string, Handler>; schemas: Record<string, 
     'frames-aula-v1': check(Source),
     'commercial-intake-v1': check(Intake),
     'aula-receipt-v1': receiptCheck,
+    'aula-build-bindings-v1': check(BuildBindings),
   },
 };

@@ -1,98 +1,182 @@
 {
   "schemaVersion": "frames-aula-v1",
-  "title": {
-    "es": "De la idea a la práctica",
-    "en": "From idea to practice",
-    "pt": "Da ideia à prática",
-    "fr": "De l’idée à la pratique"
-  },
-  "languages": [
-    "es",
-    "en",
-    "pt",
-    "fr"
-  ],
   "language": "es",
+  "languages": [
+    "es"
+  ],
+  "theme": "dark",
+  "pieces": [],
+  "authoringPolicy": {
+    "origin": "new",
+    "maxSlides": 8,
+    "explicitBrief": "Javier requested a commercial brochure with exactly eight slides, including cover and back cover."
+  },
+  "title": "MetodologIA · Capacidad propia con IA",
   "objectives": [
-    {
-      "es": "Construir una propuesta verificable",
-      "en": "Build a verifiable proposal",
-      "pt": "Construir uma proposta verificável",
-      "fr": "Construire une proposition vérifiable"
-    }
+    "Identificar la intervención adecuada para un reto profesional."
   ],
   "acceptance": [
+    "La persona distingue entrenamiento, consultoría y soluciones y define un siguiente paso."
+  ],
+  "facts": [
     {
-      "es": "Incluye objetivo, evidencia y siguiente paso.",
-      "en": "Include objective, evidence and next step.",
-      "pt": "Inclua objetivo, evidência e próximo passo.",
-      "fr": "Inclure objectif, preuve et prochaine étape."
+      "id": "offer-current",
+      "text": "Oferta: entrenamiento, consultoría y construcción de soluciones; método entender, diseñar, implementar y transferir.",
+      "source": "https://metodologia.info/",
+      "sha256": "f9d1b53de29f615715aa3c931d5cc236c31cd2dec8190159e20c0cbc852353f6",
+      "confirmed": true
     }
   ],
   "sections": [
     {
-      "id": "contexto",
-      "title": {
-        "es": "Una decisión comercial con evidencia",
-        "en": "An evidence-based commercial decision",
-        "pt": "Uma decisão comercial com evidência",
-        "fr": "Une décision commerciale fondée sur des preuves"
+      "id": "portada",
+      "title": "Capacidad propia para trabajar con IA",
+      "body": "Entrenamiento, consultoría y soluciones sobre retos reales. Una oferta para aprender, decidir y construir con responsabilidad humana. [METODOLOGIA]",
+      "scene": "learning-opening",
+      "sceneParams": {
+        "title": "Del reto a la capacidad",
+        "a": "Reto real",
+        "b": "Método",
+        "c": "IA con criterio",
+        "d": "Capacidad propia"
       },
-      "body": {
-        "es": "Describe la situación antes de elegir una solución. [METODOLOGIA]",
-        "en": "Describe the situation before choosing a solution. [METODOLOGIA]",
-        "pt": "Descreva a situação antes de escolher uma solução. [METODOLOGIA]",
-        "fr": "Décrivez la situation avant de choisir une solution. [METODOLOGIA]"
-      },
-      "scene": "flow",
-      "notes": {
-        "es": "Invita a una reflexión breve.",
-        "en": "Invite a brief reflection.",
-        "pt": "Convide a uma breve reflexão.",
-        "fr": "Invitez à une courte réflexion."
-      }
+      "factIds": [
+        "offer-current"
+      ],
+      "notes": "Presentar la oferta; no prometer resultados ya obtenidos. Solicitar un siguiente paso concreto."
     },
     {
-      "id": "practica",
-      "title": {
-        "es": "Prueba una idea pequeña",
-        "en": "Test one small idea",
-        "pt": "Teste uma pequena ideia",
-        "fr": "Testez une petite idée"
+      "id": "reto",
+      "title": "Del reto a una decisión clara",
+      "body": "El siguiente paso depende del cuello de botella: criterio, dirección o sistema. El alcance se acuerda sobre un resultado concreto. [METODOLOGIA]",
+      "scene": "decision-options",
+      "sceneParams": {
+        "title": "Elegir la intervención",
+        "a": "Falta criterio",
+        "b": "Falta dirección",
+        "c": "Falta sistema",
+        "d": "Acordar el alcance"
       },
-      "body": {
-        "es": "Describe la situación antes de elegir una solución. [METODOLOGIA]",
-        "en": "Describe the situation before choosing a solution. [METODOLOGIA]",
-        "pt": "Descreva a situação antes de escolher uma solução. [METODOLOGIA]",
-        "fr": "Décrivez la situation avant de choisir une solution. [METODOLOGIA]"
-      },
-      "prompt": {
-        "es": "Propón un experimento para {{contexto}}. Incluye objetivo y evidencia.",
-        "en": "Propose an experiment for {{contexto}}. Include objective and evidence.",
-        "pt": "Proponha um experimento para {{contexto}}. Inclua objetivo e evidência.",
-        "fr": "Proposez une expérience pour {{contexto}}. Incluez objectif et preuve."
-      },
-      "fields": [
+      "cols": [
         {
-          "key": "contexto",
-          "label": {
-            "es": "Tu contexto",
-            "en": "Your context",
-            "pt": "Seu contexto",
-            "fr": "Votre contexte"
-          },
-          "default": "un equipo de práctica"
+          "title": "Entrenar",
+          "body": "Aprender y aplicar con criterio."
+        },
+        {
+          "title": "Acompañar",
+          "body": "Delimitar y ordenar decisiones."
+        },
+        {
+          "title": "Construir",
+          "body": "Resolver una necesidad concreta."
         }
       ],
+      "factIds": [
+        "offer-current"
+      ],
+      "notes": "Presentar la oferta; no prometer resultados ya obtenidos. Solicitar un siguiente paso concreto."
+    },
+    {
+      "id": "metodo",
+      "title": "Un método que se transfiere",
+      "body": "Entender el reto, diseñar la intervención, implementar con revisión y transferir la práctica. La tecnología se elige según el caso. [METODOLOGIA]",
+      "scene": "flow",
+      "sceneParams": {
+        "title": "Método antes que herramienta",
+        "a": "Entender",
+        "b": "Diseñar",
+        "c": "Implementar",
+        "d": "Transferir"
+      },
+      "factIds": [
+        "offer-current"
+      ],
+      "notes": "Presentar la oferta; no prometer resultados ya obtenidos. Solicitar un siguiente paso concreto."
+    },
+    {
+      "id": "entrenamientos",
+      "title": "Entrenamiento para aprender haciendo",
+      "body": "Práctica guiada sobre un reto propio, ruta adaptada al contexto y materiales para continuar. Definimos qué producir y cómo revisarlo. [METODOLOGIA]",
+      "scene": "learning-practice",
+      "sceneParams": {
+        "title": "Aprender sobre el trabajo",
+        "a": "Reto propio",
+        "b": "Práctica guiada",
+        "c": "Revisión",
+        "d": "Material reutilizable"
+      },
+      "factIds": [
+        "offer-current"
+      ],
+      "notes": "Presentar la oferta; no prometer resultados ya obtenidos. Solicitar un siguiente paso concreto."
+    },
+    {
+      "id": "consultoria",
+      "title": "Consultoría para ordenar decisiones",
+      "body": "Diagnóstico enfocado, prioridades y una ruta ejecutable con responsables. El acompañamiento convierte incertidumbre en decisiones documentadas. [METODOLOGIA]",
+      "scene": "decision-options",
+      "sceneParams": {
+        "title": "De incertidumbre a dirección",
+        "a": "Diagnosticar",
+        "b": "Priorizar",
+        "c": "Decidir",
+        "d": "Acompañar"
+      },
+      "factIds": [
+        "offer-current"
+      ],
+      "notes": "Presentar la oferta; no prometer resultados ya obtenidos. Solicitar un siguiente paso concreto."
+    },
+    {
+      "id": "soluciones",
+      "title": "Soluciones para necesidades concretas",
+      "body": "Caso de uso delimitado, prototipo verificable y consolidación con gobierno y transferencia. El equipo debe poder operar la solución. [METODOLOGIA]",
       "scene": "steps",
-      "exemplar": {
-        "es": "Un equipo registra una prueba y revisa el resultado. [SUPUESTO]",
-        "en": "A team records a test and reviews the result. [SUPUESTO]",
-        "pt": "Uma equipe registra um teste e revisa o resultado. [SUPUESTO]",
-        "fr": "Une équipe consigne un test et examine le résultat. [SUPUESTO]"
-      }
+      "sceneParams": {
+        "title": "Construir y comprobar",
+        "a": "Caso delimitado",
+        "b": "Prototipo",
+        "c": "Revisión humana",
+        "d": "Transferencia"
+      },
+      "factIds": [
+        "offer-current"
+      ],
+      "notes": "Presentar la oferta; no prometer resultados ya obtenidos. Solicitar un siguiente paso concreto."
+    },
+    {
+      "id": "entregables",
+      "title": "Entregables que permiten continuar",
+      "body": "Según el alcance: materiales, decisiones, rutas, prototipos y documentación de la práctica. Son componentes de la oferta; los resultados se comprobarán en cada proyecto. [METODOLOGIA]",
+      "scene": "evidence-observe",
+      "sceneParams": {
+        "title": "Evidencia de trabajo",
+        "a": "Materiales",
+        "b": "Decisiones",
+        "c": "Prototipos",
+        "d": "Práctica documentada"
+      },
+      "factIds": [
+        "offer-current"
+      ],
+      "notes": "Presentar la oferta; no prometer resultados ya obtenidos. Solicitar un siguiente paso concreto."
+    },
+    {
+      "id": "tapa",
+      "title": "Conversemos sobre tu siguiente paso",
+      "body": "Trae un reto y el resultado que necesitas. Revisaremos si conviene entrenar, acompañar o construir, y acordaremos alcance y evidencia de avance. [METODOLOGIA]",
+      "scene": "learning-closing",
+      "sceneParams": {
+        "title": "Un siguiente paso concreto",
+        "a": "Tu reto",
+        "b": "Resultado buscado",
+        "c": "Alcance",
+        "d": "Evidencia de avance"
+      },
+      "factIds": [
+        "offer-current"
+      ],
+      "notes": "Presentar la oferta; no prometer resultados ya obtenidos. Solicitar un siguiente paso concreto."
     }
-  ],
-  "facts": [],
-  "pieces": []
+  ]
 }

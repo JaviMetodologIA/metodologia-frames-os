@@ -1,98 +1,393 @@
 {
   "schemaVersion": "frames-aula-v1",
-  "title": {
-    "es": "De la idea a la práctica",
-    "en": "From idea to practice",
-    "pt": "Da ideia à prática",
-    "fr": "De l’idée à la pratique"
-  },
-  "languages": [
-    "es",
-    "en",
-    "pt",
-    "fr"
-  ],
   "language": "es",
+  "languages": [
+    "es"
+  ],
+  "theme": "dark",
+  "pieces": [],
+  "authoringPolicy": {
+    "origin": "new",
+    "maxSlides": 13,
+    "explicitBrief": "Javier requested the academic empowerment presentation with exactly 13 slides, including cover and back cover."
+  },
+  "title": "Programa de Empoderamiento · MetodologIA · 13 escenas",
   "objectives": [
-    {
-      "es": "Construir una propuesta verificable",
-      "en": "Build a verifiable proposal",
-      "pt": "Construir uma proposta verificável",
-      "fr": "Construire une proposition vérifiable"
-    }
+    "Explicar la ruta y sus activos.",
+    "Definir un reto y una evidencia inicial."
   ],
   "acceptance": [
+    "Relaciona ciclos, activos y revisión humana.",
+    "Propone un entregable con criterio de revisión."
+  ],
+  "facts": [
     {
-      "es": "Incluye objetivo, evidencia y siguiente paso.",
-      "en": "Include objective, evidence and next step.",
-      "pt": "Inclua objetivo, evidência e próximo passo.",
-      "fr": "Inclure objectif, preuve et prochaine étape."
+      "id": "program-current",
+      "text": "Programa publicado:16 semanas,3 horas semanales,cuatro ciclos y cuatro activos; personas o equipos, sin experiencia previa requerida.",
+      "source": "https://metodologia.info/programas/empoderamiento/",
+      "sha256": "70072e8d7828107cd17f32ffc3dd0c00d59338cd5065ee81fddd7adf5b3dcac0",
+      "confirmed": true
     }
   ],
+  "training": {
+    "durationMinutes": 26,
+    "audience": "Personas o equipos que exploran el programa",
+    "materials": [
+      "Un reto profesional y una hoja para registrar evidencia."
+    ],
+    "runOfShow": [
+      {
+        "sectionId": "portada",
+        "minutes": 2,
+        "notes": "Presentar, detenerse para preguntas y revisar la comprensión."
+      },
+      {
+        "sectionId": "audiencia",
+        "minutes": 2,
+        "notes": "Presentar, detenerse para preguntas y revisar la comprensión."
+      },
+      {
+        "sectionId": "metodo",
+        "minutes": 2,
+        "notes": "Presentar, detenerse para preguntas y revisar la comprensión."
+      },
+      {
+        "sectionId": "contrato",
+        "minutes": 2,
+        "notes": "Presentar, detenerse para preguntas y revisar la comprensión."
+      },
+      {
+        "sectionId": "ciclos",
+        "minutes": 2,
+        "notes": "Presentar, detenerse para preguntas y revisar la comprensión."
+      },
+      {
+        "sectionId": "diagnosticar",
+        "minutes": 2,
+        "notes": "Presentar, detenerse para preguntas y revisar la comprensión."
+      },
+      {
+        "sectionId": "disenar",
+        "minutes": 2,
+        "notes": "Presentar, detenerse para preguntas y revisar la comprensión."
+      },
+      {
+        "sectionId": "practicar",
+        "minutes": 2,
+        "notes": "Presentar, detenerse para preguntas y revisar la comprensión."
+      },
+      {
+        "sectionId": "consolidar",
+        "minutes": 2,
+        "notes": "Presentar, detenerse para preguntas y revisar la comprensión."
+      },
+      {
+        "sectionId": "clase",
+        "minutes": 2,
+        "notes": "Presentar, detenerse para preguntas y revisar la comprensión."
+      },
+      {
+        "sectionId": "activos",
+        "minutes": 2,
+        "notes": "Presentar, detenerse para preguntas y revisar la comprensión."
+      },
+      {
+        "sectionId": "evidencia",
+        "minutes": 2,
+        "notes": "Presentar, detenerse para preguntas y revisar la comprensión."
+      },
+      {
+        "sectionId": "tapa",
+        "minutes": 2,
+        "notes": "Presentar, detenerse para preguntas y revisar la comprensión."
+      }
+    ]
+  },
   "sections": [
     {
-      "id": "contexto",
-      "title": {
-        "es": "Observa, discute y practica",
-        "en": "Observe, discuss and practice",
-        "pt": "Observe, discuta e pratique",
-        "fr": "Observer, discuter et pratiquer"
+      "id": "portada",
+      "title": "Tu reto profesional, una ruta con IA",
+      "body": "Programa de Empoderamiento de MetodologIA. Una ruta para diseñar, usar, comprobar y mejorar una práctica propia. [METODOLOGIA]",
+      "scene": "learning-opening",
+      "sceneParams": {
+        "title": "Del reto a una práctica propia",
+        "a": "Reto profesional",
+        "b": "Método",
+        "c": "Práctica con IA",
+        "d": "Evidencia"
       },
-      "body": {
-        "es": "Describe la situación antes de elegir una solución. [METODOLOGIA]",
-        "en": "Describe the situation before choosing a solution. [METODOLOGIA]",
-        "pt": "Descreva a situação antes de escolher uma solução. [METODOLOGIA]",
-        "fr": "Décrivez la situation avant de choisir une solution. [METODOLOGIA]"
-      },
-      "scene": "flow",
-      "notes": {
-        "es": "Invita a una reflexión breve.",
-        "en": "Invite a brief reflection.",
-        "pt": "Convide a uma breve reflexão.",
-        "fr": "Invitez à une courte réflexion."
-      }
+      "factIds": [
+        "program-current"
+      ],
+      "durationMinutes": 2,
+      "facilitatorNotes": "Distinguir oferta publicada de ejemplos didácticos. No atribuir logros a participantes."
     },
     {
-      "id": "practica",
-      "title": {
-        "es": "Prueba una idea pequeña",
-        "en": "Test one small idea",
-        "pt": "Teste uma pequena ideia",
-        "fr": "Testez une petite idée"
+      "id": "audiencia",
+      "title": "Parte de un reto que te importe",
+      "body": "Para personas o equipos con un reto profesional real. No exige experiencia previa con IA. El contexto ayuda a decidir qué aprender y cómo comprobarlo. [METODOLOGIA]",
+      "scene": "team-roles",
+      "sceneParams": {
+        "title": "Tu caso orienta la ruta",
+        "a": "Persona o equipo",
+        "b": "Reto real",
+        "c": "Nivel de partida",
+        "d": "Criterio compartido"
       },
-      "body": {
-        "es": "Describe la situación antes de elegir una solución. [METODOLOGIA]",
-        "en": "Describe the situation before choosing a solution. [METODOLOGIA]",
-        "pt": "Descreva a situação antes de escolher uma solução. [METODOLOGIA]",
-        "fr": "Décrivez la situation avant de choisir une solution. [METODOLOGIA]"
+      "reflection": "¿Qué resultado te gustaría repetir de forma confiable?",
+      "factIds": [
+        "program-current"
+      ],
+      "durationMinutes": 2,
+      "facilitatorNotes": "Distinguir oferta publicada de ejemplos didácticos. No atribuir logros a participantes."
+    },
+    {
+      "id": "metodo",
+      "title": "Método antes que herramienta",
+      "body": "Intención define el resultado; flujo ordena decisiones; criterio compara la salida con el estándar. El contexto dirige la elección de herramientas. [METODOLOGIA]",
+      "scene": "contrast",
+      "sceneParams": {
+        "title": "Tres decisiones del método",
+        "a": "Intención",
+        "b": "Flujo",
+        "c": "Criterio",
+        "d": "Herramienta contextual"
       },
-      "prompt": {
-        "es": "Propón un experimento para {{contexto}}. Incluye objetivo y evidencia.",
-        "en": "Propose an experiment for {{contexto}}. Include objective and evidence.",
-        "pt": "Proponha um experimento para {{contexto}}. Inclua objetivo e evidência.",
-        "fr": "Proposez une expérience pour {{contexto}}. Incluez objectif et preuve."
+      "factIds": [
+        "program-current"
+      ],
+      "durationMinutes": 2,
+      "facilitatorNotes": "Distinguir oferta publicada de ejemplos didácticos. No atribuir logros a participantes."
+    },
+    {
+      "id": "contrato",
+      "title": "La IA asiste; tú respondes",
+      "body": "La ruta publicada contempla 16 semanas y 3 horas por semana. El programa aporta estructura y revisión; tú conservas las decisiones y la responsabilidad. [METODOLOGIA]",
+      "scene": "gate",
+      "sceneParams": {
+        "title": "Responsabilidad y revisión",
+        "a": "Propósito",
+        "b": "Producción con IA",
+        "c": "Revisión humana",
+        "d": "Decisión"
       },
-      "fields": [
+      "checkpoints": [
         {
-          "key": "contexto",
-          "label": {
-            "es": "Tu contexto",
-            "en": "Your context",
-            "pt": "Seu contexto",
-            "fr": "Votre contexte"
-          },
-          "default": "un equipo de práctica"
+          "question": "¿Quién decide si una salida sirve?",
+          "answer": "La persona responsable compara la salida con el estándar acordado.",
+          "criterion": "Identifica revisión humana y un estándar explícito."
         }
       ],
+      "factIds": [
+        "program-current"
+      ],
+      "durationMinutes": 2,
+      "facilitatorNotes": "Distinguir oferta publicada de ejemplos didácticos. No atribuir logros a participantes."
+    },
+    {
+      "id": "ciclos",
+      "title": "Cuatro ciclos construyen una práctica",
+      "body": "Diagnosticar, diseñar, practicar y consolidar. Cada ciclo ocupa cuatro semanas y prepara un activo que habilita el siguiente. [METODOLOGIA]",
+      "scene": "flow",
+      "sceneParams": {
+        "title": "Una ruta de cuatro ciclos",
+        "a": "Diagnosticar",
+        "b": "Diseñar",
+        "c": "Practicar",
+        "d": "Consolidar"
+      },
+      "factIds": [
+        "program-current"
+      ],
+      "durationMinutes": 2,
+      "facilitatorNotes": "Distinguir oferta publicada de ejemplos didácticos. No atribuir logros a participantes."
+    },
+    {
+      "id": "diagnosticar",
+      "title": "Diagnosticar: delimita el punto de partida",
+      "body": "Semanas 1–4: prioridades, recepción, presencia y estándar de excelencia. Define el reto y la evidencia que importa. [METODOLOGIA]",
+      "scene": "evidence-observe",
+      "sceneParams": {
+        "title": "Diagnosticar",
+        "a": "Prioridades",
+        "b": "Punto de partida",
+        "c": "Respuesta consciente",
+        "d": "Estándar"
+      },
+      "factIds": [
+        "program-current"
+      ],
+      "durationMinutes": 2,
+      "facilitatorNotes": "Distinguir oferta publicada de ejemplos didácticos. No atribuir logros a participantes."
+    },
+    {
+      "id": "disenar",
+      "title": "Diseñar: convierte intención en flujo",
+      "body": "Semanas 5–8: fricciones, jornadas estratégicas, rituales de desempeño y prototipado con IA. Documenta decisiones y un estándar de calidad. [METODOLOGIA]",
       "scene": "steps",
-      "exemplar": {
-        "es": "Un equipo registra una prueba y revisa el resultado. [SUPUESTO]",
-        "en": "A team records a test and reviews the result. [SUPUESTO]",
-        "pt": "Uma equipe registra um teste e revisa o resultado. [SUPUESTO]",
-        "fr": "Une équipe consigne un test et examine le résultat. [SUPUESTO]"
-      }
+      "sceneParams": {
+        "title": "Diseñar",
+        "a": "Fricción",
+        "b": "Jornada",
+        "c": "Rituales",
+        "d": "Prototipo"
+      },
+      "factIds": [
+        "program-current"
+      ],
+      "durationMinutes": 2,
+      "facilitatorNotes": "Distinguir oferta publicada de ejemplos didácticos. No atribuir logros a participantes."
+    },
+    {
+      "id": "practicar",
+      "title": "Practicar: produce y revisa con IA",
+      "body": "Semanas 9–12: multimedia, mini apps, asistentes y skills, y automatización. Ejecuta sobre el caso, revisa los resultados y ajusta el sistema. [METODOLOGIA]",
+      "scene": "learning-practice",
+      "sceneParams": {
+        "title": "Practicar",
+        "a": "Multimedia",
+        "b": "Mini apps",
+        "c": "Asistentes y skills",
+        "d": "Automatizar"
+      },
+      "factIds": [
+        "program-current"
+      ],
+      "durationMinutes": 2,
+      "facilitatorNotes": "Distinguir oferta publicada de ejemplos didácticos. No atribuir logros a participantes."
+    },
+    {
+      "id": "consolidar",
+      "title": "Consolidar: documenta y transfiere la práctica",
+      "body": "Semanas 13–16: agentes, orquestación, integración de aprendizajes y cierre. Presenta tu portafolio y define el siguiente ciclo. [METODOLOGIA]",
+      "scene": "learning-transfer",
+      "sceneParams": {
+        "title": "Consolidar",
+        "a": "Agentes",
+        "b": "Orquestación",
+        "c": "Integración",
+        "d": "Portafolio"
+      },
+      "factIds": [
+        "program-current"
+      ],
+      "durationMinutes": 2,
+      "facilitatorNotes": "Distinguir oferta publicada de ejemplos didácticos. No atribuir logros a participantes."
+    },
+    {
+      "id": "clase",
+      "title": "Aprende, aplica y revisa tu caso",
+      "body": "Cada sesión combina una masterclass inicial, hands-on y cierre de dudas. La práctica trabaja sobre el contexto de la persona participante. [METODOLOGIA]",
+      "scene": "learning-practice",
+      "sceneParams": {
+        "title": "Tres momentos de clase",
+        "a": "Concepto y criterio",
+        "b": "Ejemplo",
+        "c": "Práctica propia",
+        "d": "Revisión y cierre"
+      },
+      "demonstration": "Ejemplo didáctico: un equipo define una entrega, prueba un prompt y revisa si cumple el criterio. [SUPUESTO]",
+      "practice": "Escribe un reto, un entregable y una evidencia observable de avance. [SUPUESTO]",
+      "prompt": "Para {{reto}}, propón un entregable pequeño. Explicita fuentes necesarias, criterio de revisión humana y evidencia observable. Marca lo desconocido como supuesto.",
+      "fields": [
+        {
+          "key": "reto",
+          "label": "Tu reto profesional",
+          "default": "preparar una propuesta revisable"
+        }
+      ],
+      "exemplar": "Reto: ordenar una propuesta. Entregable: borrador con fuentes. Criterio: separar hechos y supuestos. Evidencia: revisión registrada. [SUPUESTO]",
+      "factIds": [
+        "program-current"
+      ],
+      "durationMinutes": 2,
+      "facilitatorNotes": "Distinguir oferta publicada de ejemplos didácticos. No atribuir logros a participantes."
+    },
+    {
+      "id": "activos",
+      "title": "Cuatro activos para continuar",
+      "body": "Mapa de dirección, sistema de trabajo, kit con IA y portafolio de evidencia. Se construyen sobre el caso propio y permiten explicar y repetir la práctica. [METODOLOGIA]",
+      "scene": "evidence-observe",
+      "sceneParams": {
+        "title": "Lo que permanece",
+        "a": "Mapa de dirección",
+        "b": "Sistema de trabajo",
+        "c": "Kit con IA",
+        "d": "Portafolio"
+      },
+      "table": {
+        "headers": [
+          "Activo",
+          "Qué conserva"
+        ],
+        "rows": [
+          [
+            "Mapa de dirección",
+            "Propósito y criterios"
+          ],
+          [
+            "Sistema de trabajo",
+            "Flujos y reglas"
+          ],
+          [
+            "Kit con IA",
+            "Prompts y fuentes"
+          ],
+          [
+            "Portafolio",
+            "Entregables y decisiones"
+          ]
+        ]
+      },
+      "factIds": [
+        "program-current"
+      ],
+      "durationMinutes": 2,
+      "facilitatorNotes": "Distinguir oferta publicada de ejemplos didácticos. No atribuir logros a participantes."
+    },
+    {
+      "id": "evidencia",
+      "title": "El avance se demuestra con entregables",
+      "body": "El portafolio reúne trabajo, decisiones y aprendizajes explicables. La oferta distingue participación y competencia bajo sus condiciones; este ejemplo no emite ninguna credencial. [METODOLOGIA]",
+      "scene": "learning-feedback",
+      "sceneParams": {
+        "title": "Comprobar antes de usar",
+        "a": "Entregable",
+        "b": "Criterio",
+        "c": "Revisión",
+        "d": "Aprendizaje"
+      },
+      "checkpoints": [
+        {
+          "question": "¿Qué incluirías para comprobar tu avance?",
+          "answer": "Un entregable, el criterio usado y el registro de revisión y decisiones.",
+          "criterion": "Aporta evidencia concreta y distingue participación de competencia."
+        }
+      ],
+      "factIds": [
+        "program-current"
+      ],
+      "durationMinutes": 2,
+      "facilitatorNotes": "Distinguir oferta publicada de ejemplos didácticos. No atribuir logros a participantes."
+    },
+    {
+      "id": "tapa",
+      "title": "Define tu primer compromiso verificable",
+      "body": "Trae un caso real. Describe qué quieres cambiar, qué entregarás y cómo lo revisarás. El diagnóstico fija el punto de partida de la ruta. [METODOLOGIA]",
+      "scene": "learning-transfer",
+      "sceneParams": {
+        "title": "De la explicación a tu caso",
+        "a": "Tu reto",
+        "b": "Primer entregable",
+        "c": "Criterio",
+        "d": "Siguiente acción"
+      },
+      "transfer": "Registrar una acción, una evidencia y una fecha elegida por la persona. [SUPUESTO]",
+      "factIds": [
+        "program-current"
+      ],
+      "durationMinutes": 2,
+      "facilitatorNotes": "Distinguir oferta publicada de ejemplos didácticos. No atribuir logros a participantes."
     }
-  ],
-  "facts": [],
-  "pieces": []
+  ]
 }

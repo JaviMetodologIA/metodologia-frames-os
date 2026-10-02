@@ -175,7 +175,10 @@ if (check) {
   const target = repoPath(catalog.engine.source);
   if (existsSync(target)) rmSync(target, { recursive: true, force: true });
   mkdirSync(target, { recursive: true });
-  for (const f of Object.keys(engineFiles)) cpSync(path.join(engineSource, f), path.join(target, f));
+  for (const f of Object.keys(engineFiles)) {
+    mkdirSync(path.dirname(path.join(target, f)), { recursive: true });
+    cpSync(path.join(engineSource, f), path.join(target, f));
+  }
   writeFileSync(repoPath('registry/aula-capabilities.json'), text);
   if (inventoryText !== nextInventory) writeFileSync(inventoryFile, nextInventory);
 }

@@ -144,6 +144,8 @@ steps:
     outputs:
       - id: aula-source
         schema: frames-aula-v1
+      - id: aula-build-bindings
+        schema: aula-build-bindings-v1
     gate: sources-and-spec
   - id: DC03
     title: Renderizar el deck comercial
@@ -154,6 +156,7 @@ steps:
       eq: frames-aula
     inputs:
       - aula-source
+      - aula-build-bindings
       - commercial-intake
     outputs:
       - id: aula-html
