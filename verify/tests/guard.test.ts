@@ -16,7 +16,7 @@ it('scans outside exact OFL fonts and keeps unknown embedded bytes in the scan',
     expect(pattern.test(privacyScanBody(`${aws} ${uri(bytes)}`))).toBe(true);
     expect(pattern.test(privacyScanBody(`${uri(bytes)} ${aws}`))).toBe(true);
     const altered = Buffer.from(bytes);
-    altered[0] ^= 1;
+    altered[0] = altered.readUInt8(0) ^ 1;
     expect(privacyScanBody(uri(altered))).toBe(uri(altered));
     expect(privacyScanBody(uri(bytes).replace('font/ttf', 'image/png'))).toContain(bytes.toString('base64'));
   }
