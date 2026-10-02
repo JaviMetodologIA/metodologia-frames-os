@@ -1,6 +1,6 @@
 ---
 name: frames
-description: Crear, mejorar o planear contenido con Frames OS (MetodologIA) — Aula dinámica, masterclasses, workbooks, módulos, decks comerciales MetodologIA o marca blanca, piezas, carruseles, campañas, CV, video, NotebookLM y skills. Usar para producir o mejorar comunicación y aprendizaje.
+description: Crear, mejorar o planear contenido con Frames OS (MetodologIA) — Aula dinámica, talleres inmersivos, masterclasses, workbooks, módulos, decks comerciales MetodologIA o marca blanca, piezas, carruseles, campañas, CV, video, NotebookLM y skills. Usar para producir o mejorar comunicación y aprendizaje.
 ---
 <!-- GENERADO por `pnpm gen` (engine/gen.ts). No editar a mano: edita la fuente. -->
 

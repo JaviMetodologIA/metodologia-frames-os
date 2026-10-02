@@ -8,6 +8,7 @@ import { repoPath } from '../paths.ts';
 
 export const AULA_KINDS = [
   'immersive-class',
+  'workshop-immersive',
   'masterclass',
   'workbook',
   'lean-coffee',
@@ -43,7 +44,7 @@ const Catalog = z
     schema: z.literal('aula-capabilities-v1'),
     state: z.literal('ACTIVE_LOCAL'),
     engine: z.object({ source: Ref, files: z.record(Ref, Hash) }).strict(),
-    capabilities: z.array(Capability).length(18),
+    capabilities: z.array(Capability).length(AULA_KINDS.length * Edition.options.length),
   })
   .strict();
 export type AulaCatalog = z.infer<typeof Catalog>;
@@ -115,6 +116,9 @@ export function loadAulaCatalog(file = repoPath('registry/aula-capabilities.json
       if (skill.files[`engine/${f}`] !== catalog.engine.files[f])
         throw new Error(`AULA-ENGINE-DIVERGENCE: ${skill.id}/${f}`);
   }
+  for (const edition of Edition.options)
+    for (const kind of AULA_KINDS)
+      if (!keys.has(`${edition}/${kind}`)) throw new Error(`AULA-CAPABILITY-MISSING: ${edition}/${kind}`);
   return catalog;
 }
 

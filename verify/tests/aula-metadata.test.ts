@@ -9,7 +9,7 @@ import { handlers } from '../../engine/handlers.ts';
 import { repoPath } from '../../engine/paths.ts';
 import { loadRegistry } from '../../engine/registry.ts';
 
-it('resolves native metadata for all eighteen packages and checks adapted bytes without writes', () => {
+it('resolves native metadata for all twenty packages and checks adapted bytes without writes', () => {
   const catalog = loadAulaCatalog();
   const registry = loadRegistry();
   const observed = [repoPath('registry/aula-capabilities.json')];
@@ -24,6 +24,7 @@ it('resolves native metadata for all eighteen packages and checks adapted bytes 
     for (const ref of lineage.authority_refs) expect(existsSync(repoPath(ref)), ref).toBe(true);
     expect(handlers.has(skill.handler)).toBe(true);
     const context = readFileSync(contextFile, 'utf8');
+    expect(skill.files['context.md']).toBeDefined();
     expect(context).not.toMatch(/03_artefactos|frames:aula|P05|P06|P07|EXP_BRIEF_APPROVED/);
     expect(context).toContain(`pnpm frames start ${family.id} --request`);
     expect(context).toContain(`aula_format=${skill.kind}`);
@@ -53,6 +54,12 @@ it('resolves native metadata for all eighteen packages and checks adapted bytes 
   const temp = mkdtempSync(path.join(os.tmpdir(), 'frames-aula-metadata-'));
   try {
     cpSync(repoPath('skills/aula'), path.join(temp, 'skills'), { recursive: true });
+    for (const skill of catalog.capabilities) rmSync(path.join(temp, 'skills', skill.id, 'context.md'));
+    const portable = check(path.join(temp, 'skills'));
+    expect(portable.status, portable.stderr).toBe(0);
+    for (const skill of catalog.capabilities)
+      expect(existsSync(path.join(temp, 'skills', skill.id, 'context.md'))).toBe(false);
+    expect(mtimes()).toEqual(before);
     const file = path.join(temp, 'skills', catalog.capabilities[0]!.id, 'examples/input.json');
     writeFileSync(file, readFileSync(file, 'utf8') + '\n');
     const drift = check(path.join(temp, 'skills'));

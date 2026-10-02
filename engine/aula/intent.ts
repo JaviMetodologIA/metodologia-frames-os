@@ -17,6 +17,16 @@ export function aulaIntent(request: string): AulaIntent | null {
   if (/\b(notebooklm|notebook|nlm)\b/.test(text)) return null;
   if (/\btrainer\b/.test(text)) return null;
   if (
+    /\bworkshop\b|taller inmersivo/.test(text) ||
+    /\b(deck|presentacion|presentation)\b.*\b(facilitar|facilitate)\b.*\btaller\b/.test(text)
+  )
+    return {
+      family: 'aula',
+      kind: 'workshop-immersive',
+      edition,
+      renderer: 'frames-aula',
+    };
+  if (
     /\b(comercial|commercial|prospeccion)\b/.test(text) &&
     /\b(deck|presentacion|presentation|propuesta)\b/.test(text)
   )

@@ -88,6 +88,8 @@ describe('native approved Aula build dependencies', () => {
   });
   it('preserves legacy metadata and rejects partial or unbound successor claims', () => {
     expect(Metadata.parse({})).toEqual({});
+    for (const engineVersion of ['1.1.0', '1.2.0'])
+      expect(Metadata.parse({ ...binding(), engineVersion }).engineVersion).toBe(engineVersion);
     const b = binding();
     for (const changed of [
       { ...b, profile: undefined },

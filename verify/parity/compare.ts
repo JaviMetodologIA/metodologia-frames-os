@@ -40,7 +40,14 @@ import {
 import YAML from 'yaml';
 import { z } from 'zod';
 import { aulaBuild } from '../../engine/aula/bridge.ts';
-import { AulaKind, Edition, digest, loadAulaCatalog, type AulaCatalog } from '../../engine/aula/catalog.ts';
+import {
+  AULA_KINDS,
+  AulaKind,
+  Edition,
+  digest,
+  loadAulaCatalog,
+  type AulaCatalog,
+} from '../../engine/aula/catalog.ts';
 
 export type CaseResult = { verdict: 'equal' | 'superset' | 'red'; detail: string };
 
@@ -803,6 +810,7 @@ COMPARATORS['meta.maintain'] = (caseDir, goldenDir) => {
 };
 
 const AULA_BASELINE_SHA256 = '6c691379b76842ed4ee9d23141a7b722ab9f078553521664954a47ce6228c84d';
+const AULA_110_SHA256 = '4db10b74c4f47b7b4caca25a9d6289e8b6b988385851bcb6517b53c111875442';
 const AulaCaseHash = z.string().regex(/^[a-f0-9]{64}$/);
 const CompanionName = z.string().regex(/^[a-z][a-z0-9-]*\.html$/);
 const AulaCaseCapability = z
@@ -813,11 +821,14 @@ const AulaCaseCapability = z
     inputSha256: AulaCaseHash,
   })
   .strict();
+const AulaHistoricalCapability = AulaCaseCapability.extend({
+  kind: AulaKind.exclude(['workshop-immersive']),
+});
 const AulaBaseline = z
   .object({
     schema: z.literal('aula-succession-case-v1'),
     origin: z.string().min(1),
-    capabilities: z.array(AulaCaseCapability).length(18),
+    capabilities: z.array(AulaHistoricalCapability).length(18),
   })
   .strict();
 const AulaSuccessor = z
@@ -838,7 +849,7 @@ const AulaSuccessor = z
       .strict(),
     capabilities: z
       .array(
-        AulaCaseCapability.extend({
+        AulaHistoricalCapability.extend({
           version: z.literal('1.1.0'),
           companions: z.record(CompanionName, AulaCaseHash),
         }).strict(),
@@ -846,6 +857,25 @@ const AulaSuccessor = z
       .length(18),
   })
   .strict();
+const AulaWorkshopSuccessor = AulaSuccessor.extend({
+  schema: z.literal('aula-succession-case-v3'),
+  version: z.literal('1.2.0'),
+  baseline: AulaSuccessor.shape.supersedes,
+  supersedes: z
+    .object({
+      ref: z.literal('verify/parity/cases/aula/frames-os/cases-1.1.0.json'),
+      sha256: z.literal(AULA_110_SHA256),
+    })
+    .strict(),
+  capabilities: z
+    .array(
+      AulaCaseCapability.extend({
+        version: z.literal('1.2.0'),
+        companions: z.record(CompanionName, AulaCaseHash),
+      }).strict(),
+    )
+    .length(AULA_KINDS.length * Edition.options.length),
+});
 
 // The historical capture is immutable; new inputs require this explicit successor.
 // Runtime catalog/bridge checks still verify complete trees and confined attachments.
@@ -853,24 +883,56 @@ export function validateAulaParitySuccession(
   baselineBody: string,
   successorBody: string,
   catalogBody: string,
+  previousBody?: string,
 ) {
   const baseline = AulaBaseline.parse(JSON.parse(baselineBody) as unknown);
-  const current = AulaSuccessor.parse(JSON.parse(successorBody) as unknown);
+  const current = z
+    .discriminatedUnion('version', [AulaSuccessor, AulaWorkshopSuccessor])
+    .parse(JSON.parse(successorBody) as unknown);
   const catalog = JSON.parse(catalogBody) as AulaCatalog;
-  if (digest(baselineBody) !== current.supersedes.sha256)
+  if (digest(baselineBody) !== AULA_BASELINE_SHA256)
     throw new Error('AULA-PARITY-HISTORICAL-BASELINE-CHANGED');
+  const ancestors = [baseline.capabilities];
+  if (current.version === '1.2.0') {
+    if (!previousBody || digest(previousBody) !== current.supersedes.sha256)
+      throw new Error('AULA-PARITY-HISTORICAL-SUCCESSOR-CHANGED');
+    ancestors.push(AulaSuccessor.parse(JSON.parse(previousBody) as unknown).capabilities);
+  }
   if (digest(catalogBody) !== current.catalog.sha256) throw new Error('AULA-PARITY-CATALOG-STALE');
-  for (const cases of [baseline.capabilities, current.capabilities])
+  for (const cases of ancestors)
     if (new Set(cases.map((skill) => skill.id)).size !== 18)
       throw new Error('AULA-PARITY-REQUIRES-EIGHTEEN-UNIQUE-CAPABILITIES');
+  if (
+    new Set(current.capabilities.map((skill) => skill.id)).size !== current.capabilities.length ||
+    catalog.capabilities.length !== current.capabilities.length
+  )
+    throw new Error('AULA-PARITY-CAPABILITY-SET');
+  const kinds =
+    current.version === '1.2.0' ? AULA_KINDS : AULA_KINDS.filter((kind) => kind !== 'workshop-immersive');
+  for (const edition of Edition.options)
+    for (const kind of kinds)
+      if (
+        current.capabilities.filter((skill) => skill.kind === kind && skill.edition === edition).length !==
+          1 ||
+        catalog.capabilities.filter((skill) => skill.kind === kind && skill.edition === edition).length !== 1
+      )
+        throw new Error(`AULA-PARITY-CAPABILITY-PAIR: ${edition}/${kind}`);
+  for (const cases of ancestors)
+    for (const original of cases)
+      if (
+        !current.capabilities.some(
+          (skill) =>
+            skill.id === original.id && skill.kind === original.kind && skill.edition === original.edition,
+        )
+      )
+        throw new Error(`AULA-PARITY-CAPABILITY-CHANGED: ${original.id}`);
   for (const expected of current.capabilities) {
     const original = baseline.capabilities.find((skill) => skill.id === expected.id);
     const skill = catalog.capabilities.find((skill) => skill.id === expected.id);
     if (
-      !original ||
+      (!original && expected.kind !== 'workshop-immersive') ||
       !skill ||
-      original.kind !== expected.kind ||
-      original.edition !== expected.edition ||
+      (original && (original.kind !== expected.kind || original.edition !== expected.edition)) ||
       skill.kind !== expected.kind ||
       skill.edition !== expected.edition ||
       skill.version !== expected.version
@@ -900,8 +962,9 @@ export function compare(family: string, name: string): CaseResult {
       const catalog = loadAulaCatalog();
       const frozen = validateAulaParitySuccession(
         readFileSync(repoPath('verify/parity/cases/aula', name, 'cases.json'), 'utf8'),
-        readFileSync(repoPath('verify/parity/cases/aula', name, 'cases-1.1.0.json'), 'utf8'),
+        readFileSync(repoPath('verify/parity/cases/aula', name, 'cases-1.2.0.json'), 'utf8'),
         readFileSync(repoPath('registry/aula-capabilities.json'), 'utf8'),
+        readFileSync(repoPath('verify/parity/cases/aula', name, 'cases-1.1.0.json'), 'utf8'),
       );
       const errors: string[] = [];
       for (const expected of frozen.capabilities) {
@@ -927,7 +990,7 @@ export function compare(family: string, name: string): CaseResult {
         : {
             verdict: 'superset',
             detail:
-              '18 versioned1.1.0 Aula/deck sources and linked HTML resolve to native hash-bound handlers; historical case preserved',
+              '20 versioned1.2.0 Aula/workshop/deck sources and linked HTML resolve to native hash-bound handlers; both historical cases preserved',
           };
     } catch (e) {
       return { verdict: 'red', detail: (e as Error).message };

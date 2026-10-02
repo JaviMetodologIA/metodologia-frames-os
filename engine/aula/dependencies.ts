@@ -36,7 +36,7 @@ export const BuildFields = {
   buildDependencies: z.array(BuildDependency).max(1024).optional(),
   assetEvidence: z.array(AssetEvidence).max(416).optional(),
   profile: z.object({ id: Edition, sha256: Hash }).strict().optional(),
-  engineVersion: z.literal('1.1.0').optional(),
+  engineVersion: z.enum(['1.1.0', '1.2.0']).optional(),
 };
 export const Metadata = z
   .object({ ...BuildFields, bankRef: Ref.optional() })

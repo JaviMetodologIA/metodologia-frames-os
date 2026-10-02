@@ -7,6 +7,8 @@ intent:
   examples:
     - crea un workbook dinámico con campos editables para practicar
     - prepara una clase inmersiva para presentar en una sesión
+    - prepara un taller inmersivo para facilitar una práctica
+    - crea una presentación para facilitar un workshop
     - explica conceptos en una masterclass dinámica de Aula
     - construye un módulo completo de Aula con recursos y ejercicios
     - organiza un Lean Coffee con temporizador y revelado
@@ -22,15 +24,15 @@ slots:
     question: ¿Quién aprenderá y qué práctica demostrará el resultado?
     required: true
   - id: format
-    question: ¿Conceptos, práctica, sesión presentada o kit completo?
+    question: ¿Conceptos, práctica, sesión presentada, taller inmersivo o kit completo?
     required: false
   - id: brand
     question: ¿MetodologIA o marca blanca?
     required: false
 improvements:
   - id: aula-material-execution
-    claim: Dieciséis capacidades educativas producen HTML offline y recibos ligados a archivos desde el catálogo de skills.
-    check: verify/tests/aula.test.ts#executes all eighteen edition and format combinations through native human gates
+    claim: Dieciocho capacidades educativas producen HTML offline y recibos ligados a archivos desde el catálogo de skills.
+    check: verify/tests/aula.test.ts#executes both workshop editions through native human gates
 steps:
   - id: A01
     title: Brief educativo y dirección
